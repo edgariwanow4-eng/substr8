@@ -11,122 +11,158 @@
             --bg-color: #f5f5f5;
             --text-color: #34495e;
             --white: #ffffff;
-            --ticker-bg: #2c3e50;
+            --ticker-bg: rgba(44, 62, 80, 0.9);
             --ticker-text: #ffffff;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+        body, html {
             margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            padding: 0;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
         }
 
-        /* Nawigacja */
+        /* Sekcja powitalna (Hero) - Zdjęcie na całe okno */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Pełna wysokość okna */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Dopasowanie do okna, lekkie przycięcie */
+            z-index: -1;
+            filter: brightness(0.7); /* Przyciemnienie obrazu dla czytelności tekstu */
+        }
+
+        /* Nawigacja nad obrazkiem */
         .nav-buttons {
-            margin-bottom: 40px;
+            position: absolute;
+            top: 30px;
+            width: 100%;
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
             justify-content: center;
+            z-index: 10;
         }
 
         .nav-buttons a {
             text-decoration: none;
-            padding: 12px 24px;
-            background-color: var(--primary-color);
+            padding: 10px 20px;
+            background-color: rgba(44, 62, 80, 0.8);
             color: var(--white);
             font-weight: bold;
             border-radius: 30px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            backdrop-filter: blur(5px);
         }
 
         .nav-buttons a:hover {
             background-color: var(--accent-color);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* Kontenery treści */
-        .container {
-            max-width: 800px;
+        /* Treść główna pod obrazkiem */
+        .content-wrapper {
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 0;
+        }
+
+        .container {
+            width: 90%; /* Wykorzystanie większości szerokości */
+            max-width: 1400px; /* Maksymalny limit dla bardzo szerokich ekranów */
             background: var(--white);
-            padding: 30px;
+            padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             margin-bottom: 30px;
-            overflow: hidden; /* Zabezpieczenie dla paska */
+            box-sizing: border-box;
         }
 
         h1 {
             color: var(--primary-color);
-            margin-top: 0;
-            font-size: 2.5rem;
+            font-size: 3rem;
+            margin-bottom: 10px;
         }
 
-        p {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
+        .hero-text {
+            z-index: 1;
+            padding: 20px;
         }
 
         /* Media */
+        .media-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dwa elementy obok siebie na dużych ekranach */
+            gap: 30px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+            h1 { font-size: 2rem; }
+        }
+
         .media-box {
-            margin: 25px 0;
             width: 100%;
         }
 
-        img, video, iframe {
-            display: block;
+        video, iframe {
             width: 100%;
-            max-width: 100%;
-            height: auto;
             border-radius: 10px;
-            border: 1px solid #ddd;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         iframe {
             aspect-ratio: 16 / 9;
         }
 
-        .placeholder-box {
-            background: #eee;
-            padding: 50px 20px;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            color: #777;
-        }
-
-        /* --- Styl Dynamicznego Paska Informacyjnego --- */
+        /* Dynamiczny pasek */
         .ticker-wrap {
             width: 100%;
             overflow: hidden;
             background-color: var(--ticker-bg);
-            padding: 10px 0;
-            border-radius: 8px;
-            margin: 20px 0;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
+            padding: 15px 0;
+            position: absolute;
+            bottom: 0; /* Pasek na dole zdjęcia powitalnego */
+            z-index: 5;
         }
 
         .ticker {
             display: inline-block;
             white-space: nowrap;
             padding-right: 100%;
-            animation: ticker-scroll 20s linear infinite;
+            animation: ticker-scroll 25s linear infinite;
             color: var(--ticker-text);
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 1.1rem;
         }
 
         .ticker span {
             display: inline-block;
-            padding: 0 2rem;
+            padding: 0 3rem;
         }
 
         @keyframes ticker-scroll {
@@ -134,42 +170,35 @@
             100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        .ticker:hover {
-            animation-play-state: paused; /* Zatrzymuje pasek po najechaniu myszką */
-            cursor: pointer;
-        }
-
         footer {
-            margin-top: 40px;
-            font-size: 0.9rem;
+            padding: 40px;
+            text-align: center;
             color: #95a5a6;
         }
     </style>
 </head>
 <body>
 
-    <nav class="nav-buttons">
-        <a href="index.html">Strona główna</a>
-        <a href="#fizyka">Fizyka</a>
-        <a href="#chemia">Chemia</a>
-        <a href="#biologia">Biologia</a>
-    </nav>
+    <!-- Sekcja Hero (Pełnoekranowa) -->
+    <header class="hero-section">
+        <nav class="nav-buttons">
+            <a href="index.html">Strona główna</a>
+            <a href="#fizyka">Fizyka</a>
+            <a href="#chemia">Chemia</a>
+            <a href="#biologia">Biologia</a>
+        </nav>
 
-    <main class="container">
-        <h1>Witaj na mojej stronie!</h1>
-        <p>To jest nowoczesna prezentacja multimediów osadzonych w dokumencie HTML5.</p>
+        <img src="images/tytulowa.png" 
+             alt="Obrazek tytułowy" 
+             class="hero-image"
+             onerror="this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=2072';">
 
-        <div class="media-box">
-            <!-- Zmieniono nazwę obrazka na tytulowa.png -->
-            <img src="images/tytulowa.png" 
-                 alt="Obrazek tytułowy strony"
-                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-            <div class="placeholder-box" style="display:none;">
-                🖼️ Tu pojawi się Twój obrazek: images/tytulowa.png
-            </div>
+        <div class="hero-text">
+            <h1>Witaj na mojej stronie!</h1>
+            <p style="font-size: 1.5rem;">Nowoczesna nauka w Twojej przeglądarce</p>
         </div>
 
-        <!-- Dynamiczny pasek z informacjami pod obrazkiem -->
+        <!-- Pasek informacyjny na dole zdjęcia -->
         <div class="ticker-wrap">
             <div class="ticker">
                 <span>⚡ Najnowsze wiadomości ze świata nauki!</span>
@@ -179,32 +208,40 @@
                 <span>💡 Fizyka kwantowa staje się coraz bardziej przystępna.</span>
             </div>
         </div>
+    </header>
 
-        <section class="media-box">
-            <h3>Wideo lokalne</h3>
-            <p>Odtwarzanie pliku wideo bezpośrednio z serwera:</p>
-            <video controls>
-                <source src="videos/1219.mp4" type="video/mp4">
-                Twoja przeglądarka nie obsługuje tagu video.
-            </video>
-        </section>
+    <div class="content-wrapper">
+        <main class="container">
+            <section>
+                <h2>Prezentacja Multimediów</h2>
+                <p>Poniżej znajdziesz materiały wideo prezentujące najnowsze zagadnienia naukowe. Wykorzystujemy pełną szerokość ekranu dla lepszych wrażeń wizualnych.</p>
+                
+                <div class="media-grid">
+                    <div class="media-box">
+                        <h3>Wideo lokalne</h3>
+                        <video controls>
+                            <source src="videos/1219.mp4" type="video/mp4">
+                            Twoja przeglądarka nie obsługuje wideo.
+                        </video>
+                    </div>
 
-        <section class="media-box">
-            <h3>Wideo z YouTube</h3>
-            <p>Integracja z zewnętrznym serwisem streamingowym:</p>
-            <iframe 
-                src="https://www.youtube.com/embed/JMxjxPPuphI" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </section>
-    </main>
+                    <div class="media-box">
+                        <h3>Wideo z YouTube</h3>
+                        <iframe 
+                            src="https://www.youtube.com/embed/JMxjxPPuphI" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+        </main>
 
-    <footer>
-        &copy; 2024 Moja Multimedialna Strona
-    </footer>
+        <footer>
+            &copy; 2024 Moja Multimedialna Strona
+        </footer>
+    </div>
 
 </body>
 </html>
