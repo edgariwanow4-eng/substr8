@@ -2,10 +2,100 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Moja strona na GitHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemia</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        p {
+            color: #34495e;
+            font-size: 18px;
+        }
+
+        img {
+            max-width: 90%;
+            height: auto;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        video, iframe {
+            margin-top: 20px;
+            max-width: 90%;
+            border: 2px solid #2c3e50;
+            border-radius: 8px;
+        }
+
+        iframe {
+            height: 315px;
+        }
+
+        .nav-buttons {
+            margin-bottom: 30px;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #2c3e50;
+            color: #ffffff;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-buttons a:hover {
+            background-color: #e74c3c;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Witaj!</h1>
-    <p>To jest moja pierwsza strona hostowana na GitHub Pages.</p>
+
+    <!-- MENU -->
+    <div class="nav-buttons">
+        <a href="../index.html">Strona główna</a>
+        <a href="../fizyka/fizyka.html">Fizyka</a>
+        <a href="../chemia/chemia.html">Chemia</a>
+        <a href="../biologia/biologia.html">Biologia</a>
+    </div>
+
+    <h1>Chemia</h1>
+
+    <p>Eksperymenty, reakcje chemiczne i multimedia.</p>
+
+    <!-- Obrazek -->
+    <img src="../images/Gemini_Generated_Image_bhnrmjbhnrmjbhnr.png" alt="Obrazek chemii">
+
+    <!-- Wideo lokalne -->
+    <p>Wideo z repozytorium:</p>
+    <video controls>
+        <source src="../videos/1219.mp4" type="video/mp4">
+        Twoja przeglądarka nie obsługuje wideo.
+    </video>
+
+    <!-- YouTube -->
+    <p>Film z YouTube:</p>
+    <iframe
+        src="https://www.youtube.com/embed/JMxjxPPuphI"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+    </iframe>
+
 </body>
 </html>
