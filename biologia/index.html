@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strona z obrazkiem i wideo</title>
+    <title>Biologia</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,13 +12,16 @@
             margin: 40px;
             background-color: #f5f5f5;
         }
+
         h1 {
             color: #2c3e50;
         }
+
         p {
             color: #34495e;
             font-size: 18px;
         }
+
         img {
             max-width: 90%;
             height: auto;
@@ -25,21 +29,22 @@
             border-radius: 8px;
             margin-bottom: 40px;
         }
+
         video, iframe {
             margin-top: 20px;
             max-width: 90%;
-            height: auto;
             border: 2px solid #2c3e50;
             border-radius: 8px;
         }
+
         iframe {
             height: 315px;
         }
 
-        /* Style przycisków nawigacyjnych */
         .nav-buttons {
             margin-bottom: 30px;
         }
+
         .nav-buttons a {
             text-decoration: none;
             display: inline-block;
@@ -51,40 +56,45 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
+
         .nav-buttons a:hover {
             background-color: #e74c3c;
         }
     </style>
 </head>
+
 <body>
 
-    <!-- Menu przycisków -->
+    <!-- MENU -->
     <div class="nav-buttons">
-        <a href="index.html">Strona główna</a>
-        <a href="fizyka.html">Fizyka</a>
-        <a href="chemia.html">Chemia</a>
-        <a href="biologia.html">Biologia</a>
+        <a href="../index.html">Strona główna</a>
+        <a href="../fizyka/fizyka.html">Fizyka</a>
+        <a href="../chemia/chemia.html">Chemia</a>
+        <a href="../biologia/biologia.html">Biologia</a>
     </div>
 
-    <h1>Witaj na mojej stronie!</h1>
+    <h1>Biologia</h1>
+
+    <p>Treści biologiczne, multimedia i materiały edukacyjne.</p>
 
     <!-- Obrazek -->
-    <img src="images/Gemini_Generated_Image_bhnrmjbhnrmjbhnr.png" alt="Obrazek Gemini">
+    <img src="../images/Gemini_Generated_Image_bhnrmjbhnrmjbhnr.png" alt="Obrazek biologii">
 
-    <p>Odtwarzanie pliku wideo z repozytorium:</p>
-    <!-- Wideo MP4 -->
+    <!-- Wideo lokalne -->
+    <p>Wideo z repozytorium:</p>
     <video controls>
-        <source src="videos/1219.mp4" type="video/mp4">
-        Twoja przeglądarka nie obsługuje tego wideo.
+        <source src="../videos/1219.mp4" type="video/mp4">
+        Twoja przeglądarka nie obsługuje wideo.
     </video>
 
-    <p>Odtwarzanie filmu z YouTube:</p>
-    <!-- Osadzone YouTube -->
-    <iframe src="https://www.youtube.com/embed/JMxjxPPuphI" 
-            title="YouTube video player" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
+    <!-- YouTube -->
+    <p>Film z YouTube:</p>
+    <iframe
+        src="https://www.youtube.com/embed/JMxjxPPuphI"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
     </iframe>
 
 </body>
