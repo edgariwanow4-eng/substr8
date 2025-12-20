@@ -1,1 +1,265 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dron Badawczy - Monitoring Środowiska</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50; /* Ciemny granat/antracyt */
+            --accent-color: #3498db; /* Jasny błękit */
+            --bg-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --white: #ffffff;
+            --warning-amber: #f39c12;
+        }
 
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* Nawigacja */
+        .nav-buttons {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding: 15px 0;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 8px 18px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 500;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .nav-buttons a:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .main-container {
+            max-width: 1100px;
+            margin: 100px auto 60px;
+            padding: 0 20px;
+        }
+
+        /* Project Header */
+        .project-header {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .header-content {
+            padding: 40px;
+        }
+
+        .header-content h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2.8rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16 / 9;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            margin: 40px 0;
+        }
+
+        .video-section iframe, .video-section video {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Grid Layout */
+        .details-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+
+        .description-text {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 25px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .description-text h2 {
+            color: var(--accent-color);
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* Sidebar */
+        .spec-sidebar {
+            background: var(--primary-color);
+            color: white;
+            padding: 35px;
+            border-radius: 25px;
+            height: fit-content;
+        }
+
+        .spec-sidebar h3 {
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+            margin-top: 0;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .spec-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .spec-list li {
+            margin: 18px 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 8px;
+        }
+
+        .spec-label {
+            color: #bdc3c7;
+        }
+
+        .status-badge {
+            background: var(--warning-amber);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #95a5a6;
+        }
+
+        @media (max-width: 850px) {
+            .details-grid { grid-template-columns: 1fr; }
+            .main-image { height: 300px; }
+            .header-content h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-buttons">
+        <a href="../../index.html">Strona główna</a>
+        <a href="../index.html">Projekty</a>
+        <a href="../../fizyka/index.html">Fizyka</a>
+    </nav>
+
+    <div class="main-container">
+        <!-- Nagłówek i Obraz -->
+        <header class="project-header">
+            <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=1200&auto=format&fit=crop" 
+                 alt="Dron Badawczy w locie" 
+                 class="main-image">
+            <div class="header-content">
+                <h1>Dron Badawczy "AeroScan X1"</h1>
+                <p class="subtitle">Autonomiczna platforma do analizy spektralnej i mapowania 3D.</p>
+            </div>
+        </header>
+
+        <div class="details-grid">
+            <!-- Opis projektu -->
+            <section class="description-text">
+                <h2>Misja Projektu</h2>
+                <p>AeroScan X1 to zaawansowany Bezzałogowy Statek Powietrzny (BSP) zaprojektowany do realizacji misji badawczych w trudnym terenie. Głównym celem projektu było stworzenie stabilnej platformy zdolnej do przenoszenia precyzyjnych sensorów chemicznych oraz systemów obrazowania hiperspektralnego.</p>
+                
+                <p>Dron został wyposażony w autorski system stabilizacji lotu, który pozwala na precyzyjne utrzymanie pozycji nawet przy silnych podmuchach wiatru, co jest kluczowe dla jakości zbieranych danych LiDAR. Dzięki zastosowaniu ramy z kompozytów węglowych, udało się zredukować masę własną o 15%, wydłużając czas lotu.</p>
+
+                <h2>Demonstracja Możliwości (Wideo)</h2>
+                <div class="video-section">
+                    <!-- Placeholder dla wideo z testów drona -->
+                    <iframe src="https://www.youtube.com/embed/8-9-8G_pE7g" title="Drone Flight Test" allowfullscreen></iframe>
+                </div>
+
+                <h2>Zastosowania</h2>
+                <ul>
+                    <li>Monitoring zanieczyszczenia powietrza w czasie rzeczywistym.</li>
+                    <li>Tworzenie numerycznych modeli terenu dla geologii.</li>
+                    <li>Inspekcja infrastruktury krytycznej i linii energetycznych.</li>
+                    <li>Analiza wegetacji roślin w rolnictwie precyzyjnym.</li>
+                </ul>
+            </section>
+
+            <!-- Specyfikacja techniczna -->
+            <aside class="spec-sidebar">
+                <h3>Specyfikacja Techniczna</h3>
+                <ul class="spec-list">
+                    <li><span class="spec-label">Zasięg:</span> <span>8.5 km</span></li>
+                    <li><span class="spec-label">Czas lotu:</span> <span>42 min</span></li>
+                    <li><span class="spec-label">Udźwig:</span> <span>2.5 kg</span></li>
+                    <li><span class="spec-label">Sensory:</span> <span>LiDAR, Termo, RGB</span></li>
+                    <li><span class="spec-label">Łączność:</span> <span>5G / Satelitarna</span></li>
+                </ul>
+                <div style="margin-top: 30px;">
+                    <p style="font-size: 0.8rem; margin-bottom: 10px;">Status Projektu:</p>
+                    <span class="status-badge">LOTY TESTOWE</span>
+                </div>
+                <p style="font-size: 0.75rem; margin-top: 25px; color: #bdc3c7; font-style: italic;">
+                    Zaprojektowano w kooperacji z działem Fizyki i Elektroniki.
+                </p>
+            </aside>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Laboratorium Innowacji - Sekcja Robotyki i Awioniki</p>
+    </footer>
+
+</body>
+</html>
