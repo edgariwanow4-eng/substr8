@@ -79,6 +79,98 @@
             transform: translateY(-2px);
         }
 
+        /* --- Styl Szklanej Rurki Informacyjnej --- */
+        .ticker-wrap {
+            width: 90%;
+            max-width: 1400px;
+            overflow: hidden;
+            background: linear-gradient(
+                180deg, 
+                rgba(255, 255, 255, 0.25) 0%, 
+                rgba(255, 255, 255, 0.1) 50%, 
+                rgba(255, 255, 255, 0.05) 51%, 
+                rgba(255, 255, 255, 0.15) 100%
+            );
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            height: 60px; 
+            border-radius: 50px; 
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3), inset 0 0 15px rgba(255, 255, 255, 0.2);
+            position: absolute;
+            top: 100px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            padding-right: 100%;
+            animation: ticker-scroll 35s linear infinite;
+            color: var(--ticker-text);
+            font-weight: 500;
+            font-size: 1.2rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .ticker span {
+            display: inline-block;
+            padding: 0 5rem;
+        }
+
+        @keyframes ticker-scroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-100%, 0, 0); }
+        }
+
+        /* --- Okrągły przycisk pod paskiem --- */
+        .circular-btn {
+            position: absolute;
+            top: 180px; /* Pozycja pod paskiem */
+            left: 5%; /* Z lewej strony */
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            text-decoration: none;
+            z-index: 10;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .circular-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            background: rgba(255, 255, 255, 0.25);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 45px rgba(231, 76, 60, 0.3);
+        }
+
+        .circular-btn span.en {
+            display: block;
+            font-weight: normal;
+            font-style: italic;
+            font-size: 0.75rem;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
         /* Treść główna pod obrazkiem */
         .content-wrapper {
             width: 100%;
@@ -112,75 +204,7 @@
             z-index: 5;
             padding: 20px;
             pointer-events: none;
-            margin-top: -100px; /* Przesunięcie tytułu lekko w górę */
-        }
-
-        /* --- Styl Szklanej Rurki Informacyjnej --- */
-        .ticker-wrap {
-            width: 90%;
-            max-width: 1400px;
-            overflow: hidden;
-            /* Efekt szkła */
-            background: linear-gradient(
-                180deg, 
-                rgba(255, 255, 255, 0.25) 0%, 
-                rgba(255, 255, 255, 0.1) 50%, 
-                rgba(255, 255, 255, 0.05) 51%, 
-                rgba(255, 255, 255, 0.15) 100%
-            );
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            
-            /* Kształt rurki */
-            height: 60px; /* Szerszy pasek */
-            border-radius: 50px; /* Zaokrąglone końce rurki */
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 10px 30px rgba(0,0,0,0.3),
-                inset 0 0 15px rgba(255, 255, 255, 0.2);
-            
-            /* Pozycjonowanie */
-            position: absolute;
-            bottom: 60px; /* Przesunięcie niżej od krawędzi */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
-            display: flex;
-            align-items: center;
-        }
-
-        /* Połysk na rurce */
-        .ticker-wrap::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 20px;
-            right: 20px;
-            height: 15px;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
-            border-radius: 20px;
-            pointer-events: none;
-        }
-
-        .ticker {
-            display: inline-block;
-            white-space: nowrap;
-            padding-right: 100%;
-            animation: ticker-scroll 35s linear infinite;
-            color: var(--ticker-text);
-            font-weight: 500;
-            font-size: 1.2rem;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-        }
-
-        .ticker span {
-            display: inline-block;
-            padding: 0 5rem;
-        }
-
-        @keyframes ticker-scroll {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-100%, 0, 0); }
+            margin-top: 100px; 
         }
 
         /* Media Grid */
@@ -192,19 +216,20 @@
             margin-top: 30px;
         }
 
-        @media (max-width: 600px) {
-            .media-grid {
-                grid-template-columns: 1fr;
+        @media (max-width: 900px) {
+            .circular-btn {
+                width: 120px;
+                height: 120px;
+                font-size: 0.7rem;
+                top: 170px;
             }
-            .ticker-wrap {
-                width: 95%;
-                bottom: 30px;
-                height: 50px;
-            }
+            .circular-btn span.en { font-size: 0.6rem; }
         }
 
-        .media-box {
-            width: 100%;
+        @media (max-width: 600px) {
+            .media-grid { grid-template-columns: 1fr; }
+            .ticker-wrap { top: 150px; }
+            .circular-btn { position: relative; top: 0; left: 0; margin-top: 20px; }
         }
 
         video, iframe {
@@ -215,9 +240,7 @@
             background: #000;
         }
 
-        iframe {
-            aspect-ratio: 16 / 9;
-        }
+        iframe { aspect-ratio: 16 / 9; }
 
         footer {
             padding: 60px;
@@ -239,6 +262,23 @@
             <a href="#biologia">Biologia</a>
         </nav>
 
+        <!-- Szklany pasek informacyjny -->
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <span>⚡ Najnowsze wiadomości ze świata nauki!</span>
+                <span>🧪 Nowe odkrycie w dziedzinie chemii organicznej.</span>
+                <span>🔭 Teleskop Jamesa Webba przesyła kolejne zdjęcia.</span>
+                <span>🧬 Przełom w badaniach nad genomem ludzkim.</span>
+                <span>💡 Fizyka kwantowa staje się coraz bardziej przystępna.</span>
+            </div>
+        </div>
+
+        <!-- Okrągły przycisk pod paskiem z lewej strony -->
+        <a href="#life-extension" class="circular-btn">
+            Wydłużenie życia. Nieśmiertelność
+            <span class="en">Lifespan extension. Immortality.</span>
+        </a>
+
         <img src="images/tytulowa.png" 
              alt="Obrazek tytułowy" 
              class="hero-image"
@@ -248,17 +288,6 @@
         <div class="hero-text">
             <h1>Witaj na mojej stronie!</h1>
             <p style="font-size: 1.6rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Odkrywaj naukę w pełnym wymiarze</p>
-        </div>
-
-        <!-- Szklany pasek informacyjny w formie rurki -->
-        <div class="ticker-wrap">
-            <div class="ticker">
-                <span>⚡ Najnowsze wiadomości ze świata nauki!</span>
-                <span>🧪 Nowe odkrycie w dziedzinie chemii organicznej.</span>
-                <span>🔭 Teleskop Jamesa Webba przesyła kolejne zdjęcia.</span>
-                <span>🧬 Przełom w badaniach nad genomem ludzkim.</span>
-                <span>💡 Fizyka kwantowa staje się coraz bardziej przystępna.</span>
-            </div>
         </div>
     </header>
 
