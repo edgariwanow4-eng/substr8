@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projekty - Laboratorium Innowacji</title>
+    <style>
+        :root {
+            --primary-color: #d35400; /* Pomarańczowy kolor inżynierii i projektów */
+            --accent-color: #e67e22;
+            --bg-color: #f9f9fb;
+            --text-color: #2c3e50;
+            --white: #ffffff;
+            --dark-gray: #34495e;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Nawigacja */
+        .nav-buttons {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding: 15px 0;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 8px 18px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 500;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+
+        .nav-buttons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 40vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 60px;
+            background: #222;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) contrast(1.2);
+        }
+
+        .hero-title {
+            position: absolute;
+            color: white;
+            text-align: center;
+        }
+
+        .hero-title h1 {
+            font-size: clamp(2rem, 7vw, 3.5rem);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        /* Main Content */
+        .content-container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 35px;
+            padding: 20px 0;
+        }
+
+        /* Project Card */
+        .project-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.15);
+        }
+
+        /* Image part with overlay title */
+        .project-image-wrapper {
+            position: relative;
+            height: 250px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .project-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover .project-image-wrapper img {
+            transform: scale(1.1);
+        }
+
+        .project-overlay-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85));
+            padding: 20px;
+            color: white;
+        }
+
+        .project-overlay-title h3 {
+            margin: 0;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Description part below image */
+        .project-info {
+            padding: 20px;
+            background: var(--white);
+            flex-grow: 1;
+        }
+
+        .project-info p {
+            margin: 0;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            font-size: 1rem;
+        }
+
+        .project-btn {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #95a5a6;
+            background: #f0f0f0;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-section { height: 25vh; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-buttons">
+        <a href="../index.html">Strona główna</a>
+        <a href="../fizyka/index.html">Fizyka</a>
+        <a href="../chemia/index.html">Chemia</a>
+        <a href="../biologia/index.html">Biologia</a>
+        <a href="../badania/index.html">Badania</a>
+    </nav>
+
+    <header class="hero-section">
+        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=2000&auto=format&fit=crop" 
+             alt="Inżynieria i Projekty" 
+             class="hero-image">
+        <div class="hero-title">
+            <h1>NASZE PROJEKTY</h1>
+            <p>Od koncepcji do prototypu</p>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <div class="projects-grid">
+            
+            <!-- Projekt: Growbox -->
+            <a href="growbox/index.html" class="project-card">
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1585336139118-132f70e4a7dd?q=80&w=600&auto=format&fit=crop" alt="Growbox">
+                    <div class="project-overlay-title">
+                        <h3>Growbox</h3>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p>W pełni zautomatyzowany system do uprawy roślin w kontrolowanych warunkach, wykorzystujący inteligentne czujniki wilgotności i oświetlenie LED o pełnym spektrum.</p>
+                    <span class="project-btn">Zobacz szczegóły &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Projekt: Skafander -->
+            <a href="skafander/index.html" class="project-card">
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1614728263952-84ea206f99b6?q=80&w=600&auto=format&fit=crop" alt="Skafander">
+                    <div class="project-overlay-title">
+                        <h3>Skafander</h3>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p>Prototyp lekkiego skafandra ochronnego nowej generacji, zaprojektowanego do pracy w ekstremalnych warunkach środowiskowych przy zachowaniu pełnej mobilności.</p>
+                    <span class="project-btn">Zobacz szczegóły &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Projekt: Ekstrakbacopamonierii -->
+            <a href="ekstrakbacopamonierii/index.html" class="project-card">
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1512069772995-ec65ed45afd6?q=80&w=600&auto=format&fit=crop" alt="Ekstrakcja Bacopa Monnieri">
+                    <div class="project-overlay-title">
+                        <h3>Ekstrakbacopamonierii</h3>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p>Zautomatyzowana stacja do wysokowydajnej ekstrakcji składników aktywnych z Bacopa Monnieri, optymalizująca czystość uzyskiwanych bakozydów.</p>
+                    <span class="project-btn">Zobacz szczegóły &rarr;</span>
+                </div>
+            </a>
+
+            <!-- Projekt: Dron -->
+            <a href="dron/index.html" class="project-card">
+                <div class="project-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1508614589041-895b88991e3e?q=80&w=600&auto=format&fit=crop" alt="Dron Badawczy">
+                    <div class="project-overlay-title">
+                        <h3>Dron Badawczy</h3>
+                    </div>
+                </div>
+                <div class="project-info">
+                    <p>Bezzałogowy statek powietrzny wyposażony w system mapowania terenu LiDAR oraz sensory chemiczne do monitorowania jakości powietrza w trudnodostępnych miejscach.</p>
+                    <span class="project-btn">Zobacz szczegóły &rarr;</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Laboratorium Innowacji - Projekty Technologiczne</p>
+    </footer>
+
+</body>
+</html>
