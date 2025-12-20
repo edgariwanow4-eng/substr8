@@ -142,16 +142,8 @@
             transform-style: preserve-3d;
         }
 
-        /* Przycisk Lewy */
-        .btn-left {
-            left: 5%;
-        }
-
-        /* Przycisk Prawy */
-        .btn-right {
-            right: 5%;
-            animation-delay: -1s; /* Przesunięcie fazy animacji */
-        }
+        .btn-left { left: 5%; }
+        .btn-right { right: 5%; animation-delay: -1s; }
 
         @keyframes floating3D {
             0% { transform: translate(0, 0) rotateX(0deg) rotateY(0deg); }
@@ -185,7 +177,6 @@
             transition: transform 0.5s ease;
         }
 
-        /* Napisy pojawiające się po najechaniu */
         .image-btn-text {
             margin-top: 20px;
             color: white;
@@ -208,27 +199,15 @@
             opacity: 0.9;
         }
 
-        /* Efekty Hover */
-        .image-btn-container:hover {
-            animation-play-state: paused;
-        }
-
+        .image-btn-container:hover { animation-play-state: paused; }
         .image-btn-container:hover .image-btn-circle {
             transform: scale(1.08) translateZ(50px);
             border-color: var(--accent-color);
             box-shadow: 0 30px 60px rgba(231, 76, 60, 0.6);
         }
+        .image-btn-container:hover .image-btn-circle img { transform: scale(1.1); }
+        .image-btn-container:hover .image-btn-text { opacity: 1; transform: translateY(0); }
 
-        .image-btn-container:hover .image-btn-circle img {
-            transform: scale(1.1);
-        }
-
-        .image-btn-container:hover .image-btn-text {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Treść główna */
         .content-wrapper {
             width: 100%;
             display: flex;
@@ -278,13 +257,7 @@
         }
 
         @media (max-width: 850px) {
-             .image-btn-container { position: relative; top: 0; left: 0; right: 0; margin: 20px auto; width: auto; animation: floating3D-mobile 6s ease-in-out infinite; }
-             .image-btn-circle { width: 180px; height: 180px; }
-        }
-
-        @keyframes floating3D-mobile {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(15px); }
+             .image-btn-container { position: relative; top: 0; left: 0; right: 0; margin: 20px auto; width: auto; }
         }
 
         video, iframe {
@@ -312,86 +285,56 @@
         <nav class="nav-buttons">
             <a href="index.html">Strona główna</a>
             <a href="boskiesluzby/index.html">BOSKIE SŁUŻBY</a>
-            <a href="#fizyka">Fizyka</a>
-            <a href="#chemia">Chemia</a>
-            <a href="#biologia">Biologia</a>
+            <a href="fizyka/index.html">Fizyka</a>
+            <a href="chemia/index.html">Chemia</a>
+            <a href="biologia/index.html">Biologia</a> <!-- POPRAWIONY LINK -->
         </nav>
 
         <div class="ticker-wrap">
             <div class="ticker">
                 <span>⚡ Najnowsze wiadomości ze świata nauki!</span>
                 <span>🧪 Nowe odkrycie w dziedzinie chemii organicznej.</span>
-                <span>🔭 Teleskop Jamesa Webba przesyła kolejne zdjęcia.</span>
                 <span>🧬 Przełom w badaniach nad genomem ludzkim.</span>
-                <span>💡 Fizyka kwantowa staje się coraz bardziej przystępna.</span>
             </div>
         </div>
 
-        <!-- Przycisk Lewy -->
         <a href="https://google.com" target="_blank" class="image-btn-container btn-left">
             <div class="image-btn-circle">
-                <img src="images/substr8.png" 
-                     alt="Ikona Wydłużenia Życia"
-                     onerror="this.src='https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=400&auto=format&fit=crop';">
+                <img src="images/substr8.png" alt="Wydłużenie Życia" onerror="this.src='https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=400&auto=format&fit=crop';">
             </div>
-            <div class="image-btn-text">
-                Wydłużenie życia.<br>
-                <span class="en">Lifespan extension.</span>
-            </div>
+            <div class="image-btn-text">Wydłużenie życia.</div>
         </a>
 
-        <!-- Przycisk Prawy (NOWY) -->
         <a href="boskiesluzby/index.html" class="image-btn-container btn-right">
             <div class="image-btn-circle">
-                <img src="images/naszywka.png" 
-                     alt="Naszywka Boskich Służb"
-                     onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=400&auto=format&fit=crop';">
+                <img src="images/naszywka.png" alt="Boskie Służby" onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=400&auto=format&fit=crop';">
             </div>
-            <div class="image-btn-text">
-                BOSKIE SŁUŻBY<br>
-                <span class="en">Servants of God</span>
-            </div>
+            <div class="image-btn-text">BOSKIE SŁUŻBY</div>
         </a>
 
-        <img src="images/tytulowa.png" 
-             alt="Obrazek tytułowy" 
-             class="hero-image"
-             id="mainHeroImg"
-             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop';">
+        <img src="images/tytulowa.png" alt="Obrazek tytułowy" class="hero-image" onerror="this.src='https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop';">
 
         <div class="hero-text">
             <h1>Witaj na mojej stronie!</h1>
-            <p style="font-size: 1.6rem; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Odkrywaj naukę w pełnym wymiarze</p>
+            <p>Odkrywaj naukę w pełnym wymiarze</p>
         </div>
     </header>
 
     <div class="content-wrapper">
         <main class="container">
             <section>
-                <h2 style="font-size: 2rem; border-bottom: 2px solid var(--accent-color); display: inline-block; padding-bottom: 5px;">Multimedia</h2>
+                <h2>Multimedia</h2>
                 <div class="media-grid">
                     <div class="media-box">
-                        <h3>Nagrania lokalne</h3>
-                        <video controls poster="https://images.unsplash.com/photo-1516339901600-2e3a8ad0f1d8?q=80&w=500&auto=format&fit=crop">
-                            <source src="videos/1219.mp4" type="video/mp4">
-                        </video>
+                        <video controls><source src="videos/1219.mp4" type="video/mp4"></video>
                     </div>
                     <div class="media-box">
-                        <h3>Transmisje zewnętrzne</h3>
-                        <iframe 
-                            src="https://www.youtube.com/embed/JMxjxPPuphI" 
-                            title="YouTube video player" 
-                            allowfullscreen>
-                        </iframe>
+                        <iframe src="https://www.youtube.com/embed/JMxjxPPuphI" allowfullscreen></iframe>
                     </div>
                 </div>
             </section>
         </main>
-
-        <footer>
-            <p>&copy; 2024 Moja Multimedialna Strona Naukowa</p>
-        </footer>
+        <footer><p>&copy; 2024 Moja Multimedialna Strona Naukowa</p></footer>
     </div>
-
 </body>
 </html>
