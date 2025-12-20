@@ -3,99 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biologia</title>
-
+    <title>Biologia - Interaktywna Nauka</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 40px;
-            background-color: #f5f5f5;
+        :root {
+            --primary-color: #27ae60; /* Zielony kolor biologii */
+            --accent-color: #2ecc71;
+            --bg-color: #f0f4f1;
+            --text-color: #2c3e50;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.8);
         }
 
-        h1 {
-            color: #2c3e50;
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
         }
 
-        p {
-            color: #34495e;
-            font-size: 18px;
-        }
-
-        img {
-            max-width: 90%;
-            height: auto;
-            border: 2px solid #2c3e50;
-            border-radius: 8px;
-            margin-bottom: 40px;
-        }
-
-        video, iframe {
-            margin-top: 20px;
-            max-width: 90%;
-            border: 2px solid #2c3e50;
-            border-radius: 8px;
-        }
-
-        iframe {
-            height: 315px;
-        }
-
+        /* Górny panel nawigacyjny */
         .nav-buttons {
-            margin-bottom: 30px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding: 15px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(44, 62, 80, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .nav-buttons a {
             text-decoration: none;
-            display: inline-block;
-            margin: 0 10px;
-            padding: 10px 20px;
-            background-color: #2c3e50;
-            color: #ffffff;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            padding: 8px 18px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 500;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
         }
 
         .nav-buttons a:hover {
-            background-color: #e74c3c;
+            background-color: var(--accent-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 60px;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .hero-title {
+            position: absolute;
+            color: white;
+            text-align: center;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+        }
+
+        .hero-title h1 {
+            font-size: clamp(2.5rem, 10vw, 5rem);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+        }
+
+        /* Main Content */
+        .content-container {
+            max-width: 1200px;
+            margin: -50px auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        /* Video Wrapper */
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Grid Podziałów */
+        .biology-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .category-box {
+            background: #f9f9f9;
+            border-left: 5px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .category-box h3 {
+            margin-top: 0;
+            color: #34495e;
+            font-size: 1.2rem;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .link-list li {
+            margin: 10px 0;
+        }
+
+        .link-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .link-list a:before {
+            content: '🌿';
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+
+        .link-list a:hover {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+            background: #e8ede9;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { height: 40vh; }
+            .section-card { padding: 20px; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- MENU -->
-    <div class="nav-buttons">
-        <a href="../index/">Strona główna</a>
-        <a href="../fizyka/">Fizyka</a>
-        <a href="../chemia/">Chemia</a>
-        <a href="../biologia/">Biologia</a>
+    <nav class="nav-buttons">
+        <a href="../../index.html">Strona główna</a>
+        <a href="../fizyka/index.html">Fizyka</a>
+        <a href="../chemia/index.html">Chemia</a>
+        <a href="#klasyczna">Biologia Klasyczna</a>
+        <a href="#molekularna">Biologia Molekularna</a>
+    </nav>
+
+    <header class="hero-section">
+        <img src="images/tytulowabiologia.png" 
+             alt="Biologia Hero" 
+             class="hero-image"
+             onerror="this.src='https://images.unsplash.com/photo-1530026405186-ed1f139313f8?q=80&w=2000&auto=format&fit=crop';">
+        <div class="hero-title">
+            <h1>BIOLOGIA</h1>
+            <p>Eksploracja tajemnic życia</p>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <!-- Sekcja Video -->
+        <section class="section-card">
+            <h2>Wprowadzenie do Biologii</h2>
+            <div class="video-container">
+                <!-- Przykładowy film o biologii z YT -->
+                <iframe src="https://www.youtube.com/embed/Vre-7N0P0_E" 
+                        title="Biology Overview" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <p>Biologia to nauka o życiu. Badamy tu wszystko – od mikroskopijnych struktur DNA po ogromne ekosystemy naszej planety.</p>
+        </section>
+
+        <!-- Sekcja Podziałów -->
+        <section class="section-card">
+            <h2>Dziedziny Nauki</h2>
+            
+            <div class="biology-grid">
+                <!-- Biologia Klasyczna -->
+                <div class="category-box" id="klasyczna">
+                    <h3>Biologia Klasyczna</h3>
+                    <ul class="link-list">
+                        <li><a href="biologia/botanika/index.html">Botanika</a></li>
+                        <li><a href="biologia/ewolucja/index.html">Ewolucja</a></li>
+                        <li><a href="biologia/grzyby/index.html">Grzyby</a></li>
+                        <li><a href="biologia/medycyna/index.html">Medycyczna</a></li>
+                        <li><a href="biologia/zwierzeta/index.html">Zwierzęta</a></li>
+                    </ul>
+                </div>
+
+                <!-- Biologia Molekularna -->
+                <div class="category-box" id="molekularna">
+                    <h3>Biologia Molekularna</h3>
+                    <ul class="link-list">
+                        <li><a href="biologia/zwiazki/index.html">Związki organiczne</a></li>
+                        <li><a href="biologia/kod/index.html">Kod genetyczny</a></li>
+                        <li><a href="biologia/genetyka/index.html">Genetyka molekularna</a></li>
+                        <li><a href="biologia/wirus/index.html">Wirusy</a></li>
+                        <li><a href="biologia/komorka/index.html">Komórka i jej budowa</a></li>
+                        <li><a href="biologia/podzial/index.html">Podział komórek</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <h1>Biologia</h1>
-
-    <p>Treści biologiczne, multimedia i materiały edukacyjne.</p>
-
-    <!-- Obrazek -->
-    <img src="../images/Gemini_Generated_Image_bhnrmjbhnrmjbhnr.png" alt="Obrazek biologii">
-
-    <!-- Wideo lokalne -->
-    <p>Wideo z repozytorium:</p>
-    <video controls>
-        <source src="../videos/1219.mp4" type="video/mp4">
-        Twoja przeglądarka nie obsługuje wideo.
-    </video>
-
-    <!-- YouTube -->
-    <p>Film z YouTube:</p>
-    <iframe
-        src="https://www.youtube.com/embed/JMxjxPPuphI"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-    </iframe>
+    <footer>
+        <p>&copy; 2024 Sekcja Biologiczna - Interaktywna Strona Naukowa</p>
+    </footer>
 
 </body>
 </html>
