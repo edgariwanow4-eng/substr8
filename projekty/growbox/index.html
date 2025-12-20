@@ -85,14 +85,17 @@
             height: 500px;
             overflow: hidden;
             position: relative;
-            background: #e0e0e0;
+            background: #2c3e50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .main-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: opacity 0.5s ease;
         }
 
         .header-content {
@@ -153,24 +156,25 @@
         /* Galeria */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
 
         .gallery-item {
-            aspect-ratio: 1;
+            aspect-ratio: 4/3;
             border-radius: 12px;
             overflow: hidden;
             cursor: pointer;
             border: 2px solid transparent;
             transition: all 0.3s ease;
             background: #eee;
+            position: relative;
         }
 
         .gallery-item:hover {
             border-color: var(--primary-color);
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .gallery-item img {
@@ -239,11 +243,6 @@
             margin-top: 20px;
         }
 
-        .innovation-card h4 {
-            margin: 0 0 5px 0;
-            color: var(--dark-green);
-        }
-
         footer {
             margin-top: 60px;
             padding: 40px;
@@ -260,7 +259,7 @@
 <body>
 
     <nav class="nav-buttons">
-        <a href="../index.html">Strona główna</a>
+        <a href="../../index.html">Strona główna</a>
         <a href="#galeria">Galeria</a>
         <a href="#">Fizyka</a>
         <a href="javascript:window.print()" style="background: var(--text-color)">PDF</a>
@@ -269,14 +268,15 @@
     <div class="main-container">
         <header class="project-header">
             <div class="main-image-container">
-                <img src="/images/IMGP9282.jpeg" 
-                     alt="Zdjęcie projektu Growbox" 
+                <!-- Zdjęcie zlokalizowane dwa poziomy wyżej w folderze images -->
+                <img src="../../images/IMGP9282.jpeg" 
+                     alt="Widok Growbox" 
                      class="main-image"
-                     onerror="this.src='https://images.unsplash.com/photo-1585336139118-132f70e4a7dd?q=80&w=1200&auto=format&fit=crop'">
+                     onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=1200&auto=format&fit=crop';">
             </div>
             <div class="header-content">
                 <h1>Growbox v2.0 - System Hydroponiczny</h1>
-                <p class="subtitle">Projekt automatyzacji upraw z monitoringiem w czasie rzeczywistym i analizą danych środowiskowych.</p>
+                <p class="subtitle">Budowa inteligentnego środowiska upraw z automatycznym monitoringiem i kontrolą klimatu.</p>
             </div>
         </header>
 
@@ -285,39 +285,38 @@
                 <!-- Zakres Projektu -->
                 <section class="card">
                     <h2>Zakres projektu</h2>
-                    <p>Projekt obejmuje budowę i rozwój zaawansowanego systemu hydroponicznego z pełną automatyzacją procesów kontrolnych. Główne elementy to:</p>
                     <ul style="padding-left: 20px;">
-                        <li><strong>Kontrola środowiska:</strong> Budowa modułu z możliwością automatycznego dostosowywania parametrów uprawy.</li>
-                        <li><strong>Obserwacja wizualna:</strong> Integracja sensorów i kamer timelapse do ciągłego monitorowania wzrostu.</li>
-                        <li><strong>Pomiar parametrów:</strong> Temperatura, wilgotność, CO₂, pH, EC oraz oświetlenie.</li>
-                        <li><strong>Analiza jakości:</strong> Badanie smaku, składników odżywczych i bezpieczeństwa plonu.</li>
-                        <li><strong>Automatyzacja i Cloud:</strong> Publikacja danych online oraz zdalne śledzenie stanu roślin.</li>
+                        <li><strong>System Hydroponiczny:</strong> Autorska konstrukcja z automatyczną kontrolą środowiska.</li>
+                        <li><strong>Monitoring:</strong> Kamery timelapse (24h) oraz sensory parametrów fizykochemicznych.</li>
+                        <li><strong>Pomiary:</strong> Temp/Wilg powietrza, gazy (CO₂, O₂), pH i EC pożywki, ciśnienie.</li>
+                        <li><strong>Oświetlenie:</strong> Kontrola spektrum, natężenia oraz tryb światła nocnego.</li>
+                        <li><strong>Analiza danych:</strong> Badanie optymalnych warunków dla wzrostu, smaku i wartości odżywczych.</li>
                     </ul>
                 </section>
 
                 <!-- Galeria Projektu -->
                 <section class="card" id="galeria">
-                    <h2>Galeria projektu</h2>
-                    <p>Dokumentacja wizualna postępów prac, komponentów oraz faz wzrostu roślin.</p>
+                    <h2>Galeria zdjęć</h2>
                     <div class="gallery-grid">
                         <div class="gallery-item">
-                            <img src="/images/IMGP9282.JPG" alt="Widok główny projektu">
+                            <img src="../../images/IMGP9282.jpeg" alt="Zdjęcie projektu" onerror="this.src='https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=400&h=300&fit=crop'">
                         </div>
-                        <!-- Miejsce na kolejne zdjęcia -->
-                        <div class="gallery-item" style="display: flex; align-items: center; justify-content: center; background: #f0f0f0; color: #bbb; font-size: 2rem;">+</div>
+                        <div class="gallery-item" style="background: #eef9f1; display: flex; align-items: center; justify-content: center; color: var(--primary-color);">
+                            <span>Wkrótce więcej...</span>
+                        </div>
                     </div>
                 </section>
 
                 <!-- Innowacje -->
                 <section class="card">
-                    <h2>Innowacje i rozwój</h2>
+                    <h2>Innowacje oprogramowania</h2>
                     <div class="innovation-card">
-                        <h4>Najnowsze innowacje:</h4>
-                        <p>Oprogramowanie umożliwiające tworzenie filmów timelapse ze zdjęć generowanych przez całą dobę.</p>
+                        <h4 style="margin:0 0 10px 0;">Wdrożone:</h4>
+                        <p>Moduł generowania timelapsów 24/7 (automatyczne łączenie klatek zdjęciowych).</p>
                     </div>
-                    <div class="innovation-card" style="background: #f1f4ff; border-left-color: #4a69bd;">
-                        <h4>Najbliższe planowane innowacje:</h4>
-                        <p>Dedykowany moduł analityczny dla wykresów temperatury i wilgotności powietrza.</p>
+                    <div class="innovation-card" style="background: #f1f4ff; border-left-color: #4a69bd; margin-top: 15px;">
+                        <h4 style="margin:0 0 10px 0;">Planowane:</h4>
+                        <p>Zaawansowany system wykresów i wizualizacji zmian temperatury oraz wilgotności w czasie.</p>
                     </div>
                 </section>
             </main>
@@ -327,33 +326,29 @@
                 
                 <div class="spec-group-title">Obecna (Prototyp)</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Konstrukcja:</span> <span class="spec-value">Doniczka Hevn</span></li>
+                    <li><span class="spec-label">Doniczka:</span> <span class="spec-value">Hevn (własne oświetlenie)</span></li>
                     <li><span class="spec-label">Komputer:</span> <span class="spec-value">Raspberry Pi 4B</span></li>
                     <li><span class="spec-label">Czujniki:</span> <span class="spec-value">DHT22 (Temp/Wilg)</span></li>
-                    <li><span class="spec-label">Kamera:</span> <span class="spec-value">2Mpx 1080p USB (MF)</span></li>
-                    <li><span class="spec-label">Wentylacja:</span> <span class="spec-value">Naturalna</span></li>
-                    <li><span class="spec-label">Zużycie prądu:</span> <span class="spec-value">[ ]</span></li>
+                    <li><span class="spec-label">Kamera:</span> <span class="spec-value">1080p USB Manual Focus</span></li>
+                    <li><span class="spec-label">Wentylacja:</span> <span class="spec-value">Naturalny przepływ</span></li>
+                    <li><span class="spec-label">Zasilanie / Prąd:</span> <span class="spec-value">[ ]</span></li>
                 </ul>
 
                 <div class="spec-group-title">Docelowa (v2.0)</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Pojemniki:</span> <span class="spec-value">Szkło hartowane</span></li>
+                    <li><span class="spec-label">Pojemniki:</span> <span class="spec-value">Szkło</span></li>
                     <li><span class="spec-label">Lampa:</span> <span class="spec-value">100W (Regulowana)</span></li>
-                    <li><span class="spec-label">Spectrum:</span> <span class="spec-value">Wybieralne</span></li>
-                    <li><span class="spec-label">Czujnik EC:</span> <span class="spec-value">Automatyczny</span></li>
-                    <li><span class="spec-label">Pomiar pH:</span> <span class="spec-value">[ ]</span></li>
+                    <li><span class="spec-label">Spectrum:</span> <span class="spec-value">Zmienne / Do wyboru</span></li>
+                    <li><span class="spec-label">Pomiar EC:</span> <span class="spec-value">Automatyczny</span></li>
+                    <li><span class="spec-label">Gazy / pH:</span> <span class="spec-value">[ ]</span></li>
                 </ul>
-
-                <div style="margin-top: 25px; font-size: 0.8rem; opacity: 0.7; font-style: italic;">
-                    * Pola [ ] zostaną uzupełnione po testach.
-                </div>
             </aside>
         </div>
     </div>
 
     <footer>
-        <p><strong>Laboratorium Innowacji</strong> - Growbox Project Documentation</p>
-        <p>&copy; 2024 Wszystkie prawa zastrzeżone.</p>
+        <p><strong>Laboratorium Innowacji</strong> - Projekt Growbox</p>
+        <p>&copy; 2024 Dokumentacja Rozwojowa</p>
     </footer>
 
 </body>
