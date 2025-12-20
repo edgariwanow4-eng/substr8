@@ -127,48 +127,78 @@
             100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        /* --- Okrągły przycisk pod paskiem --- */
-        .circular-btn {
+        /* --- Okrągły przycisk obrazkowy pod paskiem --- */
+        .image-btn-container {
             position: absolute;
-            top: 180px; /* Pozycja pod paskiem */
-            left: 5%; /* Z lewej strony */
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
+            top: 180px;
+            left: 5%;
+            z-index: 10;
             display: flex;
             flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            width: 180px;
+        }
+
+        .image-btn-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .image-btn-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Napisy pojawiające się po najechaniu */
+        .image-btn-text {
+            margin-top: 15px;
+            color: white;
             text-align: center;
-            padding: 15px;
-            font-size: 0.85rem;
+            opacity: 0; /* Ukryte domyślnie */
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            pointer-events: none;
             font-weight: bold;
-            text-decoration: none;
-            z-index: 10;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            box-sizing: border-box;
+            font-size: 0.95rem;
+            line-height: 1.3;
         }
 
-        .circular-btn:hover {
-            transform: scale(1.1) rotate(5deg);
-            background: rgba(255, 255, 255, 0.25);
-            border-color: var(--accent-color);
-            box-shadow: 0 20px 45px rgba(231, 76, 60, 0.3);
-        }
-
-        .circular-btn span.en {
+        .image-btn-text span.en {
             display: block;
             font-weight: normal;
             font-style: italic;
-            font-size: 0.75rem;
-            margin-top: 5px;
-            opacity: 0.8;
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        /* Efekty Hover */
+        .image-btn-container:hover .image-btn-circle {
+            transform: scale(1.15);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.4);
+        }
+
+        .image-btn-container:hover .image-btn-circle img {
+            transform: scale(1.1);
+        }
+
+        .image-btn-container:hover .image-btn-text {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Treść główna pod obrazkiem */
@@ -204,7 +234,7 @@
             z-index: 5;
             padding: 20px;
             pointer-events: none;
-            margin-top: 100px; 
+            margin-top: 120px; 
         }
 
         /* Media Grid */
@@ -217,19 +247,15 @@
         }
 
         @media (max-width: 900px) {
-            .circular-btn {
-                width: 120px;
-                height: 120px;
-                font-size: 0.7rem;
-                top: 170px;
-            }
-            .circular-btn span.en { font-size: 0.6rem; }
+            .image-btn-circle { width: 100px; height: 100px; }
+            .image-btn-container { width: 140px; top: 170px; }
+            .image-btn-text { font-size: 0.8rem; }
         }
 
         @media (max-width: 600px) {
             .media-grid { grid-template-columns: 1fr; }
             .ticker-wrap { top: 150px; }
-            .circular-btn { position: relative; top: 0; left: 0; margin-top: 20px; }
+            .image-btn-container { position: relative; top: 0; left: 0; margin-top: 20px; }
         }
 
         video, iframe {
@@ -273,10 +299,17 @@
             </div>
         </div>
 
-        <!-- Okrągły przycisk pod paskiem z lewej strony -->
-        <a href="#life-extension" class="circular-btn">
-            Wydłużenie życia. Nieśmiertelność
-            <span class="en">Lifespan extension. Immortality.</span>
+        <!-- Okrągły PRZYCISK OBRAZKOWY -->
+        <a href="https://google.com" target="_blank" class="image-btn-container">
+            <div class="image-btn-circle">
+                <img src="images/substr8.png" 
+                     alt="Ikona Wydłużenia Życia"
+                     onerror="this.src='https://images.unsplash.com/photo-1507413245164-6160d8298b31?q=80&w=200&auto=format&fit=crop';">
+            </div>
+            <div class="image-btn-text">
+                Wydłużenie życia.<br>
+                <span class="en">Lifespan extension.</span>
+            </div>
         </a>
 
         <img src="images/tytulowa.png" 
