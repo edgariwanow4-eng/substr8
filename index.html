@@ -128,11 +128,10 @@
             100% { transform: translate3d(-100%, 0, 0); }
         }
 
-        /* --- Okrągły przycisk obrazkowy - Efekt 3D Floating --- */
+        /* --- Wspólne style dla okrągłych przycisków 3D --- */
         .image-btn-container {
             position: absolute;
             top: 180px;
-            left: 5%;
             z-index: 10;
             display: flex;
             flex-direction: column;
@@ -141,6 +140,17 @@
             width: 300px;
             animation: floating3D 6s ease-in-out infinite;
             transform-style: preserve-3d;
+        }
+
+        /* Przycisk Lewy */
+        .btn-left {
+            left: 5%;
+        }
+
+        /* Przycisk Prawy */
+        .btn-right {
+            right: 5%;
+            animation-delay: -1s; /* Przesunięcie fazy animacji */
         }
 
         @keyframes floating3D {
@@ -166,8 +176,6 @@
             align-items: center;
             position: relative;
         }
-
-        /* Usunięto odblask ::after */
 
         .image-btn-circle img {
             width: 100%;
@@ -265,15 +273,13 @@
         }
 
         @media (max-width: 1100px) {
-            .image-btn-circle { width: 200px; height: 200px; }
-            .image-btn-container { width: 220px; }
+            .image-btn-circle { width: 180px; height: 180px; }
+            .image-btn-container { width: 200px; }
         }
 
-        @media (max-width: 600px) {
-            .media-grid { grid-template-columns: 1fr; }
-            .ticker-wrap { top: 150px; }
-            .image-btn-container { position: relative; top: 0; left: 0; margin-top: 20px; width: auto; animation: floating3D-mobile 6s ease-in-out infinite; }
-            .image-btn-circle { width: 180px; height: 180px; }
+        @media (max-width: 850px) {
+             .image-btn-container { position: relative; top: 0; left: 0; right: 0; margin: 20px auto; width: auto; animation: floating3D-mobile 6s ease-in-out infinite; }
+             .image-btn-circle { width: 180px; height: 180px; }
         }
 
         @keyframes floating3D-mobile {
@@ -305,6 +311,7 @@
     <header class="hero-section">
         <nav class="nav-buttons">
             <a href="index.html">Strona główna</a>
+            <a href="boskiesluzby/index.html">BOSKIE SŁUŻBY</a>
             <a href="#fizyka">Fizyka</a>
             <a href="#chemia">Chemia</a>
             <a href="#biologia">Biologia</a>
@@ -320,8 +327,8 @@
             </div>
         </div>
 
-        <!-- Przycisk bez odblasku -->
-        <a href="https://google.com" target="_blank" class="image-btn-container">
+        <!-- Przycisk Lewy -->
+        <a href="https://google.com" target="_blank" class="image-btn-container btn-left">
             <div class="image-btn-circle">
                 <img src="images/substr8.png" 
                      alt="Ikona Wydłużenia Życia"
@@ -330,6 +337,19 @@
             <div class="image-btn-text">
                 Wydłużenie życia.<br>
                 <span class="en">Lifespan extension.</span>
+            </div>
+        </a>
+
+        <!-- Przycisk Prawy (NOWY) -->
+        <a href="boskiesluzby/index.html" class="image-btn-container btn-right">
+            <div class="image-btn-circle">
+                <img src="images/naszywka.png" 
+                     alt="Naszywka Boskich Służb"
+                     onerror="this.src='https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=400&auto=format&fit=crop';">
+            </div>
+            <div class="image-btn-text">
+                BOSKIE SŁUŻBY<br>
+                <span class="en">Servants of God</span>
             </div>
         </a>
 
