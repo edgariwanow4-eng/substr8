@@ -3,32 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fizyka</title>
+    <title>Fizyka - Fundamenty Wszechświata</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 40px; background-color: #f5f5f5; }
-        h1 { color: #2c3e50; }
-        p { color: #34495e; font-size: 18px; }
-        .nav-buttons { margin-bottom: 30px; }
-        .nav-buttons a {
-            text-decoration: none; display: inline-block;
-            margin: 0 10px; padding: 10px 20px;
-            background-color: #2c3e50; color: #fff; font-weight: bold;
-            border-radius: 5px; transition: background-color 0.3s;
+        :root {
+            --primary-color: #8e44ad; /* Fioletowy kolor fizyki */
+            --accent-color: #9b59b6;
+            --bg-color: #f4f4f9;
+            --text-color: #2c3e50;
+            --white: #ffffff;
+            --dark-space: #2c3e50;
         }
-        .nav-buttons a:hover { background-color: #e74c3c; }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Nawigacja */
+        .nav-buttons {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            padding: 15px 0;
+            justify-content: center;
+            z-index: 100;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            padding: 8px 18px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 500;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+
+        .nav-buttons a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-top: 60px;
+            background: #000;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.5);
+        }
+
+        .hero-title {
+            position: absolute;
+            color: white;
+            text-align: center;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+
+        .hero-title h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+        }
+
+        /* Main Content */
+        .content-container {
+            max-width: 1200px;
+            margin: -60px auto 50px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--accent-color);
+            display: inline-block;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* Video Container */
+        .video-container {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            background: #000;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Grid */
+        .physics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .category-box {
+            background: #fcfcfc;
+            border-left: 5px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .category-box:hover {
+            transform: scale(1.02);
+            background: #fff;
+        }
+
+        .category-box h3 {
+            margin-top: 0;
+            color: var(--dark-space);
+            font-size: 1.3rem;
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 0;
+        }
+
+        .link-list li {
+            margin: 12px 0;
+        }
+
+        .link-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .link-list a:before {
+            content: '⚛️';
+            margin-right: 12px;
+            font-size: 1rem;
+        }
+
+        .link-list a:hover {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: #7f8c8d;
+            background: #ececf3;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section { height: 35vh; }
+            .section-card { padding: 25px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="nav-buttons">
+    <nav class="nav-buttons">
         <a href="../index.html">Strona główna</a>
-        <a href="../fizyka/">Fizyka</a>
-        <a href="../chemia/">Chemia</a>
-        <a href="../biologia/">Biologia</a>
+        <a href="../chemia/index.html">Chemia</a>
+        <a href="../biologia/index.html">Biologia</a>
+        <a href="#mechanika">Mechanika</a>
+        <a href="#nowoczesna">Fizyka Nowoczesna</a>
+    </nav>
+
+    <header class="hero-section">
+        <img src="images/tytulowafizyka.png" 
+             alt="Fizyka Hero" 
+             class="hero-image"
+             onerror="this.src='https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2000&auto=format&fit=crop';">
+        <div class="hero-title">
+            <h1>FIZYKA</h1>
+            <p>Zrozumieć prawa rządzące rzeczywistością</p>
+        </div>
+    </header>
+
+    <div class="content-container">
+        <!-- Sekcja Video -->
+        <section class="section-card">
+            <h2>Czym jest Fizyka?</h2>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/8-9-8G_pE7g" 
+                        title="Physics Introduction" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <p>Fizyka to nauka przyrodnicza badająca najbardziej fundamentalne właściwości materii, energii, czasu i przestrzeni. Od kwantów po galaktyki – szukamy odpowiedzi na pytanie "jak to działa?".</p>
+        </section>
+
+        <!-- Sekcja Działów -->
+        <section class="section-card">
+            <h2>Główne Obszary Badań</h2>
+            
+            <div class="physics-grid">
+                <!-- Fizyka Klasyczna -->
+                <div class="category-box" id="mechanika">
+                    <h3>Fizyka Klasyczna</h3>
+                    <ul class="link-list">
+                        <li><a href="mechanika/index.html">Mechanika Newtonowska</a></li>
+                        <li><a href="termodynamika/index.html">Termodynamika</a></li>
+                        <li><a href="optyka/index.html">Optyka i Światło</a></li>
+                        <li><a href="elektrycznosc/index.html">Elektryczność i Magnetyzm</a></li>
+                        <li><a href="akustyka/index.html">Fale i Akustyka</a></li>
+                    </ul>
+                </div>
+
+                <!-- Fizyka Nowoczesna -->
+                <div class="category-box" id="nowoczesna">
+                    <h3>Fizyka Nowoczesna</h3>
+                    <ul class="link-list">
+                        <li><a href="relatywistyka/index.html">Teoria Względności</a></li>
+                        <li><a href="kwantowa/index.html">Mechanika Kwantowa</a></li>
+                        <li><a href="jadrowa/index.html">Fizyka Jądrowa</a></li>
+                        <li><a href="astofizyka/index.html">Astrofizyka i Kosmologia</a></li>
+                        <li><a href="czastki/index.html">Fizyka Cząstek Elementarnych</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </div>
 
-    <h1>Fizyka</h1>
-    <p>Treści o fizyce – zdjęcia, filmy, artykuły, eksperymenty itp.</p>
+    <footer>
+        <p>&copy; 2024 Sekcja Fizyczna - Interaktywna Strona Naukowa</p>
+    </footer>
 
 </body>
 </html>
