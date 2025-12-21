@@ -72,6 +72,69 @@
             border-color: transparent;
         }
 
+        /* ===================== MONETY (NOWE) ===================== */
+        .coin-container {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .coin-btn {
+            width: 60px;
+            height: 60px;
+            perspective: 1000px;
+            text-decoration: none;
+            transition: transform 0.4s ease;
+        }
+
+        .coin-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCoin 4s linear infinite;
+        }
+
+        .coin-btn:hover {
+            transform: scale(1.2);
+            z-index: 10;
+        }
+
+        .coin-btn:hover .coin-inner {
+            animation: none;
+            transform: rotateY(0deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ecf0f1;
+            border: 3px solid #bdc3c7;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        .coin-face img {
+            width: 65%;
+            height: 65%;
+            object-fit: contain;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+        }
+
+        @keyframes rotateCoin {
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
+        }
+
+        
         /* Container */
         .main-container {
             max-width: 1200px;
@@ -389,6 +452,32 @@
 <body>
 
     <nav class="nav-buttons">
+
+        <div class="coin-container">
+            <a href="../../index.html" class="coin-btn" title="Strona główna">
+                <div class="coin-inner">
+                    <div class="coin-face">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png">
+                    </div>
+                    <div class="coin-face coin-back">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png">
+                    </div>
+                </div>
+            </a>
+
+            <a href="../index.html" class="coin-btn" title="Projekty">
+                <div class="coin-inner">
+                    <div class="coin-face">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png">
+                    </div>
+                    <div class="coin-face coin-back">
+                        <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png">
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        
         <a href="../../index.html">Strona główna</a>
         <a href="../index.html">Projekty</a>
         <a href="#galeria">Galeria projektu</a>
