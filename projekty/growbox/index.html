@@ -402,5 +402,21 @@
         <p>&copy; 2024 Dokumentacja Rozwojowa</p>
     </footer>
 
+    <script>
+    function openLightbox(src) {
+        const lightbox = document.getElementById('lightbox');
+        const img = document.getElementById('lightbox-img');
+        img.src = src;
+        lightbox.style.display = 'flex';
+    }
+
+    // Opcjonalne: Zamykanie klawiszem ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape") {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+    });
+    </script>
+
 </body>
 </html>
