@@ -13,6 +13,8 @@
             --white: #ffffff;
             --ticker-bg: rgba(255, 255, 255, 0.15);
             --ticker-text: #ffffff;
+            --warning-bg: #fff3cd;
+            --warning-text: #856404;
         }
 
         body, html {
@@ -299,6 +301,45 @@
             z-index: 100;
         }
 
+        /* Sekcja "W budowie" */
+        .construction-notice {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            background: var(--warning-bg);
+            border-left: 8px solid #f1c40f;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .construction-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 3px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        .construction-text {
+            color: var(--warning-text);
+        }
+
+        .construction-text h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+            color: #856404;
+        }
+
+        .construction-text p {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
         .hero-text {
             z-index: 10;
             pointer-events: none;
@@ -358,6 +399,7 @@
             .container { margin-top: 20px; padding: 20px; }
             .live-clock { right: 50%; transform: translateX(50%); bottom: 10px; }
             .scroll-down-indicator { bottom: 10px; }
+            .construction-notice { flex-direction: column; text-align: center; }
         }
 
         footer {
@@ -434,6 +476,16 @@
 
     <div class="content-wrapper" id="main-content">
         <main class="container">
+            
+            <!-- Sekcja informacyjna -->
+            <section class="construction-notice">
+                <img src="/images/Gemini_Generated_Image_kmvqo8kmvqo8kmvq.png" alt="Budowa" class="construction-image" onerror="this.src='https://images.unsplash.com/photo-1504307651254-35682f94a81b?w=400';">
+                <div class="construction-text">
+                    <h3>Uwaga!</h3>
+                    <p>strona w budowie, uważaj na puste linki</p>
+                </div>
+            </section>
+
             <section>
                 <h2>Multimedia i Nauka</h2>
                 <p>Zapoznaj się z najnowszymi materiałami wideo i interaktywnymi prezentacjami.</p>
@@ -501,15 +553,19 @@
             const scrollIndicator = document.querySelector('.scroll-down-indicator');
             
             // Efekt Parallax
-            heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
+            if (heroImage) {
+                heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
             
             // Ukrywanie strzałki podczas przewijania w dół
-            if (scrolled > 50) {
-                scrollIndicator.style.opacity = '0';
-                scrollIndicator.style.pointerEvents = 'none';
-            } else {
-                scrollIndicator.style.opacity = '1';
-                scrollIndicator.style.pointerEvents = 'auto';
+            if (scrollIndicator) {
+                if (scrolled > 50) {
+                    scrollIndicator.style.opacity = '0';
+                    scrollIndicator.style.pointerEvents = 'none';
+                } else {
+                    scrollIndicator.style.opacity = '1';
+                    scrollIndicator.style.pointerEvents = 'auto';
+                }
             }
         });
     </script>
