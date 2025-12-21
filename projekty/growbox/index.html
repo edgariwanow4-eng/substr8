@@ -12,7 +12,7 @@
             --text-color: #2c3e50;
             --white: #ffffff;
             --dark-green: #1b5e20;
-            --nav-bg: #143d26; /* Ciemniejszy kolor paska górnego */
+            --nav-bg: #143d26;
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
@@ -39,7 +39,7 @@
             padding: 15px 20px;
             justify-content: center;
             z-index: 1000;
-            background: var(--nav-bg); /* Zmiana na ciemniejszy kolor */
+            background: var(--nav-bg);
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0,0,0,0.1);
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
@@ -48,7 +48,7 @@
         .nav-buttons a {
             text-decoration: none;
             padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.1); /* Subtelne tło dla przycisków */
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
             font-weight: 600;
             border-radius: 12px;
@@ -155,6 +155,44 @@
             height: 20px;
             background: var(--accent-color);
             border-radius: 3px;
+        }
+
+        .zakres-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .zakres-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        .zakres-list li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        .sub-list {
+            list-style: none;
+            padding-left: 20px;
+            margin: 8px 0;
+            border-left: 2px solid #edf2f7;
+        }
+
+        .sub-list li {
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .sub-list li::before {
+            content: "-";
+            color: #95a5a6;
         }
 
         /* Galeria */
@@ -272,7 +310,6 @@
     <div class="main-container">
         <header class="project-header">
             <div class="main-image-container">
-                <!-- Zdjęcie zlokalizowane dwa poziomy wyżej w folderze images -->
                 <img src="../../images/IMGP9295.JPG" 
                      alt="Widok Growbox" 
                      class="main-image"
@@ -289,12 +326,24 @@
                 <!-- Zakres Projektu -->
                 <section class="card">
                     <h2>Zakres projektu</h2>
-                    <ul style="padding-left: 20px;">
-                        <li><strong>System Hydroponiczny:</strong> Autorska konstrukcja z automatyczną kontrolą środowiska.</li>
-                        <li><strong>Monitoring:</strong> Kamery timelapse (24h) oraz sensory parametrów fizykochemicznych.</li>
-                        <li><strong>Pomiary:</strong> Temp/Wilg powietrza, gazy (CO₂, O₂), pH i EC pożywki, ciśnienie.</li>
-                        <li><strong>Oświetlenie:</strong> Kontrola spektrum, natężenia oraz tryb światła nocnego.</li>
-                        <li><strong>Analiza danych:</strong> Badanie optymalnych warunków dla wzrostu, smaku i wartości odżywczych.</li>
+                    <ul class="zakres-list">
+                        <li>Budowa systemu hydroponicznego z możliwością automatycznej kontroli środowiska.</li>
+                        <li>Integracja sensorów i kamer timelapse do ciągłej obserwacji roślin.</li>
+                        <li>Pomiar parametrów środowiskowych i roślinnych:
+                            <ul class="sub-list">
+                                <li>temperatura i wilgotność powietrza</li>
+                                <li>zawartość gazów w komorze uprawowej (np. CO₂, O₂)</li>
+                                <li>ciśnienie atmosferyczne i w komorze uprawowej</li>
+                                <li>pH roztworu i przewodność elektryczna (EC)</li>
+                                <li>oświetlenie: intensywność, rodzaj światła, światło nocne</li>
+                                <li>czas wzrostu, smak i zawartość składników odżywczych roślin</li>
+                                <li>bezpieczeństwo spożycia i jakość plonu</li>
+                            </ul>
+                        </li>
+                        <li>Eksperymentowanie z różnymi zmiennymi uprawy: gatunki roślin, rodzaje nawozów, typy i natężenie światła, światło nocne, wilgotność powietrza, ciśnienie i zawartość gazów.</li>
+                        <li>Analiza danych w celu ustalenia optymalnych warunków uprawy hydroponicznej.</li>
+                        <li>Automatyzacja badań i opieki nad roślinami – system steruje oświetleniem, kontrolą klimatu i monitorowaniem parametrów w czasie rzeczywistym.</li>
+                        <li>Automatyczne udostępnianie danych online – bieżąca aktualizacja wykresów, nagrań timelapse i pomiarów, tak aby każdy mógł śledzić stan roślin zdalnie i wyciągać własne wnioski.</li>
                     </ul>
                 </section>
 
@@ -319,8 +368,8 @@
                         <p>Moduł generowania timelapsów 24/7 (automatyczne łączenie klatek zdjęciowych).</p>
                     </div>
                     <div class="innovation-card" style="background: #f1f4ff; border-left-color: #4a69bd; margin-top: 15px;">
-                        <h4 style="margin:0 0 10px 0;">Planowane:</h4>
-                        <p>Zaawansowany system wykresów i wizualizacji zmian temperatury oraz wilgotności w czasie.</p>
+                        <h4 style="margin:0 0 10px 0;">Najbliższe planowe wdrożenie:</h4>
+                        <p>Zaawansowany system wykresów i wizualizacji zmian temperatury oraz wilgotności v czasie.</p>
                     </div>
                 </section>
             </main>
@@ -330,19 +379,18 @@
                 
                 <div class="spec-group-title">Obecna (Prototyp)</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Doniczka:</span> <span class="spec-value">Hevn (własne oświetlenie)</span></li>
+                    <li><span class="spec-label">Doniczka:</span> <span class="spec-value">Hevn (oświetlenie)</span></li>
                     <li><span class="spec-label">Komputer:</span> <span class="spec-value">Raspberry Pi 4B</span></li>
                     <li><span class="spec-label">Czujniki:</span> <span class="spec-value">DHT22 (Temp/Wilg)</span></li>
-                    <li><span class="spec-label">Kamera:</span> <span class="spec-value">1080p USB Manual Focus</span></li>
-                    <li><span class="spec-label">Wentylacja:</span> <span class="spec-value">Naturalny przepływ</span></li>
-                    <li><span class="spec-label">Zasilanie / Prąd:</span> <span class="spec-value">[ ]</span></li>
+                    <li><span class="spec-label">Kamera:</span> <span class="spec-value">1080p USB</span></li>
+                    <li><span class="spec-label">Zasilanie:</span> <span class="spec-value">[ ]</span></li>
                 </ul>
 
                 <div class="spec-group-title">Docelowa (v2.0)</div>
                 <ul class="spec-list">
                     <li><span class="spec-label">Pojemniki:</span> <span class="spec-value">Szkło</span></li>
                     <li><span class="spec-label">Lampa:</span> <span class="spec-value">100W (Regulowana)</span></li>
-                    <li><span class="spec-label">Spectrum:</span> <span class="spec-value">Zmienne / Do wyboru</span></li>
+                    <li><span class="spec-label">Spectrum:</span> <span class="spec-value">Zmienne</span></li>
                     <li><span class="spec-label">Pomiar EC:</span> <span class="spec-value">Automatyczny</span></li>
                     <li><span class="spec-label">Gazy / pH:</span> <span class="spec-value">[ ]</span></li>
                 </ul>
