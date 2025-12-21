@@ -225,6 +225,36 @@
             object-fit: cover;
         }
 
+        /* Video Player Styles */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            background: #000;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-description {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+        }
+
         /* Sidebar Specs */
         .spec-sidebar {
             background: var(--dark-green);
@@ -303,6 +333,7 @@
     <nav class="nav-buttons">
         <a href="../../index.html">Strona główna</a>
         <a href="#galeria">Galeria</a>
+        <a href="#prezentacja">Wideo</a>
         <a href="javascript:window.print()" style="background: var(--text-color); border: none;">PDF</a>
     </nav>
 
@@ -342,7 +373,7 @@
                         <li>Eksperymentowanie z różnymi zmiennymi uprawy: gatunki roślin, rodzaje nawozów, typy i natężenie światła, światło nocne, wilgotność powietrza, ciśnienie i zawartość gazów.</li>
                         <li>Analiza danych w celu ustalenia optymalnych warunków uprawy hydroponicznej.</li>
                         <li>Automatyzacja badań i opieki nad roślinami – system steruje oświetleniem, kontrolą klimatu i monitorowaniem parametrów w czasie rzeczywistym.</li>
-                        <li>Automatyczne udostępnianie danych online – bieżąca aktualizacja wykresów, nagrań timelapse i pomiarów, tak aby każdy mógł śledzić stan roślin zdalnie i wyciągać własne wnioski.</li>
+                        <li>Automatyczne udostępnianie danych online – bieżąca aktualizacja wykresów, nagrań timelapse i pomiarów.</li>
                     </ul>
                 </section>
 
@@ -351,11 +382,31 @@
                     <h2>Galeria zdjęć</h2>
                     <div class="gallery-grid">
                         <div class="gallery-item">
-                            <img src="../../images/IMGP9282.jpeg" alt="Zdjęcie projektu" onerror="this.src='https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=400&h=300&fit=crop'">
+                            <img src="../../images/IMGP9282.jpeg" alt="Eksperyment 1" onclick="openLightbox(this.src)">
                         </div>
-                        <div class="gallery-item" style="background: #eef9f1; display: flex; align-items: center; justify-content: center; color: var(--primary-color);">
-                            <span>Wkrótce więcej...</span>
+                        <div class="gallery-item">
+                            <img src="../../images/TWOJE_NOWE_ZDJECIE_1.jpg" alt="Eksperyment 2" onclick="openLightbox(this.src)">
                         </div>
+                        <div class="gallery-item">
+                            <img src="../../images/TWOJE_NOWE_ZDJECIE_2.jpg" alt="Eksperyment 3" onclick="openLightbox(this.src)">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Wideo Prezentacja -->
+                <section class="card" id="prezentacja">
+                    <h2>Prezentacja wideo</h2>
+                    <div class="video-container">
+                        <!-- Zastąp VIDEO_ID właściwym identyfikatorem z YouTube -->
+                        <iframe 
+                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                            title="YouTube video player" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-description">
+                        <strong>Opis materiału:</strong> Powyższy materiał wideo prezentuje działanie prototypu v2.1 w pełnym cyklu dobowym. Można zaobserwować automatyczną zmianę widma światła, pracę systemu wentylacji oraz stabilność odczytów z sensorów w czasie rzeczywistym. Film został zmontowany z klatek timelapse generowanych przez Raspberry Pi.
                     </div>
                 </section>
 
@@ -368,7 +419,7 @@
                     </div>
                     <div class="innovation-card" style="background: #f1f4ff; border-left-color: #4a69bd; margin-top: 15px;">
                         <h4 style="margin:0 0 10px 0;">Najbliższe planowe wdrożenie:</h4>
-                        <p>Zaawansowany system wykresów i wizualizacji zmian temperatury oraz wilgotności v czasie.</p>
+                        <p>Zaawansowany system wykresów i wizualizacji zmian temperatury oraz wilgotności w czasie.</p>
                     </div>
                 </section>
             </main>
@@ -382,19 +433,25 @@
                     <li><span class="spec-label">Komputer:</span> <span class="spec-value">Raspberry Pi 4B</span></li>
                     <li><span class="spec-label">Czujniki:</span> <span class="spec-value">DHT22 (Temp/Wilg)</span></li>
                     <li><span class="spec-label">Kamera:</span> <span class="spec-value">1080p USB</span></li>
-                    <li><span class="spec-label">Zasilanie:</span> <span class="spec-value">[ ]</span></li>
+                    <li><span class="spec-label">Zasilanie:</span> <span class="spec-value">5V / 3A DC</span></li>
                 </ul>
 
                 <div class="spec-group-title">Docelowa (v2.0)</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Pojemniki:</span> <span class="spec-value">Szkło</span></li>
+                    <li><span class="spec-label">Pojemniki:</span> <span class="spec-value">Szkło hartowane</span></li>
                     <li><span class="spec-label">Lampa:</span> <span class="spec-value">100W (Regulowana)</span></li>
-                    <li><span class="spec-label">Spectrum:</span> <span class="spec-value">Zmienne</span></li>
+                    <li><span class="spec-label">Spectrum:</span> <span class="spec-value">Pełne / Zmienne</span></li>
                     <li><span class="spec-label">Pomiar EC:</span> <span class="spec-value">Automatyczny</span></li>
-                    <li><span class="spec-label">Gazy / pH:</span> <span class="spec-value">[ ]</span></li>
+                    <li><span class="spec-label">Gazy / pH:</span> <span class="spec-value">CO2 + pH probe</span></li>
                 </ul>
             </aside>
         </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" onclick="this.style.display='none'" style="display:none; position:fixed; z-index:9999; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); cursor:pointer; align-items:center; justify-content:center;">
+        <img id="lightbox-img" style="max-width:90%; max-height:90%; border-radius:10px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+        <div style="position:absolute; top:20px; right:30px; color:white; font-size:40px; font-weight:bold;">&times;</div>
     </div>
 
     <footer>
@@ -410,10 +467,11 @@
         lightbox.style.display = 'flex';
     }
 
-    // Opcjonalne: Zamykanie klawiszem ESC
+    // Zamykanie klawiszem ESC
     document.addEventListener('keydown', function(e) {
         if (e.key === "Escape") {
-            document.getElementById('lightbox').style.display = 'none';
+            const lb = document.getElementById('lightbox');
+            if(lb) lb.style.display = 'none';
         }
     });
     </script>
