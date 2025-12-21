@@ -41,7 +41,71 @@
             background-position: center;
         }
 
-        /* Nawigacja */
+        /* === PŁYWAJĄCE MONETY === */
+        .floating-coins {
+            position: fixed;
+            top: 110px;           /* pod paskiem */
+            left: 20px;           /* lewy bok ekranu */
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 999;
+        }
+
+        .coin-btn {
+            width: 70px;
+            height: 70px;
+            perspective: 1000px;
+            text-decoration: none;
+            transition: transform 0.4s ease;
+        }
+
+        .coin-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCoin 4s linear infinite;
+        }
+
+        .coin-btn:hover {
+            transform: scale(1.2);
+        }
+
+        .coin-btn:hover .coin-inner {
+            animation: none;
+            transform: rotateY(0deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 50%;
+            background: #ecf0f1;
+            border: 3px solid #bdc3c7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 12px rgba(0,0,0,0.25);
+        }
+
+        .coin-face img {
+            width: 70%;
+            height: 70%;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+        }
+
+        @keyframes rotateCoin {
+            from { transform: rotateY(0deg); }
+            to   { transform: rotateY(360deg); }
+        }
+
+        /* Nawigacja Główna */
         .nav-buttons {
             position: fixed;
             top: 0;
@@ -76,14 +140,13 @@
             box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
         }
 
-        /* Main Container */
+        /* Container i Sekcje */
         .main-container {
             max-width: 1200px;
             margin: 100px auto 60px;
             padding: 0 24px;
         }
 
-        /* Hero Header */
         .project-header {
             background: var(--white);
             border-radius: var(--card-radius);
@@ -112,10 +175,6 @@
             transition: transform 1s ease;
         }
 
-        .project-header:hover .main-image {
-            transform: scale(1.03);
-        }
-
         .header-content {
             padding: 40px;
             border-top: 5px solid var(--primary-color);
@@ -126,7 +185,6 @@
             margin: 0 0 15px 0;
             font-size: 2.8rem;
             font-weight: 800;
-            letter-spacing: -1px;
         }
 
         .subtitle {
@@ -136,10 +194,9 @@
             border-left: 4px solid var(--accent-color);
             padding-left: 25px;
             margin: 0;
-            font-weight: 400;
         }
 
-        /* Modern Image Bar */
+        /* Nowoczesny pasek zdjęć */
         .modern-image-bar {
             display: flex;
             gap: 20px;
@@ -172,27 +229,6 @@
             transform: scale(1.1);
         }
 
-        .bar-item .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
-            display: flex;
-            align-items: flex-end;
-            padding: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .bar-item:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay span {
-            color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
         /* Layout Grid */
         .details-grid {
             display: grid;
@@ -201,7 +237,6 @@
             align-items: start;
         }
 
-        /* Content Sections */
         .card {
             background: var(--white);
             padding: 40px;
@@ -211,14 +246,9 @@
             transition: transform 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
         h2 {
             font-size: 1.8rem;
             color: var(--dark-green);
-            margin-top: 0;
             margin-bottom: 25px;
             display: flex;
             align-items: center;
@@ -233,26 +263,13 @@
             border-radius: 4px;
         }
 
-        .zakres-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .zakres-list > li {
-            position: relative;
-            padding-left: 35px;
-            margin-bottom: 18px;
-            font-weight: 500;
-        }
-
+        .zakres-list { list-style: none; padding: 0; }
+        .zakres-list > li { position: relative; padding-left: 35px; margin-bottom: 18px; }
         .zakres-list > li::before {
             content: '✓';
             position: absolute;
             left: 0;
             color: var(--primary-color);
-            font-weight: 800;
-            font-size: 1.2rem;
             background: #eef9f1;
             width: 24px;
             height: 24px;
@@ -260,34 +277,44 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            font-size: 0.8rem;
+            font-weight: bold;
         }
 
-        .sub-list {
-            list-style: none;
-            padding-left: 20px;
-            margin: 12px 0;
-            border-left: 2px dashed #d1d8e0;
+        /* Rozwój i Innowacje - Timeline */
+        .innovation-timeline {
+            border-left: 2px dashed #ddd;
+            margin-left: 10px;
+            padding-left: 30px;
         }
 
-        .sub-list li {
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            color: #4b6584;
-            padding-left: 15px;
+        .timeline-item {
             position: relative;
+            margin-bottom: 30px;
         }
 
-        .sub-list li::before {
+        .timeline-item::before {
             content: '';
             position: absolute;
-            left: 0;
-            top: 10px;
-            width: 6px;
-            height: 2px;
-            background: #a5b1c2;
+            left: -41px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-color);
+            border: 4px solid var(--white);
+            border-radius: 50%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        /* Galeria */
+        .timeline-date {
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* Galeria i Video */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -300,21 +327,12 @@
             overflow: hidden;
             cursor: pointer;
             box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
-        .gallery-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
+        .gallery-item:hover { transform: scale(1.05); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
 
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Video Player */
         .video-container {
             position: relative;
             padding-bottom: 56.25%;
@@ -322,7 +340,6 @@
             overflow: hidden;
             border-radius: 20px;
             background: #000;
-            margin-bottom: 25px;
         }
 
         .video-container iframe {
@@ -331,7 +348,7 @@
             border: 0;
         }
 
-        /* Sidebar */
+        /* Sidebar Specs */
         .spec-sidebar {
             background: var(--dark-green);
             color: white;
@@ -339,15 +356,6 @@
             border-radius: var(--card-radius);
             position: sticky;
             top: 100px;
-            box-shadow: 0 15px 35px rgba(20, 61, 38, 0.3);
-        }
-
-        .spec-sidebar h3 {
-            font-size: 1.4rem;
-            margin-top: 0;
-            padding-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            margin-bottom: 25px;
         }
 
         .spec-group-title {
@@ -359,35 +367,13 @@
             font-weight: 800;
         }
 
-        .spec-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
+        .spec-list { list-style: none; padding: 0; }
         .spec-list li {
             padding: 10px 0;
             border-bottom: 1px solid rgba(255,255,255,0.05);
             display: flex;
             justify-content: space-between;
             font-size: 0.9rem;
-        }
-
-        .spec-label { color: rgba(255,255,255,0.7); }
-        .spec-value { font-weight: 600; color: white; }
-
-        /* Innovation Badges */
-        .innovation-card {
-            background: #f8fafc;
-            border-left: 5px solid var(--primary-color);
-            padding: 25px;
-            border-radius: 16px;
-            margin-top: 20px;
-        }
-
-        .innovation-card h4 {
-            margin: 0 0 10px 0;
-            color: var(--dark-green);
         }
 
         footer {
@@ -408,164 +394,164 @@
             cursor: zoom-out;
             align-items: center;
             justify-content: center;
-            padding: 40px;
         }
 
-        #lightbox img {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 8px;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-        }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 8px; }
 
+        /* RESPONSIVE */
         @media (max-width: 992px) {
             .details-grid { grid-template-columns: 1fr; }
             .spec-sidebar { position: static; }
-            .modern-image-bar { height: 200px; }
-            .header-content h1 { font-size: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .floating-coins {
+                bottom: 20px;
+                top: auto;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+            }
+            .coin-btn { width: 60px; height: 60px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- PŁYWAJĄCE MONETY -->
+    <div class="floating-coins">
+        <a href="../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png">
+                </div>
+            </div>
+        </a>
+
+        <a href="../index.html" class="coin-btn" title="Projekty">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png">
+                </div>
+            </div>
+        </a>
+    </div>
+
     <nav class="nav-buttons">
-        <a href="#">Start</a>
+        <a href="#">GardenCube</a>
+        <a href="#rozwój">Rozwój</a>
         <a href="#galeria">Galeria</a>
-        <a href="#wideo">Wideo</a>
-        <a href="#specyfikacja">Specyfikacja</a>
+        <a href="#wideo">Prezentacja</a>
         <a href="javascript:window.print()" style="background: var(--white); color: var(--dark-green);">Eksportuj PDF</a>
     </nav>
 
     <div class="main-container">
-        <!-- Hero Section -->
+        <!-- Header -->
         <header class="project-header">
             <div class="main-image-container">
-                <img src="../../images/IMGP9295.JPG" alt="GardenCube Main" class="main-image" 
-                     onerror="this.src='https://images.unsplash.com/photo-1558449028-b53a39d100fc?auto=format&fit=crop&q=80&w=1200';">
+                <img src="../../images/IMGP9295.JPG" alt="GardenCube" class="main-image" onerror="this.src='https://images.unsplash.com/photo-1558449028-b53a39d100fc?w=1200';">
             </div>
             <div class="header-content">
                 <h1>GardenCube v2.1</h1>
-                <p class="subtitle">Zautomatyzowana komora ekosystemowa do precyzyjnych badań nad wzrostem roślin w kontrolowanych warunkach hydroponicznych.</p>
+                <p class="subtitle">Eksperymentalna komora hydroponiczna do zaawansowanych badań ekosystemowych i automatyzacji upraw.</p>
             </div>
         </header>
 
-        <!-- Dynamic Image Bar -->
+        <!-- Image Bar -->
         <div class="modern-image-bar">
             <div class="bar-item" onclick="openLightbox('../../images/IMGP9282.jpeg')">
-                <img src="../../images/IMGP9282.jpeg" alt="Sensors" onerror="this.src='https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=600';">
-                <div class="overlay"><span>System sensorów</span></div>
+                <img src="../../images/IMGP9282.jpeg" alt="Sensors" onerror="this.src='https://picsum.photos/601'">
             </div>
             <div class="bar-item" onclick="openLightbox('../../images/IMGP9305.JPG')">
-                <img src="../../images/IMGP9305.JPG" alt="Growth" onerror="this.src='https://images.unsplash.com/photo-1530836361253-efad5cb9f82d?w=600';">
-                <div class="overlay"><span>Analiza wzrostu</span></div>
+                <img src="../../images/IMGP9305.JPG" alt="Grow" onerror="this.src='https://picsum.photos/602'">
             </div>
             <div class="bar-item" onclick="openLightbox('../../images/IMGP9319.JPG')">
-                <img src="../../images/IMGP9319.JPG" alt="Lab" onerror="this.src='https://images.unsplash.com/photo-1512413316925-fd4b93f31521?w=600';">
-                <div class="overlay"><span>Kontrola światła</span></div>
+                <img src="../../images/IMGP9319.JPG" alt="Light" onerror="this.src='https://picsum.photos/603'">
             </div>
         </div>
 
         <div class="details-grid">
             <main>
-                <!-- Project Scope -->
                 <section class="card">
-                    <h2>Możliwości Badawcze</h2>
+                    <h2>Zakres Projektu</h2>
                     <ul class="zakres-list">
-                        <li>Precyzyjna kontrola parametrów fizykochemicznych:
-                            <ul class="sub-list">
-                                <li>Monitoring pH i EC (przewodności) pożywki w czasie rzeczywistym.</li>
-                                <li>Analiza stężenia gazów (CO₂ / O₂) w zamkniętym obiegu.</li>
-                                <li>Kompensacja ciśnienia i temperatury otoczenia.</li>
-                            </ul>
-                        </li>
-                        <li>Autonomiczny system oświetlenia PAR:
-                            <ul class="sub-list">
-                                <li>Symulacja cyklu dobowego z regulacją widma (Deep Red / Royal Blue).</li>
-                                <li>Automatyczne dostosowanie intensywności (PPFD).</li>
-                            </ul>
-                        </li>
-                        <li>Dokumentacja wizualna i AI:
-                            <ul class="sub-list">
-                                <li>Generowanie timelapsów wysokiej rozdzielczości (4K).</li>
-                                <li>Zdalny podgląd stanu uprawy przez interfejs Web.</li>
-                            </ul>
-                        </li>
+                        <li>Automatyzacja badań hydroponicznych i kontroli klimatu.</li>
+                        <li>Monitoring gazów (CO2, O2) i parametrów roztworu (pH, EC).</li>
+                        <li>Generowanie timelapsów 24/7 dla pełnej analizy wzrostu.</li>
+                        <li>Zdalne sterowanie natężeniem oświetlenia i cyklami podlewania.</li>
                     </ul>
                 </section>
 
-                <!-- Gallery Section -->
+                <section class="card" id="rozwój">
+                    <h2>Rozwój i Innowacje</h2>
+                    <div class="innovation-timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">V1.0 - Fundamenty</span>
+                            <p>Pierwszy prototyp oparty na prostym systemie zalewowym i manualnym monitoringu temperatury.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">V2.0 - Automatyzacja</span>
+                            <p>Wprowadzenie Raspberry Pi jako centralnej jednostki sterującej. Integracja sensorów CO2 oraz pierwszej kamery inspekcyjnej.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">V2.1 - Precyzja (Aktualna)</span>
+                            <p>Implementacja dynamicznego sterowania PWM dla oświetlenia LED, optymalizacja przepływu powietrza i wdrożenie systemu alertów przez API.</p>
+                        </div>
+                    </div>
+                </section>
+
                 <section class="card" id="galeria">
-                    <h2>Dokumentacja Wizualna</h2>
+                    <h2>Galeria Zdjęć</h2>
                     <div class="gallery-grid">
                         <div class="gallery-item"><img src="../../images/IMGP9282.jpeg" onclick="openLightbox(this.src)" onerror="this.src='https://picsum.photos/401'"></div>
                         <div class="gallery-item"><img src="../../images/IMGP9305.JPG" onclick="openLightbox(this.src)" onerror="this.src='https://picsum.photos/402'"></div>
                         <div class="gallery-item"><img src="../../images/IMGP9310.JPG" onclick="openLightbox(this.src)" onerror="this.src='https://picsum.photos/403'"></div>
                         <div class="gallery-item"><img src="../../images/IMGP9319.JPG" onclick="openLightbox(this.src)" onerror="this.src='https://picsum.photos/404'"></div>
-                        <div class="gallery-item"><img src="../../images/IMGP9327.JPG" onclick="openLightbox(this.src)" onerror="this.src='https://picsum.photos/405'"></div>
-                        <div class="gallery-item"><img src="../../images/pomiary.png" onclick="openLightbox(this.src)" onerror="this.src='https://picsum.photos/406'"></div>
                     </div>
                 </section>
 
-                <!-- Video Section -->
                 <section class="card" id="wideo">
-                    <h2>Prezentacja Funkcjonalności</h2>
+                    <h2>Prezentacja Wideo</h2>
                     <div class="video-container">
                         <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                    </div>
-                    <p style="color: #636e72; font-size: 0.9rem; font-style: italic;">
-                        Wideo prezentuje moduł sterowania oświetleniem oraz proces automatycznej kalibracji sensorów CO₂.
-                    </p>
-                </section>
-
-                <!-- Innovations -->
-                <section class="card">
-                    <h2>Innowacje & Rozwój</h2>
-                    <div class="innovation-card">
-                        <h4>Wdrożone technologie:</h4>
-                        <p>System logowania danych w standardzie JSON z automatycznym backupem do chmury co 15 minut.</p>
-                    </div>
-                    <div class="innovation-card" style="border-left-color: #3498db; background: #ebf5fb;">
-                        <h4>Planowane (Q1 2025):</h4>
-                        <p>Implementacja sieci neuronowej do wczesnego wykrywania deficytów składników odżywczych na podstawie analizy liści.</p>
                     </div>
                 </section>
             </main>
 
-            <aside class="spec-sidebar" id="specyfikacja">
-                <h3>Hardware & Software</h3>
-                
-                <div class="spec-group-title">Jednostka Centralna</div>
+            <aside class="spec-sidebar">
+                <h3>Specyfikacja v2.1</h3>
+                <div class="spec-group-title">Hardware</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Procesor:</span> <span class="spec-value">Quad-core 1.5GHz</span></li>
-                    <li><span class="spec-label">RAM:</span> <span class="spec-value">4GB LPDDR4</span></li>
-                    <li><span class="spec-label">OS:</span> <span class="spec-value">GardenOS (Linux)</span></li>
+                    <li><span class="spec-label">Kontroler:</span> <span class="spec-value">Raspberry Pi 4B</span></li>
+                    <li><span class="spec-label">Sensory:</span> <span class="spec-value">DHT22 / CO2 / pH</span></li>
+                    <li><span class="spec-label">Wizja:</span> <span class="spec-value">FHD 1080p USB</span></li>
                 </ul>
-
-                <div class="spec-group-title">Matryca Sensorów</div>
+                <div class="spec-group-title">Uprawa</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Klimat:</span> <span class="spec-value">BME280 / SGP30</span></li>
-                    <li><span class="spec-label">Pożywka:</span> <span class="spec-value">Analog EC/pH</span></li>
-                    <li><span class="spec-label">Wizja:</span> <span class="spec-value">8MP Wide Angle</span></li>
+                    <li><span class="spec-label">Metoda:</span> <span class="spec-value">Hydroponika</span></li>
+                    <li><span class="spec-label">Lampa:</span> <span class="spec-value">100W Adjustable</span></li>
                 </ul>
-
-                <div class="spec-group-title">Wykonawstwo</div>
+                <div class="spec-group-title">Łączność</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Oświetlenie:</span> <span class="spec-value">COB Full Spectrum</span></li>
-                    <li><span class="spec-label">Pompy:</span> <span class="spec-value">Perystaltyczne</span></li>
-                    <li><span class="spec-label">Obudowa:</span> <span class="spec-value">Hevn Modular</span></li>
+                    <li><span class="spec-label">Protokół:</span> <span class="spec-value">MQTT / HTTP</span></li>
+                    <li><span class="spec-label">Dostęp:</span> <span class="spec-value">Web Dashboard</span></li>
                 </ul>
             </aside>
         </div>
     </div>
 
-    <!-- Lightbox Overlay -->
     <div id="lightbox" onclick="this.style.display='none'">
-        <img id="lightbox-img" src="" alt="Zoomed view">
+        <img id="lightbox-img" src="">
     </div>
 
     <footer>
-        <p><strong>Laboratorium Innowacji Agro-Tech</strong></p>
-        <p>Projekt GardenCube &copy; 2024. Wszelkie prawa zastrzeżone.</p>
+        <p><strong>Laboratorium GardenCube</strong> &copy; 2024 | Dokumentacja techniczna v2.1</p>
     </footer>
 
     <script>
@@ -576,27 +562,8 @@
             lightbox.style.display = 'flex';
         }
 
-        // Close on ESC
         document.addEventListener('keydown', (e) => {
             if (e.key === "Escape") document.getElementById('lightbox').style.display = 'none';
-        });
-
-        // Intersection Observer for fade-in effect on cards
-        const observerOptions = { threshold: 0.1 };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.card').forEach(card => {
-            card.style.opacity = "0";
-            card.style.transform = "translateY(20px)";
-            card.style.transition = "all 0.6s ease-out";
-            observer.observe(card);
         });
     </script>
 </body>
