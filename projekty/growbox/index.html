@@ -79,14 +79,14 @@
             border-radius: 30px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             display: flex;
             flex-direction: column;
         }
 
         .main-image-container {
             width: 100%;
-            height: 500px;
+            height: 400px;
             overflow: hidden;
             position: relative;
             background: #2c3e50;
@@ -103,14 +103,14 @@
         }
 
         .header-content {
-            padding: 40px 50px;
+            padding: 30px 40px;
             background: linear-gradient(to bottom, #ffffff, #fafafa);
         }
 
         .header-content h1 {
             color: var(--dark-green);
             margin: 0 0 10px 0;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 800;
         }
 
@@ -120,6 +120,56 @@
             max-width: 800px;
             border-left: 4px solid var(--accent-color);
             padding-left: 20px;
+            margin: 0;
+        }
+
+        /* Nowoczesny pasek zdjęć */
+        .modern-image-bar {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+            height: 250px;
+        }
+
+        .bar-item {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: var(--shadow);
+            transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+        }
+
+        .bar-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .bar-item:hover {
+            flex: 2; /* Powiększenie szerokości pola */
+        }
+
+        .bar-item:hover img {
+            transform: scale(1.1); /* Delikatny zoom zdjęcia wewnątrz */
+        }
+
+        .bar-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .bar-item:hover::after {
+            opacity: 1;
         }
 
         /* Layout Grid */
@@ -228,7 +278,7 @@
         /* Video Player Styles */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 16px;
@@ -325,6 +375,7 @@
         @media (max-width: 992px) {
             .details-grid { grid-template-columns: 1fr; }
             .spec-sidebar { position: static; }
+            .modern-image-bar { height: 180px; gap: 10px; }
         }
     </style>
 </head>
@@ -338,6 +389,7 @@
     </nav>
 
     <div class="main-container">
+        <!-- Główny Header -->
         <header class="project-header">
             <div class="main-image-container">
                 <img src="../../images/IMGP9295.JPG" 
@@ -346,10 +398,23 @@
                      onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=1200&auto=format&fit=crop';">
             </div>
             <div class="header-content">
-                <h1>Zautomatyzowana platforma badawcza do upraw hydroponicznych - GardenCube v2.1</h1>
+                <h1>GardenCube v2.1</h1>
                 <p class="subtitle">Eksperymentalna komora hydroponiczna do badań wpływu światła, klimatu i składu środowiska na wzrost roślin.</p>
             </div>
         </header>
+
+        <!-- Nowy Pasek Zdjęć -->
+        <div class="modern-image-bar">
+            <div class="bar-item" onclick="openLightbox('../../images/IMGP9282.jpeg')">
+                <img src="../../images/IMGP9282.jpeg" alt="Detal 1" onerror="this.src='https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?w=400&auto=format&fit=crop';">
+            </div>
+            <div class="bar-item" onclick="openLightbox('../../images/IMGP9305.JPG')">
+                <img src="../../images/IMGP9305.JPG" alt="Detal 2" onerror="this.src='https://images.unsplash.com/photo-1530836361253-efad5cb9f82d?w=400&auto=format&fit=crop';">
+            </div>
+            <div class="bar-item" onclick="openLightbox('../../images/IMGP9319.JPG')">
+                <img src="../../images/IMGP9319.JPG" alt="Detal 3" onerror="this.src='https://images.unsplash.com/photo-1512413316925-fd4b93f31521?w=400&auto=format&fit=crop';">
+            </div>
+        </div>
 
         <div class="details-grid">
             <main>
@@ -365,15 +430,11 @@
                                 <li>zawartość gazów w komorze uprawowej (np. CO₂, O₂)</li>
                                 <li>ciśnienie atmosferyczne i w komorze uprawowej</li>
                                 <li>pH roztworu i przewodność elektryczna (EC)</li>
-                                <li>oświetlenie: intensywność, rodzaj światła, światło nocne</li>
-                                <li>czas wzrostu, smak i zawartość składników odżywczych roślin</li>
-                                <li>bezpieczeństwo spożycia i jakość plonu</li>
+                                <li>oświetlenie: intensywność, rodzaj światła</li>
                             </ul>
                         </li>
-                        <li>Eksperymentowanie z różnymi zmiennymi uprawy: gatunki roślin, rodzaje nawozów, typy i natężenie światła, światło nocne, wilgotność powietrza, ciśnienie i zawartość gazów.</li>
-                        <li>Analiza danych w celu ustalenia optymalnych warunków uprawy hydroponicznej.</li>
-                        <li>Automatyzacja badań i opieki nad roślinami – system steruje oświetleniem, kontrolą klimatu i monitorowaniem parametrów w czasie rzeczywistym.</li>
-                        <li>Automatyczne udostępnianie danych online – bieżąca aktualizacja wykresów, nagrań timelapse i pomiarów.</li>
+                        <li>Automatyzacja badań i opieki nad roślinami – system steruje oświetleniem i klimatem.</li>
+                        <li>Automatyczne udostępnianie danych online – bieżąca aktualizacja wykresów i timelapsów.</li>
                     </ul>
                 </section>
 
@@ -388,19 +449,19 @@
                             <img src="../../images/IMGP9305.JPG" alt="Eksperyment 2" onclick="openLightbox(this.src)">
                         </div>
                         <div class="gallery-item">
-                            <img src="../../images/IMGP9310.JPG" alt="Eksperyment 2" onclick="openLightbox(this.src)">
+                            <img src="../../images/IMGP9310.JPG" alt="Eksperyment 3" onclick="openLightbox(this.src)">
                         </div>
                         <div class="gallery-item">
-                            <img src="../../images/IMGP9319.JPG" alt="Eksperyment 2" onclick="openLightbox(this.src)">
+                            <img src="../../images/IMGP9319.JPG" alt="Eksperyment 4" onclick="openLightbox(this.src)">
                         </div>
                         <div class="gallery-item">
-                            <img src="../../images/IMGP9327.JPG" alt="Eksperyment 2" onclick="openLightbox(this.src)">
+                            <img src="../../images/IMGP9327.JPG" alt="Eksperyment 5" onclick="openLightbox(this.src)">
                         </div>
                         <div class="gallery-item">
-                            <img src="../../images/IMGP9334.JPG" alt="Eksperyment 2" onclick="openLightbox(this.src)">
+                            <img src="../../images/IMGP9334.JPG" alt="Eksperyment 6" onclick="openLightbox(this.src)">
                         </div>
                         <div class="gallery-item">
-                            <img src="../../images/pomiary.png" alt="Eksperyment 3" onclick="openLightbox(this.src)">
+                            <img src="../../images/pomiary.png" alt="Pomiary" onclick="openLightbox(this.src)">
                         </div>
                     </div>
                 </section>
@@ -409,7 +470,6 @@
                 <section class="card" id="prezentacja">
                     <h2>Prezentacja wideo</h2>
                     <div class="video-container">
-                        <!-- Zastąp VIDEO_ID właściwym identyfikatorem z YouTube -->
                         <iframe 
                             src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
                             title="YouTube video player" 
@@ -418,7 +478,7 @@
                         </iframe>
                     </div>
                     <div class="video-description">
-                        <strong>Opis materiału:</strong> Powyższy materiał wideo prezentuje działanie prototypu v2.1 w pełnym cyklu dobowym. Można zaobserwować automatyczną zmianę widma światła, pracę systemu wentylacji oraz stabilność odczytów z sensorów w czasie rzeczywistym. Film został zmontowany z klatek timelapse generowanych przez Raspberry Pi.
+                        <strong>Opis materiału:</strong> Powyższy materiał wideo prezentuje działanie prototypu v2.1 w pełnym cyklu dobowym. Można zaobserwować automatyczną zmianę widma światła oraz pracę systemu wentylacji.
                     </div>
                 </section>
 
@@ -438,23 +498,19 @@
 
             <aside class="spec-sidebar">
                 <h3>Specyfikacja Techniczna</h3>
-                
                 <div class="spec-group-title">Obecna (Prototyp)</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Doniczka:</span> <span class="spec-value">Hevn (oświetlenie)</span></li>
+                    <li><span class="spec-label">Doniczka:</span> <span class="spec-value">Hevn</span></li>
                     <li><span class="spec-label">Komputer:</span> <span class="spec-value">Raspberry Pi 4B</span></li>
-                    <li><span class="spec-label">Czujniki:</span> <span class="spec-value">DHT22 (Temp/Wilg)</span></li>
+                    <li><span class="spec-label">Czujniki:</span> <span class="spec-value">DHT22 / CO2</span></li>
                     <li><span class="spec-label">Kamera:</span> <span class="spec-value">1080p USB</span></li>
-                    <li><span class="spec-label">Zasilanie:</span> <span class="spec-value">5V / 3A DC</span></li>
                 </ul>
 
                 <div class="spec-group-title">Docelowa (v2.0)</div>
                 <ul class="spec-list">
-                    <li><span class="spec-label">Pojemniki:</span> <span class="spec-value">Szkło hartowane</span></li>
-                    <li><span class="spec-label">Lampa:</span> <span class="spec-value">100W (Regulowana)</span></li>
+                    <li><span class="spec-label">Lampa:</span> <span class="spec-value">100W Adjustable</span></li>
                     <li><span class="spec-label">Spectrum:</span> <span class="spec-value">Pełne / Zmienne</span></li>
                     <li><span class="spec-label">Pomiar EC:</span> <span class="spec-value">Automatyczny</span></li>
-                    <li><span class="spec-label">Gazy / pH:</span> <span class="spec-value">CO2 + pH probe</span></li>
                 </ul>
             </aside>
         </div>
