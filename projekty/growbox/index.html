@@ -12,6 +12,7 @@
             --text-color: #2c3e50;
             --white: #ffffff;
             --dark-green: #1b5e20;
+            --nav-bg: #143d26; /* Ciemniejszy kolor paska górnego */
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
         }
 
@@ -38,15 +39,16 @@
             padding: 15px 20px;
             justify-content: center;
             z-index: 1000;
-            background: rgba(255, 255, 255, 0.85);
+            background: var(--nav-bg); /* Zmiana na ciemniejszy kolor */
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .nav-buttons a {
             text-decoration: none;
             padding: 10px 20px;
-            background-color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.1); /* Subtelne tło dla przycisków */
             color: white;
             font-weight: 600;
             border-radius: 12px;
@@ -54,12 +56,14 @@
             font-size: 0.85rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .nav-buttons a:hover {
-            background-color: var(--dark-green);
+            background-color: var(--primary-color);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
+            border-color: transparent;
         }
 
         /* Container */
@@ -262,7 +266,7 @@
         <a href="../../index.html">Strona główna</a>
         <a href="#galeria">Galeria</a>
         <a href="#">Fizyka</a>
-        <a href="javascript:window.print()" style="background: var(--text-color)">PDF</a>
+        <a href="javascript:window.print()" style="background: var(--text-color); border: none;">PDF</a>
     </nav>
 
     <div class="main-container">
