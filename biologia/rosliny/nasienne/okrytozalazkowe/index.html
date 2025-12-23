@@ -37,6 +37,8 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            text-decoration: none;
+            color: inherit;
         }
 
         .category-card:hover {
@@ -191,7 +193,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             <!-- 1. Jednoliścienne -->
-            <div class="category-card" 
+            <a href="jednoloscienne/index.html" class="category-card" 
                  onmouseenter="startBubbles('jednoloscienne')" 
                  onmouseleave="stopBubbles()">
                 <img src="https://images.unsplash.com/photo-1502472545331-50e5699478f7?q=80&w=800&auto=format&fit=crop" alt="Trawy i lilie" class="w-full h-40 object-cover">
@@ -207,16 +209,15 @@
                     </ul>
 
                     <div class="mt-auto">
-                        <div class="bg-blue-50 p-3 rounded-xl mb-4">
+                        <div class="bg-blue-50 p-3 rounded-xl">
                             <p class="text-[10px] text-blue-900 leading-tight"><strong>Przykłady:</strong> Trawy, palmy, lilie, orchidee, zboża.</p>
                         </div>
-                        <a href="jednoloscienne/index.html" class="block text-center bg-primary text-white py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">Eksploruj</a>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- 2. Wczesne dwuliścienne -->
-            <div class="category-card" 
+            <a href="wczesne/index.html" class="category-card" 
                  onmouseenter="startBubbles('wczesne')" 
                  onmouseleave="stopBubbles()">
                 <img src="https://images.unsplash.com/photo-1614593921381-8798e6123479?q=80&w=800&auto=format&fit=crop" alt="Magnolia" class="w-full h-40 object-cover">
@@ -231,16 +232,15 @@
                     </ul>
 
                     <div class="mt-auto">
-                        <div class="bg-amber-50 p-3 rounded-xl mb-4">
+                        <div class="bg-amber-50 p-3 rounded-xl">
                             <p class="text-[10px] text-amber-900 leading-tight"><strong>Przykłady:</strong> Magnolie, grzybienie, pieprzowce, wawrzyn.</p>
                         </div>
-                        <a href="wczesne/index.html" class="block text-center bg-amber-700 text-white py-2 rounded-lg text-sm font-bold hover:bg-amber-800 transition">Eksploruj</a>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- 3. Dwuliścienne właściwe -->
-            <div class="category-card" 
+            <a href="dwuloscienne/index.html" class="category-card" 
                  onmouseenter="startBubbles('dwuloscienne')" 
                  onmouseleave="stopBubbles()">
                 <img src="https://images.unsplash.com/photo-1464306208223-e0b4495a5553?q=80&w=800&auto=format&fit=crop" alt="Róże" class="w-full h-40 object-cover">
@@ -256,13 +256,12 @@
                     </ul>
 
                     <div class="mt-auto">
-                        <div class="bg-emerald-50 p-3 rounded-xl mb-4">
+                        <div class="bg-emerald-50 p-3 rounded-xl">
                             <p class="text-[10px] text-emerald-900 leading-tight"><strong>Przykłady:</strong> Jabłoń, groch, słonecznik, dąb, ziemniak.</p>
                         </div>
-                        <a href="dwuloscienne/index.html" class="block text-center bg-nature text-white py-2 rounded-lg text-sm font-bold hover:bg-emerald-700 transition">Eksploruj</a>
                     </div>
                 </div>
-            </div>
+            </a>
 
         </div>
     </main>
