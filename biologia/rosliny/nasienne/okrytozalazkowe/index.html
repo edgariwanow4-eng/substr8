@@ -9,6 +9,7 @@
         :root {
             --primary: #1e3a8a; /* Deep Blue */
             --nature: #059669; /* Emerald */
+            --basal: #b45309; /* Amber/Brown for Basal */
             --light: #f8fafc;
         }
 
@@ -33,6 +34,9 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .category-card:hover {
@@ -116,14 +120,22 @@
             object-fit: contain;
         }
 
+        .list-check li {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
         .list-check li::before {
             content: "•";
-            color: var(--nature);
+            position: absolute;
+            left: 0;
             font-weight: bold;
-            display: inline-block; 
-            width: 1em;
-            margin-left: -1em;
         }
+
+        .list-monocot li::before { color: var(--primary); }
+        .list-basal li::before { color: var(--basal); }
+        .list-eudicot li::before { color: var(--nature); }
+
     </style>
 </head>
 <body class="font-sans">
@@ -169,82 +181,94 @@
     <!-- Hero -->
     <header class="hero-angio flex items-center justify-center text-center text-white pt-10">
         <div>
-            <h1 class="text-4xl font-black uppercase tracking-tighter">Podział Okrytozalążkowych</h1>
-            <p class="text-sm opacity-80 mt-2 uppercase tracking-widest">Jedno- vs Dwuliścienne</p>
+            <h1 class="text-4xl font-black uppercase tracking-tighter">Klasyfikacja Okrytozalążkowych</h1>
+            <p class="text-sm opacity-80 mt-2 uppercase tracking-widest">Główne linie ewolucyjne</p>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12">
         
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             <!-- 1. Jednoliścienne -->
             <div class="category-card" 
                  onmouseenter="startBubbles('jednoloscienne')" 
                  onmouseleave="stopBubbles()">
-                <img src="https://images.unsplash.com/photo-1502472545331-50e5699478f7?q=80&w=800&auto=format&fit=crop" alt="Trawy i lilie" class="w-full h-48 object-cover">
-                <div class="p-8">
-                    <h2 class="text-2xl font-black text-primary mb-4">1. Jednoliścienne <span class="text-sm font-normal text-gray-400">(Monocots)</span></h2>
+                <img src="https://images.unsplash.com/photo-1502472545331-50e5699478f7?q=80&w=800&auto=format&fit=crop" alt="Trawy i lilie" class="w-full h-40 object-cover">
+                <div class="p-6 flex-grow flex flex-col">
+                    <h2 class="text-xl font-black text-primary mb-3">Jednoliścienne <span class="text-xs font-normal text-gray-400 block">(Monocots)</span></h2>
                     
-                    <ul class="space-y-3 text-sm text-gray-600 list-check ml-4">
-                        <li>Zarodki mają <strong>jeden liścień</strong>.</li>
-                        <li>Liście zwykle równoległe lub liniowe.</li>
-                        <li>Łodygi mają rozproszony układ wiązek przewodzących.</li>
-                        <li>Kwiaty zwykle w liczbach 3 lub wielokrotnościach 3.</li>
-                        <li>Wzrost wtórny ograniczony (brak kambium).</li>
+                    <ul class="space-y-2 text-xs text-gray-600 list-check list-monocot mb-4">
+                        <li><strong>Jeden liścień</strong> w zarodku.</li>
+                        <li>Unerwienie liści <strong>równoległe</strong>.</li>
+                        <li>Wiązki przewodzące <strong>rozproszone</strong>.</li>
+                        <li>Kwiaty zwykle <strong>trójdzielne</strong>.</li>
+                        <li>Brak typowego przyrostu na grubość.</li>
                     </ul>
 
-                    <div class="mt-8 grid grid-cols-2 gap-2">
-                        <div class="bg-blue-50 p-3 rounded-xl">
-                            <span class="block text-[10px] font-bold text-blue-400 uppercase">Rodziny</span>
-                            <p class="text-[11px] text-blue-900">Poaceae, Liliaceae, Orchidaceae, Arecaceae</p>
+                    <div class="mt-auto">
+                        <div class="bg-blue-50 p-3 rounded-xl mb-4">
+                            <p class="text-[10px] text-blue-900 leading-tight"><strong>Przykłady:</strong> Trawy, palmy, lilie, orchidee, zboża.</p>
                         </div>
-                        <div class="bg-blue-50 p-3 rounded-xl">
-                            <span class="block text-[10px] font-bold text-blue-400 uppercase">Przykłady</span>
-                            <p class="text-[11px] text-blue-900">Trawy, palmy, lilie, orchidee</p>
-                        </div>
+                        <a href="jednoloscienne/index.html" class="block text-center bg-primary text-white py-2 rounded-lg text-sm font-bold hover:bg-blue-800 transition">Eksploruj</a>
                     </div>
-                    
-                    <a href="jednoloscienne/index.html" class="mt-6 block text-center bg-primary text-white py-3 rounded-xl font-bold hover:bg-blue-800 transition">Szczegóły grupy</a>
                 </div>
             </div>
 
-            <!-- 2. Dwuliścienne -->
+            <!-- 2. Wczesne dwuliścienne -->
+            <div class="category-card" 
+                 onmouseenter="startBubbles('wczesne')" 
+                 onmouseleave="stopBubbles()">
+                <img src="https://images.unsplash.com/photo-1614593921381-8798e6123479?q=80&w=800&auto=format&fit=crop" alt="Magnolia" class="w-full h-40 object-cover">
+                <div class="p-6 flex-grow flex flex-col">
+                    <h2 class="text-xl font-black text-basal mb-3">Wczesne dwuliścienne <span class="text-xs font-normal text-gray-400 block">(Basal Angiosperms)</span></h2>
+                    
+                    <ul class="space-y-2 text-xs text-gray-600 list-check list-basal mb-4">
+                        <li>Grupa parafiletyczna ("prymitywne").</li>
+                        <li>Często <strong>spiralny układ</strong> elementów kwiatu.</li>
+                        <li>Pyłek o <strong>jednym otworze</strong> (jak u jednoliściennych).</li>
+                        <li>Liczne, wolne słupki i pręciki.</li>
+                    </ul>
+
+                    <div class="mt-auto">
+                        <div class="bg-amber-50 p-3 rounded-xl mb-4">
+                            <p class="text-[10px] text-amber-900 leading-tight"><strong>Przykłady:</strong> Magnolie, grzybienie, pieprzowce, wawrzyn.</p>
+                        </div>
+                        <a href="wczesne/index.html" class="block text-center bg-amber-700 text-white py-2 rounded-lg text-sm font-bold hover:bg-amber-800 transition">Eksploruj</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. Dwuliścienne właściwe -->
             <div class="category-card" 
                  onmouseenter="startBubbles('dwuloscienne')" 
                  onmouseleave="stopBubbles()">
-                <img src="https://images.unsplash.com/photo-1464306208223-e0b4495a5553?q=80&w=800&auto=format&fit=crop" alt="Drzewa owocowe" class="w-full h-48 object-cover">
-                <div class="p-8">
-                    <h2 class="text-2xl font-black text-nature mb-4">2. Dwuliścienne <span class="text-sm font-normal text-gray-400">(Dicots)</span></h2>
+                <img src="https://images.unsplash.com/photo-1464306208223-e0b4495a5553?q=80&w=800&auto=format&fit=crop" alt="Róże" class="w-full h-40 object-cover">
+                <div class="p-6 flex-grow flex flex-col">
+                    <h2 class="text-xl font-black text-nature mb-3">Dwuliścienne właściwe <span class="text-xs font-normal text-gray-400 block">(Eudicots)</span></h2>
                     
-                    <ul class="space-y-3 text-sm text-gray-600 list-check ml-4">
-                        <li>Zarodki mają <strong>dwa liścienie</strong>.</li>
-                        <li>Unerwienie liści sieciowane.</li>
-                        <li>Łodygi z wiązkami przewodzącymi w pierścieniu.</li>
-                        <li>Kwiaty zwykle w liczbach 4 lub 5 (lub ich wielokrotności).</li>
-                        <li>Możliwy wzrost wtórny (obecność kambium).</li>
+                    <ul class="space-y-2 text-xs text-gray-600 list-check list-eudicot mb-4">
+                        <li><strong>Dwa liścienie</strong> w zarodku.</li>
+                        <li>Unerwienie liści <strong>pierwszorzędowe/sieciowe</strong>.</li>
+                        <li>Wiązki ułożone <strong>w pierścień</strong>.</li>
+                        <li>Pyłek o <strong>trzech otworach</strong> (trójbruzdowy).</li>
+                        <li>Kwiaty zwykle 4 lub 5-dzielne.</li>
                     </ul>
 
-                    <div class="mt-8 grid grid-cols-2 gap-2">
-                        <div class="bg-emerald-50 p-3 rounded-xl">
-                            <span class="block text-[10px] font-bold text-emerald-400 uppercase">Rodziny</span>
-                            <p class="text-[11px] text-emerald-900">Rosaceae, Fabaceae, Asteraceae, Solanaceae</p>
+                    <div class="mt-auto">
+                        <div class="bg-emerald-50 p-3 rounded-xl mb-4">
+                            <p class="text-[10px] text-emerald-900 leading-tight"><strong>Przykłady:</strong> Jabłoń, groch, słonecznik, dąb, ziemniak.</p>
                         </div>
-                        <div class="bg-emerald-50 p-3 rounded-xl">
-                            <span class="block text-[10px] font-bold text-emerald-400 uppercase">Przykłady</span>
-                            <p class="text-[11px] text-emerald-900">Jabłoń, róża, słonecznik, groch</p>
-                        </div>
+                        <a href="dwuloscienne/index.html" class="block text-center bg-nature text-white py-2 rounded-lg text-sm font-bold hover:bg-emerald-700 transition">Eksploruj</a>
                     </div>
-
-                    <a href="dwuloscienne/index.html" class="mt-6 block text-center bg-nature text-white py-3 rounded-xl font-bold hover:bg-emerald-700 transition">Szczegóły grupy</a>
                 </div>
             </div>
 
         </div>
     </main>
 
-    <footer class="mt-12 py-10 text-center text-gray-400 text-xs">
-        Systematyka Roślin Okrytonasiennych &bull; 2024
+    <footer class="mt-8 py-8 text-center text-gray-400 text-[10px] uppercase tracking-widest">
+        Filogeneza Angiospermae &bull; Klasyfikacja APG IV
     </footer>
 
     <script>
@@ -257,6 +281,11 @@
                 'https://images.unsplash.com/photo-1589307730722-38600d868322?q=80&w=200&auto=format&fit=crop', // Orchidea
                 'https://images.unsplash.com/photo-1596438676698-e5a3cffcbd79?q=80&w=200&auto=format&fit=crop', // Palma
                 'https://images.unsplash.com/photo-1533221216134-c37876579d41?q=80&w=200&auto=format&fit=crop'  // Lilia
+            ],
+            wczesne: [
+                'https://images.unsplash.com/photo-1614593921381-8798e6123479?q=80&w=200&auto=format&fit=crop', // Magnolia
+                'https://images.unsplash.com/photo-1582260656093-6c0717255761?q=80&w=200&auto=format&fit=crop', // Grzybień
+                'https://images.unsplash.com/photo-1546272442-4e8c63f9d3f5?q=80&w=200&auto=format&fit=crop'  // Pieprz
             ],
             dwuloscienne: [
                 'https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=200&auto=format&fit=crop', // Jabłko
@@ -273,7 +302,7 @@
             const randomImg = images[type][Math.floor(Math.random() * images[type].length)];
             bubble.style.backgroundImage = `url('${randomImg}')`;
             
-            const size = Math.random() * 40 + 60; // 60-100px
+            const size = Math.random() * 30 + 50; // 50-80px
             bubble.style.width = `${size}px`;
             bubble.style.height = `${size}px`;
             
@@ -284,7 +313,6 @@
             
             container.appendChild(bubble);
             
-            // Usuń po zakończeniu animacji
             setTimeout(() => {
                 bubble.remove();
             }, duration * 1000);
@@ -292,7 +320,7 @@
 
         function startBubbles(type) {
             stopBubbles();
-            bubbleInterval = setInterval(() => createBubble(type), 300);
+            bubbleInterval = setInterval(() => createBubble(type), 350);
         }
 
         function stopBubbles() {
