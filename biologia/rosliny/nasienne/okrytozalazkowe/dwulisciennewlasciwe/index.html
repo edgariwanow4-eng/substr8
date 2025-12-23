@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dwuliścienne Właściwe - Eudicots</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #15803d; /* Green 700 */
+            --rosids: #be123c;  /* Rose 700 */
+            --asterids: #6d28d9; /* Violet 700 */
+            --basal: #b45309;    /* Amber 700 */
+            --light: #fdfcfb;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        .hero-eudicot {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1464306208223-e0b4495a5553?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 35vh;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
+
+        /* Bubble Animation */
+        .bubble {
+            position: fixed;
+            bottom: -100px;
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            border: 3px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            pointer-events: none;
+            opacity: 0;
+            z-index: 5;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-125vh) rotate(360deg) scale(1.2); opacity: 0; }
+        }
+
+        /* Navigation Coins */
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 60px;
+            height: 60px;
+            perspective: 1000px;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border: 2px solid var(--primary);
+            padding: 12px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .feature-tag {
+            background: #f1f5f9;
+            color: #475569;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Bubble Container -->
+    <div id="bubble-container"></div>
+
+    <!-- Navigation Coins -->
+    <div class="floating-coins">
+        <a href="../../../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom">
+                </div>
+            </div>
+        </a>
+
+        <a href="../index.html" class="coin-btn" title="Okrytozalążkowe">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Cofnij">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Cofnij">
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Nav -->
+    <nav class="bg-white/90 backdrop-blur-lg fixed top-0 w-full z-50 py-4 px-6 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="font-black text-xl text-green-800 flex items-center gap-2">
+                <span class="text-2xl">🌿</span> EUDICOTS
+            </div>
+            <div class="flex gap-4 items-center">
+                <span class="feature-tag">Liście sieciowane</span>
+                <span class="feature-tag">2 liścienie</span>
+                <span class="feature-tag">Kambium</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero-eudicot flex items-center justify-center text-center text-white pt-12">
+        <div>
+            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tight">Dwuliścienne Właściwe</h1>
+            <p class="text-lg opacity-90 mt-2 font-light italic">Największa grupa roślin okrytozalążkowych</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Summary Section -->
+        <section class="mb-16 bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800 border-l-4 border-green-600 pl-4">Charakterystyka Eudicots</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center p-4 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl mb-2">🍃</div>
+                    <p class="text-xs font-bold text-gray-500 uppercase">Liście</p>
+                    <p class="text-sm font-semibold">Sieciowane</p>
+                </div>
+                <div class="text-center p-4 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl mb-2">🪵</div>
+                    <p class="text-xs font-bold text-gray-500 uppercase">Łodyga</p>
+                    <p class="text-sm font-semibold">Wiązki w pierścieniu</p>
+                </div>
+                <div class="text-center p-4 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl mb-2">🌸</div>
+                    <p class="text-xs font-bold text-gray-500 uppercase">Kwiaty</p>
+                    <p class="text-sm font-semibold">4 lub 5-dzielne</p>
+                </div>
+                <div class="text-center p-4 bg-slate-50 rounded-2xl">
+                    <div class="text-3xl mb-2">🧬</div>
+                    <p class="text-xs font-bold text-gray-500 uppercase">Pyłek</p>
+                    <p class="text-sm font-semibold">Trójbruzdowy</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Categories -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- 1. Basal Eudicots -->
+            <a href="basal/index.html" class="category-card" 
+                 onmouseenter="startBubbles('basal')" 
+                 onmouseleave="stopBubbles()">
+                <div class="h-48 bg-amber-100 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541344230113-d0234a9b4412?q=80&w=600&auto=format&fit=crop" alt="Maki" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex-grow flex flex-col">
+                    <h3 class="text-xl font-black text-amber-700 mb-2">Basal Eudicots</h3>
+                    <p class="text-xs text-gray-500 italic mb-4">Wczesne linie filogenetyczne</p>
+                    <p class="text-sm text-gray-600 mb-6">Cechy pośrednie między grupami bazalnymi a właściwymi. Często byliny lub krzewy.</p>
+                    <div class="mt-auto space-y-2">
+                        <div class="flex gap-2">
+                            <span class="text-[10px] bg-amber-50 text-amber-800 px-2 py-1 rounded">Ranunculales</span>
+                            <span class="text-[10px] bg-amber-50 text-amber-800 px-2 py-1 rounded">Proteales</span>
+                        </div>
+                        <p class="text-[11px] font-bold text-amber-600">Przykłady: maki, berberysy</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 2. Rosids -->
+            <a href="rosids/index.html" class="category-card" 
+                 onmouseenter="startBubbles('rosids')" 
+                 onmouseleave="stopBubbles()">
+                <div class="h-48 bg-rose-100 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=80&w=600&auto=format&fit=crop" alt="Róża" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex-grow flex flex-col">
+                    <h3 class="text-xl font-black text-rose-700 mb-2">Core: Rosids</h3>
+                    <p class="text-xs text-gray-500 italic mb-4">Największy klad eudicots</p>
+                    <ul class="text-xs text-gray-600 space-y-2 mb-6">
+                        <li>• Zwykle 5-pręcikowe kwiaty</li>
+                        <li>• Silnie rozwinięty wzrost wtórny</li>
+                    </ul>
+                    <div class="mt-auto space-y-2">
+                        <div class="flex gap-2">
+                            <span class="text-[10px] bg-rose-50 text-rose-800 px-2 py-1 rounded">Rosaceae</span>
+                            <span class="text-[10px] bg-rose-50 text-rose-800 px-2 py-1 rounded">Fabaceae</span>
+                        </div>
+                        <p class="text-[11px] font-bold text-rose-600">Przykłady: jabłoń, groch, róża</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 3. Asterids -->
+            <a href="asterids/index.html" class="category-card" 
+                 onmouseenter="startBubbles('asterids')" 
+                 onmouseleave="stopBubbles()">
+                <div class="h-48 bg-violet-100 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1597426331003-74b13962d3a0?q=80&w=600&auto=format&fit=crop" alt="Słonecznik" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex-grow flex flex-col">
+                    <h3 class="text-xl font-black text-violet-700 mb-2">Core: Asterids</h3>
+                    <p class="text-xs text-gray-500 italic mb-4">Zaawansowane kwiaty</p>
+                    <ul class="text-xs text-gray-600 space-y-2 mb-6">
+                        <li>• Kwiaty zrośnięto-płatkowe</li>
+                        <li>• Złożone systemy zapylania</li>
+                    </ul>
+                    <div class="mt-auto space-y-2">
+                        <div class="flex gap-2">
+                            <span class="text-[10px] bg-violet-50 text-violet-800 px-2 py-1 rounded">Asteraceae</span>
+                            <span class="text-[10px] bg-violet-50 text-violet-800 px-2 py-1 rounded">Solanaceae</span>
+                        </div>
+                        <p class="text-[11px] font-bold text-violet-600">Przykłady: słonecznik, pomidor</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 4. Caryophyllales -->
+            <a href="caryophyllales/index.html" class="category-card" 
+                 onmouseenter="startBubbles('caryophyllales')" 
+                 onmouseleave="stopBubbles()">
+                <div class="h-48 bg-slate-100 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1520302630591-fd1c66ed11ef?q=80&w=600&auto=format&fit=crop" alt="Kaktus" class="w-full h-full object-cover">
+                </div>
+                <div class="p-8 flex-grow flex flex-col">
+                    <h3 class="text-xl font-black text-gray-800 mb-2">Caryophyllales</h3>
+                    <p class="text-xs text-gray-500 italic mb-4">Specyficzna biochemia</p>
+                    <p class="text-sm text-gray-600 mb-6">Charakteryzują się obecnością betalain zamiast antocyjanów.</p>
+                    <div class="mt-auto space-y-2">
+                        <div class="flex gap-2">
+                            <span class="text-[10px] bg-gray-100 text-gray-800 px-2 py-1 rounded">Cactaceae</span>
+                            <span class="text-[10px] bg-gray-100 text-gray-800 px-2 py-1 rounded">Amaranthaceae</span>
+                        </div>
+                        <p class="text-[11px] font-bold text-gray-600">Przykłady: kaktusy, buraki, szpinak</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Empty slots for visual balance or future clades -->
+            <div class="category-card border-2 border-dashed border-gray-200 bg-transparent shadow-none opacity-50 flex items-center justify-center p-12 text-center">
+                <p class="text-xs text-gray-400 uppercase font-bold tracking-widest">Inne mniejsze klady<br><span class="text-[10px] font-normal lowercase">W opracowaniu...</span></p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="mt-12 py-12 text-center bg-white border-t border-gray-100">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black">Eudicotidae &bull; Systematyka Ewolucyjna</p>
+    </footer>
+
+    <script>
+        let bubbleInterval;
+        const container = document.getElementById('bubble-container');
+
+        const images = {
+            basal: [
+                'https://images.unsplash.com/photo-1541344230113-d0234a9b4412?q=80&w=200&auto=format&fit=crop', // Mak
+                'https://images.unsplash.com/photo-1621255869403-12a8f89e18b8?q=80&w=200&auto=format&fit=crop'  // Berberys
+            ],
+            rosids: [
+                'https://images.unsplash.com/photo-1496062031456-07b8f162a322?q=80&w=200&auto=format&fit=crop', // Róża
+                'https://images.unsplash.com/photo-1594514580365-0453396868a1?q=80&w=200&auto=format&fit=crop', // Groch
+                'https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?q=80&w=200&auto=format&fit=crop'  // Jabłko
+            ],
+            asterids: [
+                'https://images.unsplash.com/photo-1597426331003-74b13962d3a0?q=80&w=200&auto=format&fit=crop', // Słonecznik
+                'https://images.unsplash.com/photo-1591857177580-dc82b9ac4e1e?q=80&w=200&auto=format&fit=crop', // Pomidor
+                'https://images.unsplash.com/photo-1596733430284-f7437764b1a9?q=80&w=200&auto=format&fit=crop'  // Stokrotka
+            ],
+            caryophyllales: [
+                'https://images.unsplash.com/photo-1520302630591-fd1c66ed11ef?q=80&w=200&auto=format&fit=crop', // Kaktus
+                'https://images.unsplash.com/photo-1587334206507-68b656461f68?q=80&w=200&auto=format&fit=crop', // Goździk
+                'https://images.unsplash.com/photo-1592911140023-e5e317457497?q=80&w=200&auto=format&fit=crop'  // Burak
+            ]
+        };
+
+        function createBubble(type) {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            
+            const randomImg = images[type][Math.floor(Math.random() * images[type].length)];
+            bubble.style.backgroundImage = `url('${randomImg}')`;
+            
+            const size = Math.random() * 40 + 60; 
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            
+            bubble.style.left = `${Math.random() * 100}vw`;
+            
+            const duration = Math.random() * 2 + 3; 
+            bubble.style.animation = `floatUp ${duration}s ease-in forwards`;
+            
+            container.appendChild(bubble);
+            
+            setTimeout(() => {
+                bubble.remove();
+            }, duration * 1000);
+        }
+
+        function startBubbles(type) {
+            stopBubbles();
+            bubbleInterval = setInterval(() => createBubble(type), 300);
+        }
+
+        function stopBubbles() {
+            clearInterval(bubbleInterval);
+        }
+    </script>
+
+</body>
+</html>
