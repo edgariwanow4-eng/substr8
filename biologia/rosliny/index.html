@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Królestwo Roślin (Plantae) - Biologia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #27ae60;
+            --accent: #2ecc71;
+            --dark: #1a2f23;
+            --light: #f0f7f2;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #2c3e50;
+            scroll-behavior: smooth;
+        }
+
+        .glass-nav {
+            background: rgba(26, 47, 35, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-plants {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-image {
+            height: 250px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* Stylizacja Floating Coins */
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 60px;
+            height: 60px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid var(--primary);
+            padding: 10px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .feature-badge {
+            background: var(--light);
+            color: var(--dark);
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(39, 174, 96, 0.2);
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Pływające Przyciski (Coins) -->
+    <div class="floating-coins">
+        <a href="../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom">
+                </div>
+            </div>
+        </a>
+
+        <a href="../biologia.html" class="coin-btn" title="Królestwa">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Cofnij">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Cofnij">
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Nawigacja -->
+    <nav class="glass-nav fixed top-0 w-full z-50 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-white font-bold text-xl tracking-wider flex items-center gap-2">
+                <span class="text-accent">🌿</span> KRÓLESTWO ROŚLIN
+            </div>
+            <a href="../biologia.html" class="text-white hover:text-accent transition text-sm uppercase font-bold tracking-widest">Powrót do Biologii</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-plants flex items-center justify-center text-center text-white pt-16">
+        <div>
+            <h1 class="text-4xl md:text-6xl font-black mb-2 uppercase tracking-tighter">Plantae</h1>
+            <p class="text-lg opacity-90 font-light">Ewolucyjny podział świata roślinnego</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <!-- 1. Rośliny Zarodnikowe -->
+            <a href="zarodkowe/index.html" class="category-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=800&auto=format&fit=crop" alt="Mchy i paprocie w lesie" class="card-image group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <span class="bg-accent text-dark text-xs font-bold px-3 py-1 rounded-full uppercase">Rozmnażanie przez zarodniki</span>
+                        <h2 class="text-3xl font-black mt-2">🌱 Rośliny zarodnikowe</h2>
+                    </div>
+                </div>
+                <div class="p-8 flex-grow">
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="feature-badge">Mchy</span>
+                        <span class="feature-badge">Wątrobowce</span>
+                        <span class="feature-badge">Glewiki</span>
+                        <span class="feature-badge">Paprocie</span>
+                        <span class="feature-badge">Skrzypy</span>
+                        <span class="feature-badge">Widłaki</span>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-4 border-l-4 border-accent">
+                        <h4 class="font-bold text-dark mb-2">📌 Cechy charakterystyczne:</h4>
+                        <ul class="text-gray-600 text-sm space-y-1">
+                            <li>• Brak nasion i kwiatów</li>
+                            <li>• Produkcja zarodników (mejospor)</li>
+                            <li>• Często zapłodnienie zależne od obecności wody</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-6 flex items-center text-primary font-bold text-sm">
+                        Eksploruj rośliny zarodnikowe <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 2. Rośliny Nasienne -->
+            <a href="nasienne/index.html" class="category-card group">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1444491741275-3747c53c99b4?q=80&w=800&auto=format&fit=crop" alt="Drzewa iglaste i kwiaty" class="card-image group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    <div class="absolute bottom-6 left-6 text-white">
+                        <span class="bg-yellow-400 text-dark text-xs font-bold px-3 py-1 rounded-full uppercase">Rozmnażanie przez nasiona</span>
+                        <h2 class="text-3xl font-black mt-2">🌰 Rośliny nasienne</h2>
+                    </div>
+                </div>
+                <div class="p-8 flex-grow">
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <h4 class="text-primary font-bold text-sm uppercase mb-2">🔹 Nagonasienne</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Sosny, świerki, jałowce. Brak owocu, nasiona "nagie" na łuskach szyszek.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-primary font-bold text-sm uppercase mb-2">🔹 Okrytonasienne</h4>
+                            <p class="text-xs text-gray-500 leading-relaxed">Rośliny kwiatowe, drzewa liściaste, trawy, warzywa. Nasiona chronione w owocu.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-4 border-l-4 border-yellow-500">
+                        <h4 class="font-bold text-dark mb-2">📌 Cechy charakterystyczne:</h4>
+                        <ul class="text-gray-600 text-sm space-y-1">
+                            <li>• Wytwarzanie pyłku i nasion</li>
+                            <li>• Pełna niezależność od wody przy zapłodnieniu</li>
+                            <li>• Dominacja sporofitu w cyklu życiowym</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-6 flex items-center text-primary font-bold text-sm">
+                        Eksploruj rośliny nasienne <span class="ml-2 group-hover:translate-x-2 transition-transform">→</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </main>
+
+    <footer class="bg-dark text-gray-400 py-12 px-6 text-center border-t border-gray-800">
+        <div class="max-w-7xl mx-auto">
+            <p class="mb-2 text-sm">© 2024 Królestwo Roślin — Materiały Edukacyjne</p>
+            <p class="text-[10px] uppercase tracking-[0.2em] opacity-50 font-bold">Zarodnikowe • Nasienne • Nagonasienne • Okrytonasienne</p>
+        </div>
+    </footer>
+
+</body>
+</html>
