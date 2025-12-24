@@ -144,6 +144,24 @@
             margin-top: 1rem;
             display: inline-block;
         }
+
+        .wild-species-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .wild-species-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: background 0.2s;
+        }
+
+        .wild-species-item:hover {
+            background: #f8fafc;
+        }
     </style>
 </head>
 <body class="font-sans">
@@ -240,6 +258,33 @@
             </a>
 
         </div>
+
+        <!-- Nowa sekcja: Gatunki dzikie / pokrewne -->
+        <section class="mt-12">
+            <h3 class="text-sm font-black uppercase text-green-900 mb-6 tracking-widest border-b border-green-200 pb-2">Kluczowe gatunki dzikie i pokrewne</h3>
+            <div class="wild-species-grid">
+                <div class="wild-species-item">
+                    <div class="text-[10px] font-bold text-green-600 uppercase mb-1">Sałata dzika / kolczasta</div>
+                    <div class="text-sm font-black italic">Lactuca serriola</div>
+                </div>
+                <div class="wild-species-item">
+                    <div class="text-[10px] font-bold text-green-600 uppercase mb-1">Sałata gorzka / jadowita</div>
+                    <div class="text-sm font-black italic">Lactuca virosa</div>
+                </div>
+                <div class="wild-species-item">
+                    <div class="text-[10px] font-bold text-green-600 uppercase mb-1">Sałata wąskolistna</div>
+                    <div class="text-sm font-black italic">Lactuca saligna</div>
+                </div>
+                <div class="wild-species-item">
+                    <div class="text-[10px] font-bold text-green-600 uppercase mb-1">Sałata wieloletnia</div>
+                    <div class="text-sm font-black italic">Lactuca perennis</div>
+                </div>
+                <div class="wild-species-item">
+                    <div class="text-[10px] font-bold text-green-600 uppercase mb-1">Sałata tatarska</div>
+                    <div class="text-sm font-black italic">Lactuca tatarica</div>
+                </div>
+            </div>
+        </section>
 
         <section class="mt-16 p-8 bg-white rounded-3xl border border-green-100 shadow-sm">
             <h3 class="text-sm font-black uppercase text-green-900 mb-4 tracking-widest">Podsumowanie filogenetyczne</h3>
