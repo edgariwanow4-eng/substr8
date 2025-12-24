@@ -29,19 +29,22 @@
         .family-card {
             background: white;
             border-radius: 20px;
-            padding: 24px;
+            padding: 20px;
             box-shadow: 0 4px 15px rgba(202, 138, 4, 0.08);
             border: 1px solid rgba(202, 138, 4, 0.1);
             transition: all 0.3s ease;
-            display: block; /* Zmienione na block dla linku */
+            display: flex;
+            flex-direction: column;
             text-decoration: none;
             color: inherit;
             cursor: pointer;
+            height: 100%;
         }
 
         .family-card:hover {
-            transform: scale(1.02);
+            transform: translateY(-5px);
             box-shadow: 0 10px 25px rgba(202, 138, 4, 0.15);
+            border-color: var(--primary);
         }
 
         .floating-coins {
@@ -101,11 +104,19 @@
         .tag-yellow {
             background: #fef9c3;
             color: #854d0e;
-            padding: 2px 10px;
+            padding: 2px 8px;
             border-radius: 99px;
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 800;
             text-transform: uppercase;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .grid-families {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
     </style>
 </head>
@@ -113,7 +124,7 @@
 
     <!-- Nawigacja -->
     <div class="floating-coins">
-        <a href="index.html" class="coin-btn" title="Strona główna">
+        <a href="../index.html" class="coin-btn" title="Strona główna">
             <div class="coin-inner">
                 <div class="coin-face">
                     <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]">
@@ -124,13 +135,13 @@
             </div>
         </a>
 
-        <a href="campanulids.html" class="coin-btn" title="Powrót do Campanulids">
+        <a href="../campanulids/index.html" class="coin-btn" title="Powrót do Campanulids">
             <div class="coin-inner">
                 <div class="coin-face">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Powrót]">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]">
                 </div>
                 <div class="coin-face coin-back">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Powrót]">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]">
                 </div>
             </div>
         </a>
@@ -138,133 +149,110 @@
 
     <header class="hero-asterales flex items-center justify-center text-center text-white">
         <div>
-            <span class="tag-yellow mb-4 inline-block">Rząd Asterales</span>
+            <span class="tag-yellow mb-4 inline-block bg-yellow-500 text-white px-4 py-1">Rząd Asterales</span>
             <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter">Astrowce</h1>
-            <p class="mt-4 text-lg opacity-90 max-w-2xl mx-auto font-light">Ewolucyjny szczyt kladu Campanulids</p>
+            <p class="mt-4 text-lg opacity-90 max-w-2xl mx-auto font-light">Kompletny przegląd 11 rodzin rzędu</p>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-6 py-12">
+    <main class="max-w-7xl mx-auto px-6 py-12">
         
-        <!-- Opis ogólny -->
+        <!-- Sekcja informacyjna -->
         <section class="mb-16 bg-white p-8 rounded-3xl shadow-sm border border-yellow-100">
-            <div class="flex flex-col md:flex-row gap-8 items-center">
-                <div class="flex-1">
-                    <h2 class="text-2xl font-black text-yellow-800 mb-4 border-l-4 border-yellow-500 pl-4 uppercase">Charakterystyka rzędu</h2>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">
-                        <strong>Asterales</strong> to rząd roślin okrytonasiennych należący do grupy Campanulids (Euasterids II). Stanowią one jedną z najbardziej zróżnicowanych grup roślin naczyniowych na Ziemi.
-                    </p>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="flex items-center gap-3 bg-yellow-50 p-3 rounded-xl">
-                            <span class="text-xl">🌼</span>
-                            <span class="text-[11px] font-bold">Kwiaty w koszyczkach lub baldachach</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-yellow-50 p-3 rounded-xl">
-                            <span class="text-xl">🌀</span>
-                            <span class="text-[11px] font-bold">Liście sieciowane</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-yellow-50 p-3 rounded-xl">
-                            <span class="text-xl">🧪</span>
-                            <span class="text-[11px] font-bold">Obecność inuliny</span>
-                        </div>
-                        <div class="flex items-center gap-3 bg-yellow-50 p-3 rounded-xl">
-                            <span class="text-xl">🔬</span>
-                            <span class="text-[11px] font-bold">Wiązki przewodzące w pierścieniu</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full md:w-1/3 bg-gray-50 p-6 rounded-2xl border border-dashed border-yellow-300">
-                    <h3 class="text-xs font-black uppercase text-yellow-600 mb-2">Formy życiowe</h3>
-                    <p class="text-[11px] text-gray-500 italic leading-relaxed">
-                        Większość przedstawicieli to rośliny zielne, jednak w specyficznych ekosystemach (np. wyspiarskich) wykształciły się formy krzewiaste oraz niewielkie drzewa.
-                    </p>
-                </div>
+            <h2 class="text-2xl font-black text-yellow-800 mb-6 border-l-4 border-yellow-500 pl-4 uppercase">Filogeneza i Cechy Wspólne</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-600 leading-relaxed">
+                <p>Rząd <strong>Asterales</strong> obejmuje około 14% wszystkich gatunków roślin dwuliściennych. Większość to rośliny zielne, choć występują tu również drzewa i krzewy.</p>
+                <p>Cechą charakterystyczną jest obecność <strong>inuliny</strong> jako materiału zapasowego oraz specyficzna budowa pręcików (często zrośniętych w rurkę otaczającą słupek).</p>
+                <p>W systemie APG IV wyróżnia się 11 rodzin, które wykazują tendencję do tworzenia zwartych kwiatostanów, takich jak koszyczki lub główki.</p>
             </div>
         </section>
 
-        <!-- Przegląd Rodzin -->
-        <h2 class="text-xl font-black text-gray-800 mb-8 uppercase tracking-widest text-center">Rodziny rzędu Asterales</h2>
+        <!-- Kompletna lista rodzin -->
+        <h2 class="text-xl font-black text-gray-800 mb-10 uppercase tracking-widest text-center">Rodziny rzędu Asterales (APG IV)</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid-families">
             
-            <!-- Asteraceae -->
-            <a href="asteraceae.html" class="family-card border-t-4 border-yellow-500">
-                <h3 class="font-black text-lg text-yellow-800">Asteraceae</h3>
-                <p class="text-[10px] text-yellow-600 font-bold mb-3 uppercase tracking-tighter">Astrowate / Compositae</p>
-                <p class="text-xs text-gray-600 mb-4">Największa rodzina okrytonasiennych. Charakterystyczny kwiatostan typu koszyczek (pseudancjum).</p>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                    <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag-yellow">Słonecznik</span>
-                        <span class="tag-yellow">Sałata</span>
-                        <span class="tag-yellow">Mniszek</span>
-                        <span class="tag-yellow">Stokrotka</span>
-                    </div>
-                </div>
+            <!-- 1. Asteraceae -->
+            <a href="asteraceae/index.html" class="family-card border-t-4 border-yellow-500">
+                <h3 class="font-black text-lg text-yellow-800 uppercase">Asteraceae</h3>
+                <span class="text-[10px] font-bold text-yellow-600 mb-2">Astrowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Największa rodzina. Kwiaty zebrane w koszyczki, obecność niełupek z puchem.</p>
+                <div><span class="tag-yellow">Słonecznik</span> <span class="tag-yellow">Mniszek</span></div>
             </a>
 
-            <!-- Campanulaceae -->
-            <a href="campanulaceae.html" class="family-card border-t-4 border-blue-400">
-                <h3 class="font-black text-lg text-blue-800">Campanulaceae</h3>
-                <p class="text-[10px] text-blue-600 font-bold mb-3 uppercase tracking-tighter">Dzwonkowate</p>
-                <p class="text-xs text-gray-600 mb-4">Głównie rośliny zielne o dzwonkowatych kwiatach, często zawierające przewody mleczne.</p>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                    <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="tag-yellow" style="background: #dbeafe; color: #1e40af;">Dzwonek</span>
-                        <span class="tag-yellow" style="background: #dbeafe; color: #1e40af;">Lobelia</span>
-                    </div>
-                </div>
+            <!-- 2. Campanulaceae -->
+            <a href="campanulaceae/index.html" class="family-card border-t-4 border-blue-400">
+                <h3 class="font-black text-lg text-blue-800 uppercase">Campanulaceae</h3>
+                <span class="text-[10px] font-bold text-blue-600 mb-2">Dzwonkowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Kwiaty dzwonkowate, rurki mleczne, owoce w formie torebek.</p>
+                <div><span class="tag-yellow" style="background:#dbeafe">Dzwonek</span> <span class="tag-yellow" style="background:#dbeafe">Lobelia</span></div>
             </a>
 
-            <!-- Goodeniaceae -->
-            <a href="goodeniaceae.html" class="family-card">
-                <h3 class="font-black text-lg text-gray-800">Goodeniaceae</h3>
-                <p class="text-xs text-gray-600 mb-4">Głównie rośliny australijskie. Kwiaty promieniste lub o płatkach lekko zrośniętych u nasady.</p>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                    <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
-                    <span class="tag-yellow" style="background: #f3f4f6; color: #374151;">Scaevola</span>
-                </div>
+            <!-- 3. Goodeniaceae -->
+            <a href="goodeniaceae/index.html" class="family-card border-t-4 border-green-400">
+                <h3 class="font-black text-lg text-green-800 uppercase">Goodeniaceae</h3>
+                <span class="text-[10px] font-bold text-green-600 mb-2">Goodeniowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Głównie Australia. Specyficzny mechanizm zapylania (induzjum na słupku).</p>
+                <div><span class="tag-yellow" style="background:#dcfce7">Scaevola</span></div>
             </a>
 
-            <!-- Menyanthaceae -->
-            <a href="menyanthaceae.html" class="family-card">
-                <h3 class="font-black text-lg text-gray-800">Menyanthaceae</h3>
-                <p class="text-xs text-gray-600 mb-4">Rośliny wodne lub bagienne. Posiadają kwiaty zebrane w efektowne grona.</p>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                    <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
-                    <span class="tag-yellow" style="background: #f3f4f6; color: #374151;">Bobrek trójlistkowy</span>
-                </div>
+            <!-- 4. Stylidiaceae -->
+            <a href="stylidiaceae/index.html" class="family-card border-t-4 border-pink-400">
+                <h3 class="font-black text-lg text-pink-800 uppercase">Stylidiaceae</h3>
+                <span class="text-[10px] font-bold text-pink-600 mb-2">Tratwiastowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Rośliny o kwiatach z ruchomą kolumną prętosłupa (reakcja na dotyk).</p>
+                <div><span class="tag-yellow" style="background:#fce7f3">Stylidium</span></div>
             </a>
 
-            <!-- Calceolariaceae -->
-            <a href="calceolariaceae.html" class="family-card">
-                <h3 class="font-black text-lg text-gray-800">Calceolariaceae</h3>
-                <p class="text-xs text-gray-600 mb-4">Charakteryzują się niezwykłymi kwiatami w kształcie "pantofelków" lub kapci.</p>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                    <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
-                    <span class="tag-yellow" style="background: #f3f4f6; color: #374151;">Calceolaria</span>
-                </div>
+            <!-- 5. Menyanthaceae -->
+            <a href="menyanthaceae/index.html" class="family-card border-t-4 border-cyan-400">
+                <h3 class="font-black text-lg text-cyan-800 uppercase">Menyanthaceae</h3>
+                <span class="text-[10px] font-bold text-cyan-600 mb-2">Bobrkowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Rośliny wodne i bagienne, liście skrętoległe, kwiaty pięciokrotne.</p>
+                <div><span class="tag-yellow" style="background:#cffafe">Bobrek</span></div>
             </a>
 
-            <!-- Rodziny Krzewiaste -->
-            <div class="family-card bg-gray-900 text-white cursor-default">
-                <h3 class="font-black text-lg text-yellow-400">Rodziny Krzewiaste</h3>
-                <div class="mt-4 space-y-4">
-                    <div>
-                        <p class="text-[10px] font-bold text-yellow-200 uppercase">Alseuosmiaceae:</p>
-                        <p class="text-[10px] opacity-70 italic">Australia/NZ, np. Alseuosmia.</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] font-bold text-yellow-200 uppercase">Bruniaceae:</p>
-                        <p class="text-[10px] opacity-70 italic">Południowoafrykańskie krzewy, np. Brunia.</p>
-                    </div>
-                    <div>
-                        <p class="text-[10px] font-bold text-yellow-200 uppercase">Calyceraceae:</p>
-                        <p class="text-[10px] opacity-70 italic">Cechy przejściowe, np. Calycera.</p>
-                    </div>
-                </div>
-            </div>
+            <!-- 6. Calyceraceae -->
+            <a href="calyceraceae/index.html" class="family-card border-t-4 border-orange-400">
+                <h3 class="font-black text-lg text-orange-800 uppercase">Calyceraceae</h3>
+                <span class="text-[10px] font-bold text-orange-600 mb-2">Calycerowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Ameryka Południowa. Wykazują cechy pośrednie między Astrowatymi a Dipsacales.</p>
+            </a>
+
+            <!-- 7. Alseuosmiaceae -->
+            <a href="alseuosmiaceae/index.html" class="family-card border-t-4 border-red-400">
+                <h3 class="font-black text-lg text-red-800 uppercase">Alseuosmiaceae</h3>
+                <span class="text-[10px] font-bold text-red-600 mb-2">Alseuosmiowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Krzewy z obszaru Australazji. Kwiaty często pachnące, owoce to jagody.</p>
+            </a>
+
+            <!-- 8. Bruniaceae -->
+            <a href="bruniaceae/index.html" class="family-card border-t-4 border-slate-400">
+                <h3 class="font-black text-lg text-slate-800 uppercase">Bruniaceae</h3>
+                <span class="text-[10px] font-bold text-slate-600 mb-2">Bruniowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Endemity Afryki Południowej (fynbos). Wyglądem przypominają wrzosy.</p>
+            </a>
+
+            <!-- 9. Rousseaceae -->
+            <a href="rousseaceae/index.html" class="family-card border-t-4 border-indigo-400">
+                <h3 class="font-black text-lg text-indigo-800 uppercase">Rousseaceae</h3>
+                <span class="text-[10px] font-bold text-indigo-600 mb-2">Rousseowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Występują na Mauritiusie i w Australazji. Krzewy lub pnącza.</p>
+            </a>
+
+            <!-- 10. Pentaphragmataceae -->
+            <a href="pentaphragmataceae/index.html" class="family-card border-t-4 border-purple-400">
+                <h3 class="font-black text-lg text-purple-800 uppercase">Pentaphragmataceae</h3>
+                <span class="text-[10px] font-bold text-purple-600 mb-2">Pentaphragmatowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Azja Południowo-Wschodnia. Charakterystyczna asymetria liści u nasady.</p>
+            </a>
+
+            <!-- 11. Phellinaceae -->
+            <a href="phellinaceae/index.html" class="family-card border-t-4 border-stone-400">
+                <h3 class="font-black text-lg text-stone-800 uppercase">Phellinaceae</h3>
+                <span class="text-[10px] font-bold text-stone-600 mb-2">Phellinowate</span>
+                <p class="text-xs text-gray-500 flex-grow">Endemity Nowej Kaledonii. Jednopłciowe kwiaty i specyficzna kora.</p>
+            </a>
 
         </div>
 
@@ -272,13 +260,13 @@
         <div class="mt-16 p-8 rounded-3xl bg-yellow-600 text-white shadow-xl relative overflow-hidden">
             <div class="text-9xl absolute -right-8 -bottom-8 opacity-10">🌿</div>
             <div class="relative z-10 max-w-3xl">
-                <h3 class="text-2xl font-black mb-4 uppercase">Podsumowanie Systematyki</h3>
+                <h3 class="text-2xl font-black mb-4 uppercase">Systematyka i Rozwój</h3>
                 <p class="text-sm opacity-90 leading-relaxed mb-6">
-                    W systemie APG IV rzędy takie jak <strong>Asterales</strong> stanowią końcowe ogniwa ewolucji dwuliściennych. Wysoka specjalizacja kwiatostanów oraz chemia roślin (inulina) odróżniają tę grupę od siostrzanych kladów wewnątrz Campanulids, takich jak Apiales czy Dipsacales.
+                    Wszystkie wymienione rodziny są monofiletyczne i tworzą spójny klad wewnątrz Euasterids II. Podział na 11 rodzin odzwierciedla głębokie różnice morfologiczne przy zachowaniu kluczowych cech biochemicznych właściwych dla całego rzędu.
                 </p>
                 <div class="flex gap-4">
-                    <span class="bg-white/20 px-4 py-2 rounded-full text-[10px] font-bold uppercase">Phylogeny Project</span>
                     <span class="bg-white/20 px-4 py-2 rounded-full text-[10px] font-bold uppercase">APG IV Standards</span>
+                    <span class="bg-white/20 px-4 py-2 rounded-full text-[10px] font-bold uppercase">Monophyletic Groups</span>
                 </div>
             </div>
         </div>
@@ -286,7 +274,7 @@
     </main>
 
     <footer class="py-12 text-center text-gray-400 text-[10px] font-black uppercase tracking-widest">
-        Asterales Taxonomy Module &bull; 2024
+        Asterales Taxonomy Database &bull; 2024 &bull; Klad Campanulids
     </footer>
 
 </body>
