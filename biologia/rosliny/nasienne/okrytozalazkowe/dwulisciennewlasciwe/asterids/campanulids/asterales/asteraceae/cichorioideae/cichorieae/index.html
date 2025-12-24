@@ -1,1 +1,303 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plemię Cichorieae - Szczegółowa Taksonomia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #16a34a; /* Green 600 */
+            --secondary: #eab308; /* Yellow 500 */
+            --dark: #064e3b;
+            --light: #f0fdf4;
+        }
 
+        body {
+            background-color: var(--light);
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+
+        .hero-cichorieae {
+            background: linear-gradient(rgba(6, 78, 59, 0.8), rgba(6, 78, 59, 0.4)), url('https://images.unsplash.com/photo-1501535033-a593d6248643?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 30vh;
+        }
+
+        .subtribe-card {
+            display: block;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(6, 78, 59, 0.05);
+            border: 1px solid rgba(22, 163, 74, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .subtribe-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 25px rgba(22, 163, 74, 0.12);
+        }
+
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 55px;
+            height: 55px;
+            perspective: 1000px;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+            padding: 10px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .diagnostic-box {
+            background: white;
+            border-left: 4px solid var(--secondary);
+            padding: 1rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .genus-pill {
+            background: #f3f4f6;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            margin-right: 3px;
+            margin-bottom: 3px;
+            display: inline-block;
+            border: 1px solid transparent;
+        }
+
+        .subtribe-card:hover .genus-pill {
+            border-color: #d1d5db;
+        }
+
+        .star-badge {
+            background: var(--secondary);
+            color: #713f12;
+            font-size: 9px;
+            font-weight: 900;
+            padding: 1px 5px;
+            border-radius: 3px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-coins">
+        <a href="../../../../../../../../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+        <a href="../cichorioideae.html" class="coin-btn" title="Powrót do Cichorioideae">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Wstecz"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Wstecz" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+    </div>
+
+    <header class="hero-cichorieae flex items-center justify-center text-center text-white">
+        <div>
+            <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-2">Plemię Cichorieae</h1>
+            <p class="text-sm opacity-80 tracking-widest uppercase">Synonim: Lactuceae</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-10">
+        
+        <!-- Pozycja Systematyczna i Cechy -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+            <div class="lg:col-span-1">
+                <h3 class="text-xs font-black uppercase text-green-700 mb-4 tracking-widest">Pozycja systematyczna</h3>
+                <nav class="text-[11px] space-y-1 font-medium text-gray-500 uppercase">
+                    <div class="flex items-center"><span>Angiospermae</span><span class="mx-2 opacity-30">→</span></div>
+                    <div class="flex items-center"><span>Eudicots</span><span class="mx-2 opacity-30">→</span></div>
+                    <div class="flex items-center"><span>Asterids</span><span class="mx-2 opacity-30">→</span></div>
+                    <div class="flex items-center"><span>Campanulids</span><span class="mx-2 opacity-30">→</span></div>
+                    <div class="flex items-center"><span>Asterales</span><span class="mx-2 opacity-30">→</span></div>
+                    <div class="flex items-center text-green-800 font-black"><span>Asteraceae</span><span class="mx-2">→</span></div>
+                    <div class="flex items-center text-green-900 font-black"><span>Cichorioideae</span></div>
+                </nav>
+            </div>
+            
+            <div class="lg:col-span-2">
+                <h3 class="text-xs font-black uppercase text-green-700 mb-4 tracking-widest">Cechy diagnostyczne</h3>
+                <div class="diagnostic-box">
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2 text-sm">
+                        <li>🌼 Wszystkie kwiaty <strong>języczkowate</strong></li>
+                        <li>🥛 Obecny <strong>lateks</strong> (sok mleczny)</li>
+                        <li>🚫 Brak kwiatów rurkowatych</li>
+                        <li>🎈 Owoc: niełupka z <strong>puchem</strong></li>
+                        <li>🧬 Zredukowana liczba chromosomów</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="text-center text-xl font-black uppercase mb-8 tracking-widest text-green-900">Podział na podplemiona (Subtribes)</h3>
+
+        <!-- Siatka Podplemion -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- 1. Lactucinae -->
+            <a href="lactucinae/index.html" class="subtribe-card border-t-4 border-green-600">
+                <h4 class="font-black text-green-900 mb-2">1. Lactucinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Największa grupa, rośliny jednoroczne i byliny.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Lactuca</em> <span class="star-badge">⭐</span></span>
+                    <span class="genus-pill"><em>Melanoseris</em></span>
+                    <span class="genus-pill"><em>Cicerbita</em></span>
+                    <span class="genus-pill"><em>Mulgedium</em></span>
+                </div>
+            </a>
+
+            <!-- 2. Crepidinae -->
+            <a href="crepidinae/index.html" class="subtribe-card">
+                <h4 class="font-black text-green-900 mb-2">2. Crepidinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Byliny i rośliny górskie, duża zmienność.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Crepis</em></span>
+                    <span class="genus-pill"><em>Hieracium</em></span>
+                    <span class="genus-pill"><em>Pilosella</em></span>
+                    <span class="genus-pill"><em>Hypochaeris</em></span>
+                </div>
+            </a>
+
+            <!-- 3. Hypochaeridinae -->
+            <a href="hypochaeridinae/index.html" class="subtribe-card">
+                <h4 class="font-black text-green-900 mb-2">3. Hypochaeridinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Typowe dla basenu Morza Śródziemnego.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Leontodon</em></span>
+                    <span class="genus-pill"><em>Picris</em></span>
+                    <span class="genus-pill"><em>Helminthotheca</em></span>
+                </div>
+            </a>
+
+            <!-- 4. Cichoriinae -->
+            <a href="cichoriinae/index.html" class="subtribe-card">
+                <h4 class="font-black text-green-900 mb-2">4. Cichoriinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Klasyczne „cykoriowate”, silny korzeń palowy.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Cichorium</em></span>
+                    <span class="genus-pill"><em>Erythroseris</em></span>
+                </div>
+            </a>
+
+            <!-- 5. Hyoseridinae -->
+            <a href="hyoseridinae/index.html" class="subtribe-card">
+                <h4 class="font-black text-green-900 mb-2">5. Hyoseridinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Rośliny pustynne i stepowe.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Hyoseris</em></span>
+                    <span class="genus-pill"><em>Scorzoneroides</em></span>
+                </div>
+            </a>
+
+            <!-- 6. Sonchinae -->
+            <a href="sonchinae/index.html" class="subtribe-card">
+                <h4 class="font-black text-green-900 mb-2">6. Sonchinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Azjatyckie i europejskie mlecze.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Sonchus</em></span>
+                    <span class="genus-pill"><em>Launaea</em></span>
+                    <span class="genus-pill"><em>Aposeris</em></span>
+                </div>
+            </a>
+
+            <!-- 7. Taraxacinae -->
+            <a href="taraxacinae/index.html" class="subtribe-card border-t-4 border-yellow-500">
+                <h4 class="font-black text-green-900 mb-2">7. Taraxacinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Apomiktyczne, bardzo charakterystyczne.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Taraxacum</em> <span class="star-badge">⭐</span></span>
+                    <span class="genus-pill"><em>Chondrilla</em></span>
+                    <span class="genus-pill"><em>Willemetia</em></span>
+                </div>
+            </a>
+
+            <!-- 8. Scorzonerinae -->
+            <a href="scorzonerinae/index.html" class="subtribe-card">
+                <h4 class="font-black text-green-900 mb-2">8. Scorzonerinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Byliny stepowe, często jadalne korzenie.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Scorzonera</em></span>
+                    <span class="genus-pill"><em>Tragopogon</em></span>
+                    <span class="genus-pill"><em>Podospermum</em></span>
+                </div>
+            </a>
+
+            <!-- 9. Crepidiastrinae -->
+            <a href="crepidiastrinae/index.html" class="subtribe-card">
+                <h4 class="font-black text-green-900 mb-2">9. Crepidiastrinae</h4>
+                <p class="text-[11px] text-gray-500 mb-3 italic">Głównie Azja Wschodnia.</p>
+                <div class="flex flex-wrap">
+                    <span class="genus-pill"><em>Crepidiastrum</em></span>
+                    <span class="genus-pill"><em>Youngia</em></span>
+                    <span class="genus-pill"><em>Ixeris</em></span>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer class="py-12 text-center text-green-900/20 text-[10px] font-black uppercase tracking-[0.4em]">
+        biologia / rosliny / nasienne / okrytozalazkowe / dwulisciennewlasciwe / asterids / campanulids / asterales / cichorioideae / cichorieae
+    </footer>
+
+</body>
+</html>
