@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteraceae - Podrodziny</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #f59e0b;
+            --accent: #fbbf24;
+            --dark: #451a03;
+            --light: #fffbeb;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .hero-asteraceae {
+            background: linear-gradient(rgba(69, 26, 3, 0.7), rgba(69, 26, 3, 0.4)), url('https://images.unsplash.com/photo-1464306208223-e0b4495a5553?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 40vh;
+        }
+
+        /* Styl dla całej karty jako przycisku */
+        .subfamily-card {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(69, 26, 3, 0.05);
+            border: 1px solid rgba(245, 158, 11, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subfamily-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(69, 26, 3, 0.12);
+            border-color: var(--primary);
+        }
+
+        .subfamily-card::after {
+            content: '→';
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+
+        .subfamily-card:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 60px;
+            height: 60px;
+            perspective: 1000px;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border: 2px solid var(--primary);
+            padding: 12px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .tribe-label {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .species-list {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        .evolution-badge {
+            font-size: 10px;
+            font-weight: 900;
+            background: var(--dark);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 99px;
+            margin-bottom: 1rem;
+            display: inline-block;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Nawigacja -->
+    <div class="floating-coins">
+        <a href="../../../../../../../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]" style="filter: brightness(0) invert(1);">
+                </div>
+            </div>
+        </a>
+
+        <a href="../asterales.html" class="coin-btn" title="Powrót do Astrowców">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Powrót]">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Powrót]" style="filter: brightness(0) invert(1);">
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <header class="hero-asteraceae flex items-center justify-center text-center text-white">
+        <div>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4">Asteraceae</h1>
+            <p class="text-xl opacity-90 font-light max-w-xl mx-auto text-amber-100">Przegląd podrodzin astrowatych</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- 1. Barnadesioideae -->
+            <a href="barnadesioideae/index.html" class="subfamily-card border-l-8 border-amber-900">
+                <span class="evolution-badge">Linia wczesna</span>
+                <h2 class="text-xl font-black uppercase mb-2">Barnadesioideae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Głównie Ameryka Południowa, często kolczaste.</p>
+                <div class="species-list">
+                    <em>Barnadesia</em>
+                </div>
+            </a>
+
+            <!-- 2. Mutisioideae -->
+            <a href="mutisioideae/index.html" class="subfamily-card">
+                <h2 class="text-xl font-black uppercase mb-2">Mutisioideae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Gatunki południowoamerykańskie.</p>
+                <div class="tribe-label">Mutisieae</div>
+                <div class="species-list italic">Mutisia, Chaptalia</div>
+                <div class="tribe-label">Onoserideae</div>
+                <div class="species-list italic">Onoseris</div>
+            </a>
+
+            <!-- 3. Gochnatioideae -->
+            <a href="gochnatioideae/index.html" class="subfamily-card">
+                <h2 class="text-xl font-black uppercase mb-2">Gochnatioideae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Niewielka podrodzina Ameryki Płd.</p>
+                <div class="tribe-label">Gochnatieae</div>
+                <div class="species-list italic">Gochnatia</div>
+            </a>
+
+            <!-- 4. Stifftioideae -->
+            <a href="stifftioideae/index.html" class="subfamily-card">
+                <h2 class="text-xl font-black uppercase mb-2">Stifftioideae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Kwiaty rurkowate.</p>
+                <div class="tribe-label">Stifftieae</div>
+                <div class="species-list italic">Stifftia</div>
+            </a>
+
+            <!-- 5. Carduoideae -->
+            <a href="carduoideae/index.html" class="subfamily-card border-l-8 border-gray-400">
+                <h2 class="text-xl font-black uppercase mb-2">Carduoideae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Osty, rośliny kolczaste.</p>
+                <div class="tribe-label">Cardueae</div>
+                <div class="species-list italic">Cirsium, Cynara, Centaurea</div>
+                <div class="tribe-label">Tarchonantheae</div>
+                <div class="species-list italic">Tarchonanthus</div>
+            </a>
+
+            <!-- 6. Cichorioideae -->
+            <a href="cichorioideae/index.html" class="subfamily-card border-l-8 border-blue-200">
+                <h2 class="text-xl font-black uppercase mb-2">Cichorioideae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Mleczne soki, gorzkie związki.</p>
+                <div class="tribe-label" style="background: #dbeafe; color: #1e40af;">Cichorieae</div>
+                <div class="species-list italic">Lactuca, Taraxacum, Cichorium, Sonchus</div>
+            </a>
+
+            <!-- 7. Asteroideae -->
+            <a href="asteroideae/index.html" class="subfamily-card lg:col-span-2 border-t-8 border-amber-500 bg-amber-50/30">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h2 class="text-3xl font-black uppercase mb-2">Asteroideae</h2>
+                        <p class="text-sm text-gray-500 italic mb-4">Największa podrodzina (~70% gatunków).</p>
+                    </div>
+                    <span class="evolution-badge bg-amber-600">Główny Klad</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8">
+                    <div>
+                        <div class="tribe-label">Anthemideae</div>
+                        <div class="species-list italic">Matricaria, Artemisia</div>
+                        <div class="tribe-label">Heliantheae</div>
+                        <div class="species-list italic">Helianthus, Echinacea</div>
+                    </div>
+                    <div>
+                        <div class="tribe-label">Astereae</div>
+                        <div class="species-list italic">Bellis, Aster</div>
+                        <div class="tribe-label">Senecioneae</div>
+                        <div class="species-list italic">Senecio</div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- 8. Pertyoideae -->
+            <a href="pertyoideae/index.html" class="subfamily-card">
+                <h2 class="text-xl font-black uppercase mb-2">Pertyoideae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Azja i Ameryka Północna.</p>
+                <div class="tribe-label">Pertyeae</div>
+                <div class="species-list italic">Pertya</div>
+            </a>
+
+            <!-- 9. Nassauvieae -->
+            <a href="nassauvieae/index.html" class="subfamily-card bg-gray-50">
+                <h2 class="text-xl font-black uppercase mb-2">Nassauvieae</h2>
+                <p class="text-sm text-gray-500 italic mb-2">Onoserideae (p. rozszerzone).</p>
+                <div class="tribe-label" style="background: #e2e8f0; color: #475569;">Nassauvieae</div>
+                <div class="species-list italic">Nassauvia</div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <footer class="py-12 text-center text-amber-900/30 text-[10px] font-black uppercase tracking-[0.4em]">
+        biologia / rosliny / nasienne / okrytozalazkowe / dwulisciennewlasciwe / asterids / campanulids / asterales
+    </footer>
+
+</body>
+</html>
