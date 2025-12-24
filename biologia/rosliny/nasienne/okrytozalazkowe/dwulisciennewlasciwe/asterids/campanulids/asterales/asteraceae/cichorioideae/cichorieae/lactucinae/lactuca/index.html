@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rodzaj Lactuca - Grupy i Filogeneza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #166534; /* Green 800 */
+            --secondary: #84cc16; /* Lime 500 */
+            --dark: #064e3b;
+            --light: #f0fdf4;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+
+        .hero-lactuca {
+            background: linear-gradient(rgba(22, 101, 52, 0.8), rgba(22, 101, 52, 0.4)), url('https://images.unsplash.com/photo-1556781261-e174ff74b57e?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 30vh;
+        }
+
+        .group-card {
+            display: block;
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(22, 101, 52, 0.05);
+            border: 1px solid rgba(22, 101, 52, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .group-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(22, 101, 52, 0.12);
+            border-color: var(--secondary);
+        }
+
+        .group-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--secondary);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .group-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 55px;
+            height: 55px;
+            perspective: 1000px;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+            padding: 10px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .group-number {
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .highlight-sativa {
+            background: linear-gradient(135deg, #fefce8 0%, #ffffff 100%);
+            border: 2px solid #facc15;
+        }
+
+        .highlight-sativa:hover {
+            border-color: #854d0e;
+        }
+
+        .feature-tag {
+            font-size: 10px;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 2px 8px;
+            border-radius: 999px;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Nawigacja -->
+    <div class="floating-coins">
+        <a href="../../../../../../../../../../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+        <a href="../lactucinae.html" class="coin-btn" title="Powrót do Lactucinae">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+    </div>
+
+    <header class="hero-lactuca flex items-center justify-center text-center text-white">
+        <div>
+            <h1 class="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-2">Rodzaj <em>Lactuca</em></h1>
+            <p class="text-lg opacity-90 font-light max-w-2xl mx-auto px-4">Podział na główne linie ewolucyjne i grupy gatunkowe</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Grupa I -->
+            <a href="group_sativa/index.html" class="group-card highlight-sativa lg:col-span-2">
+                <span class="group-number">Grupa I</span>
+                <h2 class="text-2xl font-black uppercase text-amber-900 mb-3">Lactuca sativa & Kompleks Dziki</h2>
+                <p class="text-sm text-amber-800/80 mb-4 leading-relaxed">
+                    Najlepiej poznana, genetycznie spójna linia obejmująca sałatę uprawną oraz jej bezpośrednich przodków (np. <em>L. serriola</em>). Centrum udomowienia i najważniejsza grupa użytkowa rodzaju.
+                </p>
+                <div class="flex items-center gap-2">
+                    <span class="bg-amber-200 text-amber-900 text-[10px] font-black px-2 py-1 rounded">DOMESTYKACJA</span>
+                    <span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded">KRZYŻOWALNOŚĆ</span>
+                </div>
+                <div class="mt-6 text-xs font-bold text-amber-600">➡ Tu znajduje się sałata (Lactuca sativa)</div>
+            </a>
+
+            <!-- Grupa II -->
+            <a href="group_eurasia/index.html" class="group-card">
+                <span class="group-number">Grupa II</span>
+                <h2 class="text-xl font-black uppercase text-green-900 mb-3">Gatunki Eurazjatyckie</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Dzikie, najczęściej wieloletnie rośliny Europy i zachodniej Azji. Odporne środowiskowo, ważne dla filogenezy.
+                </p>
+                <span class="feature-tag">Ekologia & Filogeneza</span>
+            </a>
+
+            <!-- Grupa III -->
+            <a href="group_asia/index.html" class="group-card">
+                <span class="group-number">Grupa III</span>
+                <h2 class="text-xl font-black uppercase text-green-900 mb-3">Gatunki Azjatyckie</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Wschodnia i środkowa Azja. Duża zmienność morfologiczna liści i pokroju potwierdzona badaniami DNA.
+                </p>
+                <span class="feature-tag">Zmienność Azjatycka</span>
+            </a>
+
+            <!-- Grupa IV -->
+            <a href="group_africa/index.html" class="group-card">
+                <span class="group-number">Grupa IV</span>
+                <h2 class="text-xl font-black uppercase text-green-900 mb-3">Gatunki Afrykańskie</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Największa różnorodność form. Ważny obszar radiacji ewolucyjnej, choć gatunki słabo poznane użytkowo.
+                </p>
+                <span class="feature-tag">Centrum Radiacji</span>
+            </a>
+
+            <!-- Grupa V -->
+            <a href="group_america/index.html" class="group-card">
+                <span class="group-number">Grupa V</span>
+                <h2 class="text-xl font-black uppercase text-green-900 mb-3">Gatunki Amerykańskie</h2>
+                <p class="text-xs text-gray-500 leading-relaxed">
+                    Linia Nowego Świata. Często wysokie rośliny dwuletnie/wieloletnie. Niezależna historia ewolucyjna.
+                </p>
+                <span class="feature-tag">Ameryka Północna</span>
+            </a>
+
+            <!-- Grupa VI -->
+            <a href="group_endemic/index.html" class="group-card bg-slate-50">
+                <span class="group-number">Grupa VI</span>
+                <h2 class="text-xl font-black uppercase text-slate-800 mb-3">Endemity i Izolaty</h2>
+                <p class="text-xs text-gray-400 leading-relaxed">
+                    Rzadkie gatunki wyspowe i regionalne. Kluczowe dla ochrony bioróżnorodności i badań genetycznych.
+                </p>
+                <span class="feature-tag">Ochrona Przyrody</span>
+            </a>
+
+        </div>
+
+        <section class="mt-16 p-8 bg-white rounded-3xl border border-green-100 shadow-sm">
+            <h3 class="text-sm font-black uppercase text-green-900 mb-4 tracking-widest">Podsumowanie filogenetyczne</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-gray-600 leading-relaxed">
+                <p>
+                    Rodzaj <em>Lactuca</em> charakteryzuje się niezwykłą plastycznością, co pozwoliło mu opanować niemal wszystkie kontynenty (poza Antarktydą). Choć tradycyjnie dzielono go na podstawie cech zewnętrznych, współczesna biologia molekularna redefiniuje te grupy, często łącząc gatunki o skrajnie różnym pokroju w jedną linię ewolucyjną.
+                </p>
+                <p>
+                    Najważniejszym punktem odniesienia pozostaje <strong>Grupa I</strong>, która dostarczyła genetycznych fundamentów pod współczesne rolnictwo. Pozostałe grupy stanowią cenny rezerwuar genów, które mogą być wykorzystane w przyszłości do zwiększenia odporności sałaty uprawnej na zmiany klimatu.
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 text-center text-green-900/20 text-[10px] font-black uppercase tracking-[0.4em]">
+        biologia / rosliny / nasienne / okrytozalazkowe / dwulisciennewlasciwe / asterids / campanulids / asterales / cichorioideae / cichorieae / lactucinae / lactuca
+    </footer>
+
+</body>
+</html>
