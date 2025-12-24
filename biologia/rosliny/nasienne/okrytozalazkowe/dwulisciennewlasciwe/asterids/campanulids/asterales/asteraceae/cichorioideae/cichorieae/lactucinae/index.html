@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podplemię Lactucinae - Rodzaje i Filogeneza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #15803d; /* Green 700 */
+            --accent: #bef264; /* Lime 300 */
+            --dark: #064e3b;
+            --light: #f7fee7;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #111827;
+            overflow-x: hidden;
+        }
+
+        .hero-lactucinae {
+            background: linear-gradient(rgba(6, 78, 59, 0.7), rgba(6, 78, 59, 0.4)), url('https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 25vh;
+        }
+
+        /* Styl dla kafelków jako linków */
+        .genus-card {
+            display: block;
+            background: white;
+            border-radius: 24px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(21, 128, 61, 0.05);
+            border: 1px solid rgba(21, 128, 61, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+        }
+
+        .genus-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(21, 128, 61, 0.15);
+            border-color: var(--primary);
+        }
+
+        .genus-card::after {
+            content: '→';
+            position: absolute;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--primary);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .genus-card:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 50px;
+            height: 50px;
+            perspective: 1000px;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+            padding: 8px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .dna-tag {
+            font-size: 9px;
+            font-weight: 900;
+            background: var(--dark);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .species-item {
+            font-size: 13px;
+            border-bottom: 1px dashed rgba(0,0,0,0.05);
+            padding: 4px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .feature-list {
+            font-size: 12px;
+            color: #4b5563;
+            margin: 0.5rem 0;
+        }
+
+        .phylogenetic-note {
+            background: #ecfdf5;
+            border: 1px solid #10b981;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-coins">
+        <a href="../../../../../../../../../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+        <a href="../cichorieae.html" class="coin-btn" title="Powrót do Cichorieae">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+    </div>
+
+    <header class="hero-lactucinae flex items-center justify-center text-center text-white">
+        <div>
+            <h1 class="text-3xl md:text-5xl font-black uppercase tracking-tight mb-2 text-white">Podplemię Lactucinae</h1>
+            <p class="text-xs uppercase tracking-[0.3em] font-light text-lime-100">Eudicots / Asterids / Asterales / Asteraceae</p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-12">
+
+        <!-- Główny Rodzaj: Lactuca -->
+        <section class="mb-12">
+            <a href="lactuca/index.html" class="genus-card border-t-8 border-green-600">
+                <div class="flex flex-wrap items-center justify-between mb-4 gap-4">
+                    <h2 class="text-3xl font-black text-green-900 uppercase">1. Rodzaj <em>Lactuca</em> (Sałaty)</h2>
+                    <span class="dna-tag">Kluczowy filogenetycznie</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-xs font-black uppercase text-green-700 mb-2 tracking-widest">Charakterystyka</h4>
+                        <ul class="feature-list space-y-1">
+                            <li>🌱 Łodygi wzniesione, liście skrętoległe</li>
+                            <li>🥛 Wyraźny <strong>lateks</strong> we wszystkich organach</li>
+                            <li>🌼 Koszyczki z wieloma drobnymi kwiatami języczkowatymi</li>
+                            <li>⚠️ <em>Sensu lato:</em> obejmuje obecnie wiele dawnych rodzajów</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-black uppercase text-green-700 mb-2 tracking-widest">Główne gatunki</h4>
+                        <div class="space-y-1">
+                            <div class="species-item"><span><em>Lactuca sativa</em></span> <span class="text-[10px] font-bold text-amber-600">UPRAWNA ⭐</span></div>
+                            <div class="species-item"><span><em>Lactuca serriola</em></span> <span class="text-[10px] text-gray-400">KOMPASOWA</span></div>
+                            <div class="species-item"><span><em>Lactuca virosa</em></span> <span class="text-[10px] text-red-600">JADOWITA</span></div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <!-- Pozostałe rodzaje -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- 2. Melanoseris -->
+            <a href="melanoseris/index.html" class="genus-card">
+                <h3 class="font-black text-green-900 mb-2 uppercase text-sm tracking-wide">2. Rodzaj <em>Melanoseris</em></h3>
+                <p class="text-[11px] text-gray-500 italic mb-3">Linia azjatycka i górska.</p>
+                <div class="feature-list">Wyodrębniony filogenetycznie z dawnej <em>Lactuca</em>. Koszyczki często pojedyncze.</div>
+            </a>
+
+            <!-- 3. Mulgedium -->
+            <a href="mulgedium/index.html" class="genus-card">
+                <h3 class="font-black text-green-900 mb-2 uppercase text-sm tracking-wide">3. Rodzaj <em>Mulgedium</em></h3>
+                <p class="text-[11px] text-gray-500 italic mb-3">Często włączany do Lactuca.</p>
+                <div class="feature-list">Byliny o większych koszyczkach. Siedliska północne i wysokogórskie.</div>
+            </a>
+
+            <!-- 4. Cicerbita -->
+            <a href="cicerbita/index.html" class="genus-card">
+                <h3 class="font-black text-green-900 mb-2 uppercase text-sm tracking-wide">4. Rodzaj <em>Cicerbita</em></h3>
+                <p class="text-[11px] text-gray-500 italic mb-3">Byliny o barwnych kwiatach.</p>
+                <div class="feature-list">Duże, purpurowe lub niebieskie koszyczki. Często włączany do rodzaju <em>Lactuca</em>.</div>
+            </a>
+
+            <!-- 5. Steptorhamphus -->
+            <a href="steptorhamphus/index.html" class="genus-card">
+                <h3 class="font-black text-green-900 mb-2 uppercase text-sm tracking-wide">5. Rodzaj <em>Steptorhamphus</em></h3>
+                <p class="text-[11px] text-gray-500 italic mb-3">Grupa stepowa Azji.</p>
+                <div class="feature-list">Silnie rozgałęzione pędy, wysoka odporność na suszę i trudne warunki.</div>
+            </a>
+
+            <!-- 6. Cephalorrhynchus -->
+            <a href="cephalorrhynchus/index.html" class="genus-card bg-gray-50/50">
+                <h3 class="font-black text-green-900 mb-2 uppercase text-sm tracking-wide">6. Rodzaj <em>Cephalorrhynchus</em></h3>
+                <p class="text-[11px] text-gray-500 italic mb-3">Mało znany, wąski zasięg.</p>
+                <div class="feature-list">Koszyczki skupione w gęste kwiatostany, liście o zredukowanej blaszce.</div>
+            </a>
+
+        </div>
+
+        <!-- Uwagi filogenetyczne -->
+        <section class="phylogenetic-note">
+            <div class="flex items-start gap-4">
+                <div class="text-3xl">🧠</div>
+                <div>
+                    <h3 class="text-lg font-black uppercase text-green-900 mb-2 tracking-tighter">Uwagi filogenetyczne i zmiany w randze</h3>
+                    <div class="text-sm text-green-800 space-y-3">
+                        <p>
+                            Współczesna taksonomia <strong>Lactucinae</strong> opiera się na analizach DNA. Wykazały one, że tradycyjne podziały oparte wyłącznie na morfologii (np. kształt niełupek czy kolor kwiatów) są niewystarczające.
+                        </p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li><strong>Lactuca sensu lato:</strong> Nowoczesne ujęcia często traktują <em>Mulgedium</em> i <em>Cicerbita</em> jako sekcje wewnątrz rodzaju <em>Lactuca</em>.</li>
+                            <li><strong>Filogeografia:</strong> Rozmieszczenie rodzajów odzwierciedla historię klimatyczną krain palearktycznych.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="py-12 text-center text-green-900/20 text-[10px] font-black uppercase tracking-[0.4em]">
+        biologia / rosliny / nasienne / okrytozalazkowe / dwulisciennewlasciwe / asterids / campanulids / asterales / cichorioideae / cichorieae / lactucinae
+    </footer>
+
+</body>
+</html>
