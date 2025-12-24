@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odmiany Lactuca sativa - Grupy Użytkowe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #15803d;
+            --secondary: #84cc16;
+            --bg-light: #f7fee7;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: #111827;
+            font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+        }
+
+        /* Ustawienie kafelka jako linku */
+        .variety-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(21, 128, 61, 0.05);
+            border: 1px solid rgba(21, 128, 61, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+        }
+
+        .variety-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(21, 128, 61, 0.15);
+            border-color: var(--secondary);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .variety-card:hover .image-container img {
+            transform: scale(1.1);
+        }
+
+        /* Ikona strzałki pojawiająca się przy najechaniu */
+        .card-footer {
+            margin-top: auto;
+            padding: 0 2rem 2rem 2rem;
+            display: flex;
+            justify-content: flex-end;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .variety-card:hover .card-footer {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 50px;
+            height: 50px;
+            perspective: 1000px;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+            padding: 10px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .tag {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: #f0fdf4;
+            color: var(--primary);
+            display: inline-block;
+        }
+
+        .variety-name {
+            font-size: 1.25rem;
+            font-weight: 900;
+            color: #064e3b;
+            line-height: 1.2;
+            margin: 0.75rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nawigacja -->
+    <div class="floating-coins">
+        <a href="../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+        <a href="../index.html" class="coin-btn" title="Powrót do Lactuca">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+    </div>
+
+    <header class="bg-white border-b border-green-100 py-16 px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter text-green-900 mb-4">Grupy Użytkowe <em>Lactuca sativa</em></h1>
+        <p class="max-w-2xl mx-auto text-gray-500 font-light text-sm md:text-base">
+            Wszystkie przedstawione poniżej formy należą do tego samego gatunku, różniąc się morfologią liści, sposobem wiązania główek oraz teksturą.
+        </p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-16">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <!-- 1. Sałata głowiasta -->
+            <a href="group_crisphead.html" class="variety-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1622206141855-468846380642?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałaty głowiastej]">
+                </div>
+                <div class="p-8 pb-4">
+                    <span class="tag">Crisphead</span>
+                    <h2 class="variety-name">1. Sałata głowiasta</h2>
+                    <p class="text-sm text-gray-600 mb-4">Tworzy zwarty, kulisty kształt. Liście są chrupiące, często kremowe lub jasnozielone wewnątrz.</p>
+                    <div class="text-xs font-bold text-green-700 uppercase tracking-widest mb-2">Odmiany:</div>
+                    <ul class="text-xs text-gray-500 space-y-1 italic">
+                        <li>‘Iceberg’, ‘Great Lakes’, ‘Buttercrunch’</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <span class="text-green-600 font-black">SZCZEGÓŁY →</span>
+                </div>
+            </a>
+
+            <!-- 2. Sałata masłowa -->
+            <a href="group_butterhead.html" class="variety-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1556781261-e174ff74b57e?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałaty masłowej]">
+                </div>
+                <div class="p-8 pb-4">
+                    <span class="tag">Butterhead</span>
+                    <h2 class="variety-name">2. Sałata masłowa</h2>
+                    <p class="text-sm text-gray-600 mb-4">Liście delikatne, miękkie, luźno ułożone w głowę. Smak wybitnie łagodny i soczysty.</p>
+                    <div class="text-xs font-bold text-green-700 uppercase tracking-widest mb-2">Odmiany:</div>
+                    <ul class="text-xs text-gray-500 space-y-1 italic">
+                        <li>‘Bibb’, ‘Tom Thumb’, ‘Marvel’</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <span class="text-green-600 font-black">SZCZEGÓŁY →</span>
+                </div>
+            </a>
+
+            <!-- 3. Sałata liściowa -->
+            <a href="group_looseleaf.html" class="variety-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1620706857370-e1b977f7f13d?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałaty liściowej]">
+                </div>
+                <div class="p-8 pb-4">
+                    <span class="tag">Looseleaf</span>
+                    <h2 class="variety-name">3. Sałata liściowa</h2>
+                    <p class="text-sm text-gray-600 mb-4">Nie tworzy główki, liście rosną luźno i mogą być zbierane pojedynczo. Duża paleta kolorów.</p>
+                    <div class="text-xs font-bold text-green-700 uppercase tracking-widest mb-2">Odmiany:</div>
+                    <ul class="text-xs text-gray-500 space-y-1 italic">
+                        <li>‘Black Seeded Simpson’, ‘Red Sails’, ‘Lollo Rossa’</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <span class="text-green-600 font-black">SZCZEGÓŁY →</span>
+                </div>
+            </a>
+
+            <!-- 4. Sałata rzymska -->
+            <a href="group_romaine.html" class="variety-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałaty rzymskiej]">
+                </div>
+                <div class="p-8 pb-4">
+                    <span class="tag">Romaine / Cos</span>
+                    <h2 class="variety-name">4. Sałata rzymska</h2>
+                    <p class="text-sm text-gray-600 mb-4">Wyróżnia się długimi, sztywnymi liśćmi z grubym nerwem środkowym. Tworzy pionową rozetę.</p>
+                    <div class="text-xs font-bold text-green-700 uppercase tracking-widest mb-2">Odmiany:</div>
+                    <ul class="text-xs text-gray-500 space-y-1 italic">
+                        <li>‘Parris Island Cos’, ‘Valmaine’, ‘Little Gem’</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <span class="text-green-600 font-black">SZCZEGÓŁY →</span>
+                </div>
+            </a>
+
+            <!-- 5. Sałata dębolistna -->
+            <a href="group_oakleaf.html" class="variety-card">
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1506070533502-ff933d273544?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałaty dębolistnej]">
+                </div>
+                <div class="p-8 pb-4">
+                    <span class="tag">Oakleaf</span>
+                    <h2 class="variety-name">5. Sałata dębolistna</h2>
+                    <p class="text-sm text-gray-600 mb-4">Liście o charakterystycznym, powycinanym kształcie przypominającym dąb. Bardzo dekoracyjna.</p>
+                    <div class="text-xs font-bold text-green-700 uppercase tracking-widest mb-2">Odmiany:</div>
+                    <ul class="text-xs text-gray-500 space-y-1 italic">
+                        <li>‘Red Oakleaf’, ‘Green Oakleaf’, ‘Lollo Bionda’</li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <span class="text-green-600 font-black">SZCZEGÓŁY →</span>
+                </div>
+            </a>
+
+            <!-- Kafel informacyjny (statyczny) -->
+            <div class="flex items-center justify-center p-8 border-4 border-dashed border-green-200 rounded-[28px]">
+                <div class="text-center">
+                    <p class="text-4xl mb-4">📌</p>
+                    <h3 class="font-black text-green-900 uppercase text-xs mb-2">Ważne uwagi</h3>
+                    <p class="text-[11px] text-gray-500 leading-relaxed italic">
+                        Liczba odmian handlowych sięga setek. Odmiany różnią się odpornością na choroby i terminem wegetacji, ale wszystkie stanowią ten sam biologiczny gatunek.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="py-20 bg-green-900 text-white px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div class="text-left">
+                <h4 class="text-xs font-black uppercase tracking-[0.3em] text-lime-400 mb-2">Systematyka / Uprawa</h4>
+                <p class="text-sm opacity-60">Dokumentacja odmian Lactuca sativa na podstawie klasyfikacji użytkowej.</p>
+            </div>
+            <div class="md:text-right font-mono text-[10px] opacity-40 uppercase tracking-widest">
+                Lactucinae > Lactuca > L. sativa
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
