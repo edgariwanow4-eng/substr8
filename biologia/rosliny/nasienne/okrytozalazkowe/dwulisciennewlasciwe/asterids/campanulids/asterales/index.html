@@ -33,6 +33,10 @@
             box-shadow: 0 4px 15px rgba(202, 138, 4, 0.08);
             border: 1px solid rgba(202, 138, 4, 0.1);
             transition: all 0.3s ease;
+            display: block; /* Zmienione na block dla linku */
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
         }
 
         .family-card:hover {
@@ -184,7 +188,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
             <!-- Asteraceae -->
-            <div class="family-card border-t-4 border-yellow-500">
+            <a href="asteraceae.html" class="family-card border-t-4 border-yellow-500">
                 <h3 class="font-black text-lg text-yellow-800">Asteraceae</h3>
                 <p class="text-[10px] text-yellow-600 font-bold mb-3 uppercase tracking-tighter">Astrowate / Compositae</p>
                 <p class="text-xs text-gray-600 mb-4">Największa rodzina okrytonasiennych. Charakterystyczny kwiatostan typu koszyczek (pseudancjum).</p>
@@ -197,10 +201,10 @@
                         <span class="tag-yellow">Stokrotka</span>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Campanulaceae -->
-            <div class="family-card border-t-4 border-blue-400">
+            <a href="campanulaceae.html" class="family-card border-t-4 border-blue-400">
                 <h3 class="font-black text-lg text-blue-800">Campanulaceae</h3>
                 <p class="text-[10px] text-blue-600 font-bold mb-3 uppercase tracking-tighter">Dzwonkowate</p>
                 <p class="text-xs text-gray-600 mb-4">Głównie rośliny zielne o dzwonkowatych kwiatach, często zawierające przewody mleczne.</p>
@@ -211,40 +215,40 @@
                         <span class="tag-yellow" style="background: #dbeafe; color: #1e40af;">Lobelia</span>
                     </div>
                 </div>
-            </div>
+            </a>
 
             <!-- Goodeniaceae -->
-            <div class="family-card">
+            <a href="goodeniaceae.html" class="family-card">
                 <h3 class="font-black text-lg text-gray-800">Goodeniaceae</h3>
                 <p class="text-xs text-gray-600 mb-4">Głównie rośliny australijskie. Kwiaty promieniste lub o płatkach lekko zrośniętych u nasady.</p>
                 <div class="bg-gray-50 p-3 rounded-lg">
                     <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
                     <span class="tag-yellow" style="background: #f3f4f6; color: #374151;">Scaevola</span>
                 </div>
-            </div>
+            </a>
 
             <!-- Menyanthaceae -->
-            <div class="family-card">
+            <a href="menyanthaceae.html" class="family-card">
                 <h3 class="font-black text-lg text-gray-800">Menyanthaceae</h3>
                 <p class="text-xs text-gray-600 mb-4">Rośliny wodne lub bagienne. Posiadają kwiaty zebrane w efektowne grona.</p>
                 <div class="bg-gray-50 p-3 rounded-lg">
                     <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
                     <span class="tag-yellow" style="background: #f3f4f6; color: #374151;">Bobrek trójlistkowy</span>
                 </div>
-            </div>
+            </a>
 
             <!-- Calceolariaceae -->
-            <div class="family-card">
+            <a href="calceolariaceae.html" class="family-card">
                 <h3 class="font-black text-lg text-gray-800">Calceolariaceae</h3>
                 <p class="text-xs text-gray-600 mb-4">Charakteryzują się niezwykłymi kwiatami w kształcie "pantofelków" lub kapci.</p>
                 <div class="bg-gray-50 p-3 rounded-lg">
                     <p class="text-[10px] font-bold text-gray-400 mb-2 uppercase">Przykłady:</p>
                     <span class="tag-yellow" style="background: #f3f4f6; color: #374151;">Calceolaria</span>
                 </div>
-            </div>
+            </a>
 
             <!-- Rodziny Krzewiaste -->
-            <div class="family-card bg-gray-900 text-white">
+            <div class="family-card bg-gray-900 text-white cursor-default">
                 <h3 class="font-black text-lg text-yellow-400">Rodziny Krzewiaste</h3>
                 <div class="mt-4 space-y-4">
                     <div>
