@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lamiids - Euasterids I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #4338ca; /* Indigo 700 */
+            --accent: #6366f1; /* Indigo 500 */
+            --light: #fafaf9;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #1e293b;
+            overflow-x: hidden;
+        }
+
+        .hero-lamiids {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1596434442994-06c88849b28b?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            height: 35vh;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(67, 56, 202, 0.15);
+            border-color: rgba(67, 56, 202, 0.2);
+        }
+
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .coin-btn {
+            width: 60px;
+            height: 60px;
+            perspective: 1000px;
+        }
+
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            border: 2px solid var(--primary);
+            padding: 12px;
+        }
+
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--primary);
+        }
+
+        .coin-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .feature-tag {
+            background: #eef2ff;
+            color: #4338ca;
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            border: 1px solid #e0e7ff;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #ffffff 0%, #eef2ff 100%);
+            border: 1px solid #e0e7ff;
+        }
+        
+        .order-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Nawigacja Monetami -->
+    <div class="floating-coins">
+        <!-- Przycisk Strona Główna -->
+        <a href="../../../../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom">
+                </div>
+            </div>
+        </a>
+
+        <!-- Przycisk Powrót -->
+        <a href="index.html" class="coin-btn" title="Powrót do Asterids">
+            <div class="coin-inner">
+                <div class="coin-face">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Cofnij">
+                </div>
+                <div class="coin-face coin-back">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Cofnij">
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Pasek Nawigacji -->
+    <nav class="bg-white/90 backdrop-blur-lg fixed top-0 w-full z-50 py-4 px-6 border-b border-indigo-100">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="font-black text-xl text-indigo-900 flex items-center gap-2">
+                <span class="text-2xl">🌿</span> LAMIIDS
+            </div>
+            <div class="flex gap-3 items-center">
+                <span class="feature-tag">Superior Ovary</span>
+                <span class="feature-tag">Olejki eteryczne</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sekcja Hero -->
+    <header class="hero-lamiids flex items-center justify-center text-center text-white pt-12">
+        <div class="px-4">
+            <h1 class="text-4xl md:text-5xl font-black uppercase tracking-tight mb-2">Lamiids</h1>
+            <p class="text-lg opacity-90 font-light max-w-2xl mx-auto italic">
+                Euasterids I – bogactwo aromatów, kofeiny i zaawansowanych kwiatów.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Charakterystyka Lamiids -->
+        <section class="mb-16 summary-box p-8 rounded-3xl shadow-sm">
+            <h2 class="text-2xl font-black mb-6 text-indigo-900 border-l-4 border-indigo-600 pl-4 uppercase tracking-tight">Profil Grupy</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="flex gap-4">
+                    <div class="text-3xl">🌸</div>
+                    <div>
+                        <h4 class="font-bold text-sm uppercase text-indigo-800">Górny Słupek</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed">W przeciwieństwie do Campanulids, większość Lamiids posiada zalążnię górną.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="text-3xl">🍃</div>
+                    <div>
+                        <h4 class="font-bold text-sm uppercase text-indigo-800">Liście</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed">Często naprzeciwległe, o brzegach całobrzegich lub ząbkowanych.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="text-3xl">🧪</div>
+                    <div>
+                        <h4 class="font-bold text-sm uppercase text-indigo-800">Chemia</h4>
+                        <p class="text-xs text-gray-600 leading-relaxed">Częsta obecność alkaloidów (np. kofeina) oraz glikozydów irydoidowych.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Przegląd Rzędów -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Lamiales -->
+            <div class="category-card">
+                <div class="h-40 bg-indigo-50 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1599023414216-928646b97607?q=80&w=600&auto=format&fit=crop" alt="[Jasnotowce]" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <span class="order-badge">LAMIALES</span>
+                    <h3 class="text-lg font-black text-indigo-900 mb-2">Jasnotowce</h3>
+                    <p class="text-[11px] text-gray-600 mb-4 italic">Kwadratowe łodygi i grzbieciste kwiaty.</p>
+                    <ul class="text-[10px] space-y-1 text-gray-500">
+                        <li>• Lamiaceae (Jasnotowate)</li>
+                        <li>• Oleaceae (Oliwkowate)</li>
+                        <li>• Plantaginaceae (Babkowate)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Gentianales -->
+            <div class="category-card">
+                <div class="h-40 bg-blue-50 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1525923743516-f335198e727e?q=80&w=600&auto=format&fit=crop" alt="[Goryczkowce]" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <span class="order-badge">GENTIANALES</span>
+                    <h3 class="text-lg font-black text-indigo-900 mb-2">Goryczkowce</h3>
+                    <p class="text-[11px] text-gray-600 mb-4 italic">Częsta obecność przylistków i lateksu.</p>
+                    <ul class="text-[10px] space-y-1 text-gray-500">
+                        <li>• Rubiaceae (Marzanowate - Kawa)</li>
+                        <li>• Gentianaceae (Goryczkowate)</li>
+                        <li>• Apocynaceae (Toinowate)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Solanales -->
+            <div class="category-card">
+                <div class="h-40 bg-red-50 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1592924357228-91a4daadcfea?q=80&w=600&auto=format&fit=crop" alt="[Psiankowce]" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <span class="order-badge">SOLANALES</span>
+                    <h3 class="text-lg font-black text-indigo-900 mb-2">Psiankowce</h3>
+                    <p class="text-[11px] text-gray-600 mb-4 italic">Kwiaty promieniste, owoce: jagody lub torebki.</p>
+                    <ul class="text-[10px] space-y-1 text-gray-500">
+                        <li>• Solanaceae (Psiankowate - Pomidor)</li>
+                        <li>• Convolvulaceae (Powojowate)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Boraginales -->
+            <div class="category-card">
+                <div class="h-40 bg-sky-50 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1618173745201-9e32049d4791?q=80&w=600&auto=format&fit=crop" alt="[Ogórecznikowce]" class="w-full h-full object-cover">
+                </div>
+                <div class="p-6">
+                    <span class="order-badge">BORAGINALES</span>
+                    <h3 class="text-lg font-black text-indigo-900 mb-2">Ogórecznikowce</h3>
+                    <p class="text-[11px] text-gray-600 mb-4 italic">Szorstkie owłosienie i kwiatostany typu skrętka.</p>
+                    <ul class="text-[10px] space-y-1 text-gray-500">
+                        <li>• Boraginaceae (Ogórecznikowate)</li>
+                        <li>• Heliotropium, Niezapominajka</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sekcja Gospodarcza -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-8 rounded-3xl border border-indigo-50">
+                <h3 class="font-black text-indigo-900 uppercase text-sm mb-4">Znaczenie Gospodarcze</h3>
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <span class="text-xl">☕</span>
+                        <p class="text-xs text-gray-600"><strong>Używki:</strong> Kawa (Rubiaceae), herbata paragwajska, tytoń (Solanaceae).</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="text-xl">🍕</span>
+                        <p class="text-xs text-gray-600"><strong>Żywność:</strong> Pomidory, ziemniaki, papryka, oliwki.</p>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="text-xl">🌿</span>
+                        <p class="text-xs text-gray-600"><strong>Zioła:</strong> Mięta, bazylia, oregano, szałwia, tymianek.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-indigo-900 text-white p-8 rounded-3xl relative overflow-hidden">
+                <div class="text-6xl absolute -right-4 -bottom-4 opacity-10">☕</div>
+                <h3 class="font-black text-indigo-300 uppercase text-sm mb-4">Focus: Kawa</h3>
+                <p class="text-xs leading-relaxed opacity-80 italic">
+                    Kawa (Coffea arabica) należy do rodziny marzanowatych (Rubiaceae) w rzędzie Gentianales. Jest to jeden z najważniejszych towarów handlowych świata, pochodzący z afrykańskich wyżyn, a ewolucyjnie osadzony głęboko w kladzie Lamiids.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="mt-12 py-12 text-center border-t border-indigo-50">
+        <p class="text-[10px] text-gray-400 uppercase tracking-widest font-black">Lamiids &bull; Phylogeny Project</p>
+    </footer>
+
+</body>
+</html>
