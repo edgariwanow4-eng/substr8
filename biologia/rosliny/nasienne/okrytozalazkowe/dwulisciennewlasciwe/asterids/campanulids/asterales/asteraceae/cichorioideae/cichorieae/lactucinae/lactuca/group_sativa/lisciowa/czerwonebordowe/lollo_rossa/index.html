@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lollo Rossa - Karta Odmiany</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --lollo-red: #7f1d1d;
+            --lollo-bg: #fff5f5;
+        }
+        body {
+            background-color: var(--lollo-bg);
+            color: #1e293b;
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            scroll-behavior: smooth;
+        }
+        .science-header {
+            background: linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%);
+        }
+        .content-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(127, 29, 29, 0.05);
+            border: 1px solid #fee2e2;
+            display: flex;
+            flex-direction: column;
+        }
+        .photo-card {
+            overflow: hidden;
+            border-radius: 20px;
+            border: 4px solid white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            background: #fecaca;
+        }
+        .photo-card:hover {
+            transform: translateY(-5px);
+        }
+        .photo-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .floating-coins {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            z-index: 1000;
+        }
+        .coin-btn {
+            width: 50px;
+            height: 50px;
+            perspective: 1000px;
+        }
+        .coin-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .coin-btn:hover .coin-inner {
+            transform: rotateY(180deg);
+        }
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid var(--lollo-red);
+            padding: 10px;
+        }
+        .coin-back {
+            transform: rotateY(180deg);
+            background: var(--lollo-red);
+        }
+        .taxonomy-step {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed #fecaca;
+        }
+        .taxonomy-step:last-child { border: none; font-weight: bold; color: var(--lollo-red); padding-top: 0.75rem; }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -0.025em;
+            color: #7f1d1d;
+            border-bottom: 2px solid #fee2e2;
+            padding-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: #fffafa;
+            border-left: 4px solid #7f1d1d;
+            padding: 1rem;
+            margin-top: auto;
+            border-radius: 0 12px 12px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nawigacja -->
+    <div class="floating-coins">
+        <a href="../../../../index.html" class="coin-btn" title="Strona główna">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+        <a href="../red_leaf.html" class="coin-btn" title="Powrót do katalogu czerwonych">
+            <div class="coin-inner">
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]" style="filter: brightness(0) invert(1);"></div>
+            </div>
+        </a>
+    </div>
+
+    <!-- Header -->
+    <header class="science-header py-16 px-6 text-white text-center relative overflow-hidden">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <span class="text-xs font-black uppercase tracking-[0.5em] opacity-70 mb-4 block">Karta Botaniczna Odmiany</span>
+            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 italic">Lollo Rossa</h1>
+            <p class="text-lg font-light opacity-90 max-w-3xl mx-auto leading-relaxed">
+                Kultywar <em>Lactuca sativa</em> znany z unikalnej tekstury, intensywnej pigmentacji antocyjanowej oraz wysokiej zawartości antyoksydantów.
+            </p>
+        </div>
+    </header>
+
+    <!-- Galeria Zdjęć na górze -->
+    <section class="max-w-7xl mx-auto px-6 -mt-10 relative z-20">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1622206148242-479a54d63f2a?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałata Lollo Rossa w zbliżeniu]">
+                <div class="bg-white p-2 text-center text-[10px] uppercase font-bold text-red-900">Morfologia liścia</div>
+            </div>
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1556781266-302513333201?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Rozeta sałaty Lollo Rossa]">
+                <div class="bg-white p-2 text-center text-[10px] uppercase font-bold text-red-900">Pokrój rozety</div>
+            </div>
+            <div class="photo-card">
+                <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałata Lollo Rossa na polu uprawnym]">
+                <div class="bg-white p-2 text-center text-[10px] uppercase font-bold text-red-900">Uprawa polowa</div>
+            </div>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        
+        <!-- Główny Grid 12-kolumnowy -->
+        <div class="grid grid-cols-12 gap-8">
+            
+            <!-- Lewa Sekcja (4 kolumny) -->
+            <div class="col-span-12 lg:col-span-4 space-y-8">
+                <!-- Systematyka -->
+                <section class="content-card">
+                    <h2 class="section-title"><span class="text-2xl">📚</span> Systematyka</h2>
+                    <div class="space-y-1">
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Królestwo</span> Plantae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Typ</span> Angiospermae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Klasa</span> Eudicots</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Klad</span> Asterids</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Rząd</span> Asterales</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Rodzina</span> Asteraceae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Plemię</span> Cichorieae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Rodzaj</span> Lactuca</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Gatunek</span> L. sativa</div>
+                        <div class="taxonomy-step"><span class="text-xs uppercase">Odmiana</span> Lollo Rossa</div>
+                    </div>
+                </section>
+
+                <!-- Ekologia -->
+                <section class="content-card">
+                    <h2 class="section-title"><span class="text-2xl">🌎</span> Ekologia</h2>
+                    <div class="space-y-4 text-sm text-gray-600">
+                        <div>
+                            <h4 class="font-bold text-red-900 mb-1 italic">Wymagania Siedliskowe</h4>
+                            <p>Preferuje stanowiska słoneczne, umiarkowaną wilgotność i gleby bogate w próchnicę. Odporna na chłody.</p>
+                        </div>
+                        <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-800">
+                            <h4 class="font-bold text-red-900 mb-1 italic">Zagrożenia</h4>
+                            <p>Nadmierne temperatury (>25°C) stymulują wybijanie w pęd kwiatowy (bolting).</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Środkowa i Prawa Sekcja (8 kolumn) -->
+            <div class="col-span-12 lg:col-span-8 space-y-8">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <section class="content-card">
+                        <h2 class="section-title"><span class="text-2xl">🌿</span> Morfologia</h2>
+                        <ul class="text-sm space-y-3 text-gray-600 mb-4">
+                            <li>• <strong>Pokrój:</strong> Luźna rozeta, brak zwartej główki.</li>
+                            <li>• <strong>Liście:</strong> Silnie pofalowane brzegi, cienkie i delikatne w strukturze.</li>
+                            <li>• <strong>Barwa:</strong> Intensywny bordowy na brzegach.</li>
+                        </ul>
+                        <div class="highlight-box">
+                            <p class="text-[11px] leading-tight text-gray-500 uppercase tracking-tight">Kluczowa cecha: Karbowana krawędź blaszki liściowej.</p>
+                        </div>
+                    </section>
+
+                    <section class="content-card">
+                        <h2 class="section-title"><span class="text-2xl">🔬</span> Anatomia</h2>
+                        <div class="text-sm text-gray-600 space-y-3">
+                            <p>Zróżnicowanie na <strong>miękisz palisadowy</strong> i <strong>gąbczasty</strong>.</p>
+                            <p>Obecność <strong>kanałów lateksowych</strong> charakterystyczna dla <em>Cichorieae</em>.</p>
+                        </div>
+                    </section>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <section class="content-card">
+                        <h2 class="section-title"><span class="text-2xl">☀️</span> Fizjologia</h2>
+                        <div class="text-sm text-gray-600 space-y-3">
+                            <p><strong>Fotosynteza C3</strong>: Standardowy mechanizm asymilacji.</p>
+                            <p><strong>Rola Antocyjanów:</strong> Ochrona przed UV i stresem oksydacyjnym.</p>
+                        </div>
+                    </section>
+
+                    <section class="content-card">
+                        <h2 class="section-title"><span class="text-2xl">🧪</span> Biotechnologia</h2>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <p>Wykorzystanie <strong>markerów SSR</strong> do identyfikacji linii hodowlanych.</p>
+                            <p>Możliwość rozmnażania <strong>in vitro</strong>.</p>
+                        </div>
+                    </section>
+                </div>
+
+                <section class="content-card">
+                    <h2 class="section-title"><span class="text-2xl">🌱</span> Rozwój i Embriologia</h2>
+                    <p class="text-sm text-gray-600 leading-relaxed italic">
+                        Rozwój embrionalny zgodny z wzorcem eudicots. Kiełkowanie epigeiczne (nadziemne).
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Stopka parametrów -->
+        <div class="mt-16 bg-red-950 text-white p-10 rounded-[40px] shadow-2xl overflow-hidden relative">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
+                <div class="text-center">
+                    <span class="block text-3xl mb-1">🥗</span>
+                    <span class="text-[10px] uppercase opacity-50 block mb-1">Typ</span>
+                    <span class="text-sm font-bold">Liściasta</span>
+                </div>
+                <div class="text-center border-l border-white/10">
+                    <span class="block text-3xl mb-1">🧬</span>
+                    <span class="text-[10px] uppercase opacity-50 block mb-1">Kariotyp</span>
+                    <span class="text-sm font-bold">2n = 18</span>
+                </div>
+                <div class="text-center border-l border-white/10">
+                    <span class="block text-3xl mb-1">🩸</span>
+                    <span class="text-[10px] uppercase opacity-50 block mb-1">Pigment</span>
+                    <span class="text-sm font-bold">Antocyjany</span>
+                </div>
+                <div class="text-center border-l border-white/10">
+                    <span class="block text-3xl mb-1">⌛</span>
+                    <span class="text-[10px] uppercase opacity-50 block mb-1">Wegetacja</span>
+                    <span class="text-sm font-bold">~50 dni</span>
+                </div>
+            </div>
+            <div class="absolute inset-0 bg-gradient-to-r from-red-900/50 to-transparent pointer-events-none"></div>
+        </div>
+
+    </main>
+
+    <footer class="py-12 border-t border-red-200 text-center">
+        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-red-400 opacity-60">
+            Atlas Botaniczny / Lactuca Sativa / Lollo Rossa
+        </p>
+    </footer>
+
+</body>
+</html>
