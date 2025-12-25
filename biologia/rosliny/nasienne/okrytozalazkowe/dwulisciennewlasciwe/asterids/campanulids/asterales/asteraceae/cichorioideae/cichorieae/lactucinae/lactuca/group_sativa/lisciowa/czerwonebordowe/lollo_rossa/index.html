@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lollo Rossa - Karta Odmiany</title>
+    <title>Lollo Rossa - Karta Odmiany i Raport z Eksperymentu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
             --lollo-red: #7f1d1d;
             --lollo-bg: #fff5f5;
+            --accent-gold: #b45309;
         }
         body {
             background-color: var(--lollo-bg);
@@ -27,22 +28,50 @@
             border: 1px solid #fee2e2;
             display: flex;
             flex-direction: column;
+            width: 100%;
+        }
+        .experiment-card {
+            background: #fff;
+            border: 2px solid #7f1d1d;
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+        .experiment-card::before {
+            content: "EKSPERYMENT ZAKOŃCZONY";
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: #7f1d1d;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 10;
         }
         .photo-card {
             overflow: hidden;
             border-radius: 20px;
             border: 4px solid white;
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             background: #fecaca;
+            cursor: pointer;
+            height: 100%;
         }
         .photo-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
+            z-index: 30;
         }
         .photo-card img {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
+        }
+        /* Style dla dużych zdjęć głównych */
+        .hero-photo {
+            height: 350px !important;
         }
         .floating-coins {
             position: fixed;
@@ -113,184 +142,364 @@
             background: #fffafa;
             border-left: 4px solid #7f1d1d;
             padding: 1rem;
-            margin-top: auto;
+            margin-top: 1.5rem; 
             border-radius: 0 12px 12px 0;
+        }
+
+        .data-grid-item {
+            padding: 0.75rem;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .resource-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #fee2e2;
+            border-radius: 10px;
+            transition: background 0.2s;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .resource-link:hover {
+            background: #fff1f1;
+            border-color: #7f1d1d;
+        }
+
+        /* Modal / Lightbox */
+        #photo-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        #modal-img {
+            max-width: 95%;
+            max-height: 90vh;
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
         }
     </style>
 </head>
 <body>
 
+    <!-- Lightbox Modal -->
+    <div id="photo-modal" onclick="this.style.display='none'">
+        <img id="modal-img" src="" alt="Powiększone zdjęcie">
+        <div class="absolute top-10 right-10 text-white text-4xl cursor-pointer hover:scale-110 transition-transform">&times;</div>
+    </div>
+
     <!-- Nawigacja -->
     <div class="floating-coins">
-        <a href="../../../../index.html" class="coin-btn" title="Strona główna">
+        <a href="../../../../../../../../../../../../../../index.html" class="coin-btn" title="Strona główna">
             <div class="coin-inner">
-                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]"></div>
-                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]" style="filter: brightness(0) invert(1);"></div>
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom" style="filter: brightness(0) invert(1);"></div>
             </div>
         </a>
-        <a href="../red_leaf.html" class="coin-btn" title="Powrót do katalogu czerwonych">
+        <a href="../red_leaf.html" class="coin-btn" title="Powrót do katalogu">
             <div class="coin-inner">
-                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]"></div>
-                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]" style="filter: brightness(0) invert(1);"></div>
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Wstecz"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Wstecz" style="filter: brightness(0) invert(1);"></div>
             </div>
         </a>
     </div>
 
     <!-- Header -->
-    <header class="science-header py-16 px-6 text-white text-center relative overflow-hidden">
+    <header class="science-header py-24 px-6 text-white text-center relative overflow-hidden">
         <div class="max-w-5xl mx-auto relative z-10">
-            <span class="text-xs font-black uppercase tracking-[0.5em] opacity-70 mb-4 block">Karta Botaniczna Odmiany</span>
-            <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tighter mb-4 italic">Lollo Rossa</h1>
+            <span class="text-xs font-black uppercase tracking-[0.5em] opacity-70 mb-4 block">Karta Botaniczna & Raport z Doświadczeń</span>
+            <h1 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-4 italic">Lollo Rossa</h1>
             <p class="text-lg font-light opacity-90 max-w-3xl mx-auto leading-relaxed">
-                Kultywar <em>Lactuca sativa</em> znany z unikalnej tekstury, intensywnej pigmentacji antocyjanowej oraz wysokiej zawartości antyoksydantów.
+                Analiza kultywaru <em>Lactuca sativa</em> na podstawie badań literaturowych oraz zakończonego eksperymentu domowego (listopad-grudzień 2025).
             </p>
         </div>
     </header>
 
-    <!-- Galeria Zdjęć na górze -->
-    <section class="max-w-7xl mx-auto px-6 -mt-10 relative z-20">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1622206148242-479a54d63f2a?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałata Lollo Rossa w zbliżeniu]">
-                <div class="bg-white p-2 text-center text-[10px] uppercase font-bold text-red-900">Morfologia liścia</div>
+    <!-- Sekcja 3 dużych zdjęć głównych -->
+    <section class="max-w-7xl mx-auto px-6 -mt-20 relative z-20 mb-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                <img class="hero-photo" src="https://images.unsplash.com/photo-1622206148242-479a54d63f2a?q=80&w=1200" alt="Morfologia Liścia">
+                <div class="bg-white p-4 text-center text-xs uppercase font-black text-red-900 border-t">Szczegółowa morfologia liścia</div>
             </div>
-            <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1556781266-302513333201?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Rozeta sałaty Lollo Rossa]">
-                <div class="bg-white p-2 text-center text-[10px] uppercase font-bold text-red-900">Pokrój rozety</div>
+            <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                <img class="hero-photo" src="https://images.unsplash.com/photo-1556781266-302513333201?q=80&w=1200" alt="Pokrój Rozety">
+                <div class="bg-white p-4 text-center text-xs uppercase font-black text-red-900 border-t">Pełny pokrój rozety</div>
             </div>
-            <div class="photo-card">
-                <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=800&auto=format&fit=crop" alt="[Zdjęcie Sałata Lollo Rossa na polu uprawnym]">
-                <div class="bg-white p-2 text-center text-[10px] uppercase font-bold text-red-900">Uprawa polowa</div>
+            <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                <img class="hero-photo" src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=1200" alt="Uprawa Ekologiczna">
+                <div class="bg-white p-4 text-center text-xs uppercase font-black text-red-900 border-t">Optymalna uprawa polowa</div>
             </div>
         </div>
     </section>
 
-    <main class="max-w-7xl mx-auto px-6 py-12">
-        
-        <!-- Główny Grid 12-kolumnowy -->
-        <div class="grid grid-cols-12 gap-8">
+    <main class="max-w-7xl mx-auto px-6 py-6">
+
+        <!-- SEKCCJA 1: GALERIA UŻYTECZNA -->
+        <section class="mb-20">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+                <div>
+                    <h2 class="section-title"><span class="text-2xl">🖼️</span> Galeria Dokumentacyjna</h2>
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Wybierz zdjęcie, aby zobaczyć szczegóły</p>
+                </div>
+            </div>
             
-            <!-- Lewa Sekcja (4 kolumny) -->
-            <div class="col-span-12 lg:col-span-4 space-y-8">
-                <!-- Systematyka -->
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <!-- Nasiona Mikro -->
+                <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                    <img src="https://images.unsplash.com/photo-1505235687559-28b5f54645b7?q=80&w=600" alt="Nasiona Mikro">
+                    <div class="bg-white p-3 text-center text-[9px] uppercase font-bold text-red-900 border-t">Nasiona (Mikro)</div>
+                </div>
+                <!-- Nasiona Makro -->
+                <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                    <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?q=80&w=600" alt="Nasiona Makro">
+                    <div class="bg-white p-3 text-center text-[9px] uppercase font-bold text-red-900 border-t">Nasiona (Makro)</div>
+                </div>
+                <!-- Nowe Zdjęcie Nasion 1 -->
+                <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                    <img src="https://images.unsplash.com/photo-1536627217140-692757262070?q=80&w=600" alt="Nasiona w skali 1:1">
+                    <div class="bg-white p-3 text-center text-[9px] uppercase font-bold text-red-900 border-t">Nasiona (Skala 1:1)</div>
+                </div>
+                <!-- Nowe Zdjęcie Nasion 2 -->
+                <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                    <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=600" alt="Pojedyncze nasiona">
+                    <div class="bg-white p-3 text-center text-[9px] uppercase font-bold text-red-900 border-t">Nasiona (Detale)</div>
+                </div>
+                <!-- Inne ujęcie Morfologii -->
+                <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                    <img src="https://images.unsplash.com/photo-1615485500704-8e990f9900f7?q=80&w=600" alt="Pofałdowanie">
+                    <div class="bg-white p-3 text-center text-[9px] uppercase font-bold text-red-900 border-t">Pofałdowanie</div>
+                </div>
+                <!-- Etap wzrostu -->
+                <div class="photo-card" onclick="openModal(this.querySelector('img').src)">
+                    <img src="https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=600" alt="Młody liść">
+                    <div class="bg-white p-3 text-center text-[9px] uppercase font-bold text-red-900 border-t">Faza wzrostu</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GŁÓWNA SIATKA DANYCH -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- KOLUMNA LEWA: SYSTEMATYKA I EKSPERYMENT (5/12) -->
+            <div class="lg:col-span-5 flex flex-col gap-8">
+                
+                <!-- RAPORT Z DOŚWIADCZEŃ -->
+                <section class="content-card experiment-card">
+                    <h2 class="section-title"><span class="text-2xl">🧪</span> Dziennik Doświadczeń</h2>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="data-grid-item text-center">
+                            <span class="block text-[10px] uppercase text-gray-400 font-bold mb-1">Siew</span>
+                            <span class="font-bold text-sm">18.11.2025</span>
+                        </div>
+                        <div class="data-grid-item text-center">
+                            <span class="block text-[10px] uppercase text-gray-400 font-bold mb-1">Zbiór</span>
+                            <span class="font-bold text-sm text-red-700">25.12.2025</span>
+                        </div>
+                        <div class="data-grid-item text-center col-span-2 bg-red-50 border-red-200 py-4">
+                            <span class="block text-[10px] uppercase text-gray-400 font-bold mb-1">Cykl Wegetacyjny</span>
+                            <span class="font-bold text-2xl text-red-900">36–37 dni</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4 text-sm mb-6">
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 italic">Masa jadalna:</span>
+                            <span class="font-bold">~25 g</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 italic">Długość korzenia:</span>
+                            <span class="font-bold">~25 cm</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 italic">Smak:</span>
+                            <span class="font-bold text-red-800 uppercase tracking-tight">Lekko gorzki</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <h4 class="text-[11px] font-black uppercase text-gray-400 tracking-widest">Obserwacje Krytyczne:</h4>
+                        <ul class="text-[12px] space-y-3 text-gray-700">
+                            <li class="flex gap-3 items-start"><span class="mt-0.5">⚠️</span> <p><strong>Światło:</strong> Niewystarczające (zacienienie przez liście ogórka).</p></li>
+                            <li class="flex gap-3 items-start"><span class="mt-0.5">⚡</span> <p><strong>Energia:</strong> Nadmierne zużycie we wczesnym etapie przez niewykorzystaną przestrzeń.</p></li>
+                            <li class="flex gap-3 items-start"><span class="mt-0.5">💨</span> <p><strong>Wentylacja:</strong> Brak systemowej cyrkulacji.</p></li>
+                            <li class="flex gap-3 items-start"><span class="mt-0.5">🍂</span> <p><strong>Utrata:</strong> 2 najniższe liście wyschły w fazie juwenilnej.</p></li>
+                            <li class="flex gap-3 items-start"><span class="mt-0.5">📏</span> <p><strong>Rozstaw:</strong> Zaobserwowano nieregularny wzrost osiowy.</p></li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box bg-red-900 text-white p-4">
+                        <p class="text-[12px] font-medium leading-relaxed">Odmiana wybrana do dalszych eksperymentów optymalizacyjnych warunków uprawy (produkcja żywności wertykalnej).</p>
+                    </div>
+                </section>
+
+                <!-- SYSTEMATYKA -->
                 <section class="content-card">
                     <h2 class="section-title"><span class="text-2xl">📚</span> Systematyka</h2>
                     <div class="space-y-1">
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Królestwo</span> Plantae</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Typ</span> Angiospermae</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Klasa</span> Eudicots</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Klad</span> Asterids</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Rząd</span> Asterales</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Rodzina</span> Asteraceae</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Plemię</span> Cichorieae</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Rodzaj</span> Lactuca</div>
-                        <div class="taxonomy-step"><span class="opacity-60 text-xs uppercase">Gatunek</span> L. sativa</div>
-                        <div class="taxonomy-step"><span class="text-xs uppercase">Odmiana</span> Lollo Rossa</div>
-                    </div>
-                </section>
-
-                <!-- Ekologia -->
-                <section class="content-card">
-                    <h2 class="section-title"><span class="text-2xl">🌎</span> Ekologia</h2>
-                    <div class="space-y-4 text-sm text-gray-600">
-                        <div>
-                            <h4 class="font-bold text-red-900 mb-1 italic">Wymagania Siedliskowe</h4>
-                            <p>Preferuje stanowiska słoneczne, umiarkowaną wilgotność i gleby bogate w próchnicę. Odporna na chłody.</p>
-                        </div>
-                        <div class="p-3 bg-red-50 rounded-lg border-l-4 border-red-800">
-                            <h4 class="font-bold text-red-900 mb-1 italic">Zagrożenia</h4>
-                            <p>Nadmierne temperatury (>25°C) stymulują wybijanie w pęd kwiatowy (bolting).</p>
-                        </div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Królestwo</span> Plantae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Typ</span> Angiospermae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Klasa</span> Eudicots</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Klad</span> Asterids</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Rząd</span> Asterales</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Rodzina</span> Asteraceae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Plemię</span> Cichorieae</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Rodzaj</span> Lactuca</div>
+                        <div class="taxonomy-step"><span class="opacity-60 text-[10px] uppercase font-bold">Gatunek</span> L. sativa</div>
+                        <div class="taxonomy-step bg-red-50 p-2 rounded-lg mt-2 font-black"><span class="text-[10px] uppercase">Odmiana</span> Lollo Rossa</div>
                     </div>
                 </section>
             </div>
 
-            <!-- Środkowa i Prawa Sekcja (8 kolumn) -->
-            <div class="col-span-12 lg:col-span-8 space-y-8">
+            <!-- KOLUMNA PRAWA: BOTANIKA I ZASOBY (7/12) -->
+            <div class="lg:col-span-7 flex flex-col gap-8">
                 
+                <!-- NASIONA I ZASOBY (Grid 1x2) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <section class="content-card">
+                        <h2 class="section-title"><span class="text-2xl">🌰</span> Biometria Nasion</h2>
+                        <ul class="text-sm space-y-3 text-gray-600 mb-6">
+                            <li class="flex justify-between border-b border-gray-50 pb-1"><span>Długość:</span> <strong class="text-gray-900">3.2 - 4.1 mm</strong></li>
+                            <li class="flex justify-between border-b border-gray-50 pb-1"><span>Szerokość:</span> <strong class="text-gray-900">0.8 - 1.1 mm</strong></li>
+                            <li class="flex justify-between border-b border-gray-50 pb-1"><span>Masa 1000:</span> <strong class="text-gray-900">~1.02 g</strong></li>
+                            <li class="flex justify-between"><span>Kształt:</span> <strong class="text-gray-900">Wrzecionowaty</strong></li>
+                        </ul>
+                        <div class="p-4 bg-amber-50 rounded-xl border border-amber-100 mt-auto">
+                            <p class="text-[10px] text-amber-800 font-black uppercase mb-2 tracking-widest">Skład chemiczny:</p>
+                            <p class="text-[11px] text-gray-700 leading-relaxed font-medium">Oleje (25-30%), Białka (15-20%), fitosterole, witamina E (tokoferole).</p>
+                        </div>
+                    </section>
+
+                    <section class="content-card">
+                        <h2 class="section-title"><span class="text-2xl">🔗</span> Zasoby Badawcze</h2>
+                        <div class="flex flex-col gap-3">
+                            <a href="#" class="resource-link group">
+                                <span class="group-hover:translate-x-1 transition-transform italic">🧬 Link do Genomu (NCBI)</span>
+                            </a>
+                            <a href="#" class="resource-link group">
+                                <span class="group-hover:translate-x-1 transition-transform italic">🔬 Badania i Eksperymenty (PubMed)</span>
+                            </a>
+                            <a href="#" class="resource-link group">
+                                <span class="group-hover:translate-x-1 transition-transform italic">📊 Warunki Uprawy (Zbiór Danych)</span>
+                            </a>
+                            <a href="#" class="resource-link group">
+                                <span class="group-hover:translate-x-1 transition-transform italic">🧪 Skład Odżywczy (USDA)</span>
+                            </a>
+                        </div>
+                        <p class="text-[10px] text-gray-400 mt-6 italic">Zasoby aktualizowane w cyklu kwartalnym.</p>
+                    </section>
+                </div>
+
+                <!-- MORFOLOGIA I FIZJOLOGIA (Grid 1x2) -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <section class="content-card">
                         <h2 class="section-title"><span class="text-2xl">🌿</span> Morfologia</h2>
-                        <ul class="text-sm space-y-3 text-gray-600 mb-4">
-                            <li>• <strong>Pokrój:</strong> Luźna rozeta, brak zwartej główki.</li>
-                            <li>• <strong>Liście:</strong> Silnie pofalowane brzegi, cienkie i delikatne w strukturze.</li>
-                            <li>• <strong>Barwa:</strong> Intensywny bordowy na brzegach.</li>
+                        <ul class="text-sm space-y-4 text-gray-600">
+                            <li class="flex gap-2">
+                                <span class="text-red-700 font-bold">•</span>
+                                <span><strong>Pokrój:</strong> Luźna rozeta bez centralnej główki.</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-red-700 font-bold">•</span>
+                                <span><strong>Liście:</strong> Silnie pofalowane brzegi, kręcona tekstura.</span>
+                            </li>
+                            <li class="flex gap-2">
+                                <span class="text-red-700 font-bold">•</span>
+                                <span><strong>Barwa:</strong> Gradient od limonkowej zieleni do głębokiego purpury.</span>
+                            </li>
                         </ul>
-                        <div class="highlight-box">
-                            <p class="text-[11px] leading-tight text-gray-500 uppercase tracking-tight">Kluczowa cecha: Karbowana krawędź blaszki liściowej.</p>
+                        <div class="highlight-box border-l-red-800 bg-red-50 mt-6">
+                            <p class="text-[11px] font-bold text-red-900 uppercase">Cecha Specyficzna:</p>
+                            <p class="text-[11px] leading-tight text-gray-700 mt-1">Karbowana krawędź zwiększa powierzchnię transpiracji.</p>
                         </div>
                     </section>
 
-                    <section class="content-card">
-                        <h2 class="section-title"><span class="text-2xl">🔬</span> Anatomia</h2>
-                        <div class="text-sm text-gray-600 space-y-3">
-                            <p>Zróżnicowanie na <strong>miękisz palisadowy</strong> i <strong>gąbczasty</strong>.</p>
-                            <p>Obecność <strong>kanałów lateksowych</strong> charakterystyczna dla <em>Cichorieae</em>.</p>
-                        </div>
-                    </section>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <section class="content-card">
                         <h2 class="section-title"><span class="text-2xl">☀️</span> Fizjologia</h2>
-                        <div class="text-sm text-gray-600 space-y-3">
-                            <p><strong>Fotosynteza C3</strong>: Standardowy mechanizm asymilacji.</p>
-                            <p><strong>Rola Antocyjanów:</strong> Ochrona przed UV i stresem oksydacyjnym.</p>
-                        </div>
-                    </section>
-
-                    <section class="content-card">
-                        <h2 class="section-title"><span class="text-2xl">🧪</span> Biotechnologia</h2>
-                        <div class="text-sm text-gray-600 space-y-2">
-                            <p>Wykorzystanie <strong>markerów SSR</strong> do identyfikacji linii hodowlanych.</p>
-                            <p>Możliwość rozmnażania <strong>in vitro</strong>.</p>
+                        <div class="text-sm text-gray-600 space-y-4">
+                            <div class="p-3 bg-blue-50/50 rounded-lg">
+                                <p class="font-bold text-blue-900 mb-1">Fotosynteza C3</p>
+                                <p class="text-xs">Wysoka efektywność przy ograniczonym natężeniu promieniowania PAR.</p>
+                            </div>
+                            <div class="p-3 bg-purple-50/50 rounded-lg">
+                                <p class="font-bold text-purple-900 mb-1">Antocyjany</p>
+                                <p class="text-xs">Główny pigment: cyjanidyno-3-glukozyd. Ochrona UV i właściwości antyoksydacyjne.</p>
+                            </div>
                         </div>
                     </section>
                 </div>
-
-                <section class="content-card">
-                    <h2 class="section-title"><span class="text-2xl">🌱</span> Rozwój i Embriologia</h2>
-                    <p class="text-sm text-gray-600 leading-relaxed italic">
-                        Rozwój embrionalny zgodny z wzorcem eudicots. Kiełkowanie epigeiczne (nadziemne).
-                    </p>
-                </section>
             </div>
         </div>
 
-        <!-- Stopka parametrów -->
-        <div class="mt-16 bg-red-950 text-white p-10 rounded-[40px] shadow-2xl overflow-hidden relative">
+        <!-- PANEL PODSUMOWUJĄCY -->
+        <div class="mt-20 bg-red-950 text-white p-12 rounded-[48px] shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                <div class="absolute top-[-10%] right-[-10%] w-64 h-64 bg-white rounded-full blur-3xl"></div>
+            </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
-                <div class="text-center">
-                    <span class="block text-3xl mb-1">🥗</span>
-                    <span class="text-[10px] uppercase opacity-50 block mb-1">Typ</span>
-                    <span class="text-sm font-bold">Liściasta</span>
+                <div class="text-center group">
+                    <span class="block text-4xl mb-3 transition-transform group-hover:scale-110">🥗</span>
+                    <span class="text-xs uppercase font-black tracking-widest opacity-60 block mb-1">Typ</span>
+                    <span class="text-sm font-bold">Liściasty</span>
                 </div>
-                <div class="text-center border-l border-white/10">
-                    <span class="block text-3xl mb-1">🧬</span>
-                    <span class="text-[10px] uppercase opacity-50 block mb-1">Kariotyp</span>
-                    <span class="text-sm font-bold">2n = 18</span>
+                <div class="text-center border-l border-white/10 group">
+                    <span class="block text-4xl mb-3 transition-transform group-hover:scale-110">🧬</span>
+                    <span class="text-xs uppercase font-black tracking-widest opacity-60 block mb-1">Genetyka</span>
+                    <span class="text-sm font-bold">Diploidalna 2n=18</span>
                 </div>
-                <div class="text-center border-l border-white/10">
-                    <span class="block text-3xl mb-1">🩸</span>
-                    <span class="text-[10px] uppercase opacity-50 block mb-1">Pigment</span>
+                <div class="text-center border-l border-white/10 group">
+                    <span class="block text-4xl mb-3 transition-transform group-hover:scale-110">🩸</span>
+                    <span class="text-xs uppercase font-black tracking-widest opacity-60 block mb-1">Związek</span>
                     <span class="text-sm font-bold">Antocyjany</span>
                 </div>
-                <div class="text-center border-l border-white/10">
-                    <span class="block text-3xl mb-1">⌛</span>
-                    <span class="text-[10px] uppercase opacity-50 block mb-1">Wegetacja</span>
-                    <span class="text-sm font-bold">~50 dni</span>
+                <div class="text-center border-l border-white/10 group">
+                    <span class="block text-4xl mb-3 transition-transform group-hover:scale-110">⌛</span>
+                    <span class="text-xs uppercase font-black tracking-widest opacity-60 block mb-1">Gotowość</span>
+                    <span class="text-sm font-bold">Zbiór: ~37 dni</span>
                 </div>
             </div>
-            <div class="absolute inset-0 bg-gradient-to-r from-red-900/50 to-transparent pointer-events-none"></div>
         </div>
-
     </main>
 
-    <footer class="py-12 border-t border-red-200 text-center">
-        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-red-400 opacity-60">
-            Atlas Botaniczny / Lactuca Sativa / Lollo Rossa
+    <footer class="py-16 border-t border-red-100 text-center bg-white/50 mt-12">
+        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-red-900/40">
+            Atlas Botaniczny / Lactuca Sativa / Lollo Rossa / Raport Badawczy 2025-12-25
         </p>
     </footer>
+
+    <script>
+        function openModal(src) {
+            const modal = document.getElementById('photo-modal');
+            const img = document.getElementById('modal-img');
+            img.src = src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Blokuj scroll
+        }
+
+        // Zamknij modal kliknięciem lub klawiszem
+        document.getElementById('photo-modal').addEventListener('click', function() {
+            this.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('photo-modal').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
 
 </body>
 </html>
