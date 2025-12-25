@@ -16,54 +16,79 @@
             background-color: #fffafb;
             color: #450a0a;
             font-family: ui-sans-serif, system-ui, sans-serif;
+            overflow-x: hidden;
         }
 
         .variety-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
+            padding: 1rem;
         }
 
+        /* Styl karty - przygotowanie do dużego powiększenia */
         .variety-card {
             background: white;
-            border-radius: 20px;
-            padding: 1rem;
+            border-radius: 24px;
+            padding: 1.25rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.25rem;
             border: 1px solid #fee2e2;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            /* Płynna, elastyczna transformacja */
+            transition: 
+                transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                box-shadow 0.4s ease, 
+                border-color 0.4s ease;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
         }
 
+        /* Bardzo wyraźne powiększenie całego kafelka */
         .variety-card:hover {
-            transform: scale(1.08);
-            box-shadow: 0 15px 30px rgba(153, 27, 27, 0.1);
+            transform: scale(1.25); /* Znaczne powiększenie */
+            box-shadow: 0 25px 50px -12px rgba(153, 27, 27, 0.25);
             border-color: var(--red-accent);
-            z-index: 10;
+            z-index: 100; /* Gwarancja bycia nad wszystkim innym */
+            background: white;
         }
 
         .img-box {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            width: 70px;
+            height: 70px;
+            border-radius: 16px;
             overflow: hidden;
             flex-shrink: 0;
             background: #fecaca;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .img-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        /* Dodatkowe delikatne powiększenie zdjęcia wewnątrz już powiększonego kafelka */
+        .variety-card:hover .img-box img {
+            transform: scale(1.1);
         }
 
         .section-divider {
-            margin: 4rem 0 2rem 0;
-            padding-bottom: 1rem;
+            margin: 5rem 0 2.5rem 0;
+            padding-bottom: 1.5rem;
             border-bottom: 2px solid #fecaca;
+        }
+
+        /* Efekt dla siatki, gdy jedna karta jest aktywna */
+        .variety-grid:hover .variety-card:not(:hover) {
+            opacity: 0.7;
+            filter: grayscale(20%);
+            transform: scale(0.95);
         }
 
         .floating-coins {
@@ -117,68 +142,56 @@
 </head>
 <body>
 
-    <!-- Nawigacja -->
     <div class="floating-coins">
         <a href="../../../../index.html" class="coin-btn" title="Strona główna">
             <div class="coin-inner">
-                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom"></div>
-                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="Dom" style="filter: brightness(0) invert(1);"></div>
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1946/1946436.png" alt="[Ikona Dom]" style="filter: brightness(0) invert(1);"></div>
             </div>
         </a>
         <a href="../group_looseleaf.html" class="coin-btn" title="Powrót do liściastych">
             <div class="coin-inner">
-                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Wstecz"></div>
-                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="Wstecz" style="filter: brightness(0) invert(1);"></div>
+                <div class="coin-face"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]"></div>
+                <div class="coin-face coin-back"><img src="https://cdn-icons-png.flaticon.com/512/1044/1044632.png" alt="[Ikona Wstecz]" style="filter: brightness(0) invert(1);"></div>
             </div>
         </a>
     </div>
 
-    <header class="py-20 px-6 text-center bg-white border-b border-red-100">
-        <h1 class="text-4xl md:text-6xl font-black text-red-900 uppercase tracking-tighter mb-4">Czerwone i Bordowe</h1>
-        <p class="text-gray-500 uppercase tracking-widest text-xs font-bold">Katalog odmian Red Leaf Lettuce</p>
+    <header class="py-24 px-6 text-center bg-white border-b border-red-100">
+        <h1 class="text-5xl md:text-7xl font-black text-red-900 uppercase tracking-tighter mb-4">Czerwone i Bordowe</h1>
+        <p class="text-gray-500 uppercase tracking-widest text-sm font-bold opacity-70">Katalog odmian Red Leaf Lettuce</p>
     </header>
 
     <main class="max-w-7xl mx-auto px-6 py-12">
 
-        <!-- SEKCJA 1 -->
         <div class="section-divider">
-            <h2 class="text-2xl font-black text-red-800 uppercase tracking-tight">Klasyczne odmiany czerwone</h2>
+            <h2 class="text-3xl font-black text-red-800 uppercase tracking-tight">Klasyczne odmiany czerwone</h2>
         </div>
-        <div class="variety-grid" id="grid-classic">
-            <!-- Wygenerowane kafelki -->
-        </div>
+        <div class="variety-grid" id="grid-classic"></div>
 
-        <!-- SEKCJA 2 -->
         <div class="section-divider">
-            <h2 class="text-2xl font-black text-red-800 uppercase tracking-tight">Bordowe i mieszane selekcje</h2>
+            <h2 class="text-3xl font-black text-red-800 uppercase tracking-tight">Bordowe i mieszane selekcje</h2>
         </div>
-        <div class="variety-grid" id="grid-mixed">
-            <!-- Wygenerowane kafelki -->
-        </div>
+        <div class="variety-grid" id="grid-mixed"></div>
 
-        <!-- SEKCJA 3 -->
         <div class="section-divider">
-            <h2 class="text-2xl font-black text-red-800 uppercase tracking-tight">Specjalne i rzadkie odmiany</h2>
+            <h2 class="text-3xl font-black text-red-800 uppercase tracking-tight">Specjalne i rzadkie odmiany</h2>
         </div>
-        <div class="variety-grid" id="grid-rare">
-            <!-- Wygenerowane kafelki -->
-        </div>
+        <div class="variety-grid" id="grid-rare"></div>
 
     </main>
 
-    <footer class="py-20 bg-red-950 text-white px-6 mt-20 text-center">
-        <p class="text-[10px] font-black uppercase tracking-[0.5em] opacity-40">
+    <footer class="py-24 bg-red-950 text-white px-6 mt-20 text-center">
+        <p class="text-xs font-black uppercase tracking-[0.5em] opacity-40">
             Lactuca Sativa / Red Leaf Varieties / Atlas
         </p>
     </footer>
 
     <script>
-        // Funkcja pomocnicza do generowania HTML kafelka
         function createVarietyCard(name, categoryLabel) {
-            // Zamiana "Red Sails" na "red_sails" dla nazw plików
             const fileName = name.toLowerCase()
-                                .replace(/’/g, '') // Usuwa specjalne apostrofy
-                                .replace(/'/g, '')  // Usuwa zwykłe apostrofy
+                                .replace(/’/g, '')
+                                .replace(/'/g, '')
                                 .replace(/ /g, '_')
                                 .replace(/&/g, 'and');
 
@@ -186,48 +199,24 @@
                 <a href="details/${fileName}.html" class="variety-card">
                     <div class="img-box">
                         <img src="img/${fileName}.jpg" 
-                             onerror="this.src='https://images.unsplash.com/photo-1620706857370-e1b977f7f13d?w=100&h=100&fit=crop'" 
-                             alt="${name}">
+                             onerror="this.src='https://images.unsplash.com/photo-1620706857370-e1b977f7f13d?w=200&h=200&fit=crop'" 
+                             alt="[Zdjęcie ${name}]">
                     </div>
                     <div>
-                        <h3 class="text-sm font-bold text-red-900">${name}</h3>
-                        <p class="text-[10px] text-gray-400 uppercase">${categoryLabel}</p>
+                        <h3 class="text-base font-extrabold text-red-900 leading-tight">${name}</h3>
+                        <p class="text-[10px] text-gray-400 font-bold uppercase mt-1 tracking-wider">${categoryLabel}</p>
                     </div>
                 </a>
             `;
         }
 
-        // Listy odmian
-        const classicRed = [
-            "Red Sails", "Lollo Rossa", "Red Salad Bowl", "Red Fire", "Ruby", 
-            "Red Oakleaf", "Scarlet Fire", "Red Romaine", "Red Forest", "Red Velvet", 
-            "Red King", "Red Salad Leaf", "Romaine Rouge", "Redina", "Red Butterleaf", 
-            "Red Coral", "Red Giant", "Ruby Crisp", "Ruby Gem", "Ruby Splash", 
-            "Rhode Island Red", "Red Tango", "Red Wiggle", "Red Garnet", 
-            "Red Velvetette", "Red Oak", "Red Fortune", "Red Lightning", "Red Wave", 
-            "Red Flame", "Red Beauty", "Red Phoenix", "Red Lion", "Red Fountain", 
-            "Red Firestorm", "Red Jewel", "Red Heart", "Red Magic", "Red Velvet Mix", 
-            "Red Dream", "Red Comet", "Crimson Butterleaf"
-        ];
+        const classicRed = ["Red Sails", "Lollo Rossa", "Red Salad Bowl", "Red Fire", "Ruby", "Red Oakleaf", "Scarlet Fire", "Red Romaine", "Red Forest", "Red Velvet", "Red King", "Red Salad Leaf", "Romaine Rouge", "Redina", "Red Butterleaf", "Red Coral", "Red Giant", "Ruby Crisp", "Ruby Gem", "Ruby Splash", "Rhode Island Red", "Red Tango", "Red Wiggle", "Red Garnet", "Red Velvetette", "Red Oak", "Red Fortune", "Red Lightning", "Red Wave", "Red Flame", "Red Beauty", "Red Phoenix", "Red Lion", "Red Fountain", "Red Firestorm", "Red Jewel", "Red Heart", "Red Magic", "Red Velvet Mix", "Red Dream", "Red Comet", "Crimson Butterleaf"];
+        const mixedSelections = ["Flashy Trout’s Back", "Firecracker Mix", "Red & Green Salad Mix", "Red Speckles", "Red Splash Mix", "Ruby & Green Mix", "Autumn Red Blend", "Ruby Crisp Blend", "Red Jewel Mix", "Crimson Mix", "Red Mosaic", "Red Tinge", "Red Pepper Blend", "Blushing Red"];
+        const rareVarieties = ["Rouge d’Hiver", "Rouge Grenobloise", "Rouge de Louviers", "Rouge de Provence", "Red Russian", "Red Salmon", "Red Lettuce Supreme", "Red Oakleaf Supreme", "Red Velvet Oak", "Red Charm", "Red Delight", "Red Majesty", "Red Dynasty", "Red Harvest", "Red King Crisp", "Red Summer Blend"];
 
-        const mixedSelections = [
-            "Flashy Trout’s Back", "Firecracker Mix", "Red & Green Salad Mix", 
-            "Red Speckles", "Red Splash Mix", "Ruby & Green Mix", "Autumn Red Blend", 
-            "Ruby Crisp Blend", "Red Jewel Mix", "Crimson Mix", "Red Mosaic", 
-            "Red Tinge", "Red Pepper Blend", "Blushing Red"
-        ];
-
-        const rareVarieties = [
-            "Rouge d’Hiver", "Rouge Grenobloise", "Rouge de Louviers", "Rouge de Provence", 
-            "Red Russian", "Red Salmon", "Red Lettuce Supreme", "Red Oakleaf Supreme", 
-            "Red Velvet Oak", "Red Charm", "Red Delight", "Red Majesty", "Red Dynasty", 
-            "Red Harvest", "Red King Crisp", "Red Summer Blend"
-        ];
-
-        // Renderowanie
-        document.getElementById('grid-classic').innerHTML = classicRed.map(n => createVarietyCard(n, "Odmiana klasyczna")).join('');
-        document.getElementById('grid-mixed').innerHTML = mixedSelections.map(n => createVarietyCard(n, "Selekcja mieszana")).join('');
-        document.getElementById('grid-rare').innerHTML = rareVarieties.map(n => createVarietyCard(n, "Odmiana specjalna")).join('');
+        document.getElementById('grid-classic').innerHTML = classicRed.map(n => createVarietyCard(n, "Klasyka")).join('');
+        document.getElementById('grid-mixed').innerHTML = mixedSelections.map(n => createVarietyCard(n, "Selekcja")).join('');
+        document.getElementById('grid-rare').innerHTML = rareVarieties.map(n => createVarietyCard(n, "Specjalna")).join('');
     </script>
 
 </body>
