@@ -25,7 +25,7 @@ class ImageButton(Button):
         super().__init__(**kwargs)
         # Ustawiamy obrazek jako tlo przycisku
         self.background_normal = img_path
-        self.background_down = img_path # Mozesz podac inny plik dla stanu klikniecia
+        self.background_down = img_path 
         self.border = (0, 0, 0, 0) # Usuwa ramki skalowania Kivy
 
 class PulseGraph(Widget):
@@ -94,12 +94,12 @@ class DHTApp(App):
     def build(self):
         self.root_layout = FloatLayout()
         
-        # --- VIEW 1: MAIN DASHBOARD ---
-        self.dashboard = BoxLayout(orientation="vertical")
+        # --- WIDOK 1: GŁÓWNY PANEL ---
+        # Zmieniamy orientację na poziomą, aby lewa strona była na pełną wysokość
+        self.dashboard = BoxLayout(orientation="horizontal")
         
-        self.top_section = BoxLayout(orientation="horizontal", size_hint=(1, 0.85))
-        
-        self.left_side = FloatLayout(size_hint=(0.333, 1))
+        # LEWA STRONA (Pełna wysokość)
+        self.left_side = FloatLayout(size_hint=(0.35, 1))
         self.bg_image = Image(source='abc.png', fit_mode="fill")
         self.left_side.add_widget(self.bg_image)
         
@@ -114,26 +114,29 @@ class DHTApp(App):
         for w in [self.temp_lt, self.temp_rt, self.temp_lb, self.temp_rb, self.hum_center]:
             self.left_side.add_widget(w)
             
-        self.right_panel = BoxLayout(orientation="vertical", size_hint=(0.667, 1))
-        self.pulse_container = FloatLayout(size_hint=(1, 0.5))
+        # PRAWA STRONA (Podzielona na górę z danymi i dół z przyciskami)
+        self.right_container = BoxLayout(orientation="vertical", size_hint=(0.65, 1))
+        
+        # Panel danych (Góra prawej strony)
+        self.data_panel = BoxLayout(orientation="vertical", size_hint=(1, 0.85))
+        
+        self.pulse_container = FloatLayout(size_hint=(1, 0.6))
         self.pulse_graph = PulseGraph(size_hint=(1, 1))
         self.pulse_container.add_widget(self.pulse_graph)
-        self.status_panel = BoxLayout(orientation="vertical", padding=20, size_hint=(1, 0.5))
+        
+        self.status_panel = BoxLayout(orientation="vertical", padding=20, size_hint=(1, 0.4))
         self.status_label = Label(text="Initializing...", font_size='18sp', color=(0.7, 0.7, 0.7, 1))
         self.status_panel.add_widget(Label(text="SYSTEM STATUS", font_size='20sp', bold=True))
         self.status_panel.add_widget(self.status_label)
-        self.right_panel.add_widget(self.pulse_container)
-        self.right_panel.add_widget(self.status_panel)
         
-        self.top_section.add_widget(self.left_side)
-        self.top_section.add_widget(self.right_panel)
+        self.data_panel.add_widget(self.pulse_container)
+        self.data_panel.add_widget(self.status_panel)
         
-        # Bottom Navigation
+        # Nawigacja (Dół prawej strony)
         self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.15), padding=10, spacing=30)
         self.nav_bar.add_widget(Widget()) # Spacer
         
-        # Przycisk wyjscia (PNG)
-        btn_size = Window.height * 0.12 # Rozmiar dopasowany do paska
+        btn_size = Window.height * 0.12
         btn_exit = ImageButton(
             img_path='exit_icon.png',
             size_hint=(None, None),
@@ -141,7 +144,6 @@ class DHTApp(App):
         )
         btn_exit.bind(on_press=self.stop)
         
-        # Przycisk wykresow (PNG)
         btn_charts = ImageButton(
             img_path='charts_icon.png',
             size_hint=(None, None),
@@ -153,10 +155,14 @@ class DHTApp(App):
         self.nav_bar.add_widget(btn_charts)
         self.nav_bar.add_widget(Widget()) # Spacer
         
-        self.dashboard.add_widget(self.top_section)
-        self.dashboard.add_widget(self.nav_bar)
+        self.right_container.add_widget(self.data_panel)
+        self.right_container.add_widget(self.nav_bar)
         
-        # --- VIEW 2: FULLSCREEN CHARTS ---
+        # Dodanie głównych kolumn do dashboardu
+        self.dashboard.add_widget(self.left_side)
+        self.dashboard.add_widget(self.right_container)
+        
+        # --- WIDOK 2: WYKRESY PEŁNOEKRANOWE ---
         self.charts_view = BoxLayout(orientation="vertical", padding=20, spacing=10)
         self.charts_grid = BoxLayout(orientation="vertical", spacing=5, size_hint=(1, 0.8))
         
