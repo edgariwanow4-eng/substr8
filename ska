@@ -1,6 +1,7 @@
 import board
 import adafruit_dht
 import math
+import random
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.uix.label import Label
@@ -8,6 +9,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.image import Image
 from kivy.uix.widget import Widget
+from kivy.uix.button import Button
+from kivy.uix.slider import Slider
 from kivy.core.window import Window
 from kivy.graphics import Color, Line, StencilPush, StencilUse, StencilUnUse, StencilPop, Rectangle
 
@@ -24,158 +27,180 @@ class PulseGraph(Widget):
         self.max_points = 100
         self.step = 0
         self.neon_green = (0.2, 1, 0.2, 1)
-        
-        # Odswiezanie grafiki przy zmianie pozycji lub rozmiaru
         self.bind(pos=self.update_canvas, size=self.update_canvas)
         Clock.schedule_interval(self.update_pulse, 0.05)
 
     def update_pulse(self, dt):
         self.step += 0.3
-        # Bazowa wysokosc Y wzgledem pozycji widgetu
         base_y = self.y + (self.height / 2)
-        
-        # Symulacja bicia serca
         if 0.5 < (self.step % 6) < 0.8:
             y_val = base_y + (math.sin(self.step * 10) * self.height * 0.4)
         else:
             y_val = base_y + (math.sin(self.step) * 5)
-
         self.points.append(y_val)
-
         if len(self.points) > self.max_points:
             self.points.pop(0)
-
         self.update_canvas()
 
     def update_canvas(self, *args):
         self.canvas.clear()
         with self.canvas:
-            # Maskowanie - zapobiega rysowaniu poza obszarem widgetu
             StencilPush()
             Rectangle(pos=self.pos, size=self.size)
             StencilUse()
-            
             Color(*self.neon_green)
             if len(self.points) > 1:
                 final_points = []
-                x_increment = self.width / (self.max_points - 1)
+                x_inc = self.width / (self.max_points - 1)
                 for i, y_val in enumerate(self.points):
-                    final_points.append(self.x + i * x_increment)
+                    final_points.append(self.x + i * x_inc)
                     final_points.append(y_val)
-                
                 Line(points=final_points, width=1.5)
-            
             StencilUnUse()
             StencilPop()
 
+class MultiSensorChart(Widget):
+    def __init__(self, sensor_name, color, **kwargs):
+        super().__init__(**kwargs)
+        self.sensor_name = sensor_name
+        self.line_color = color
+        self.data_points = [random.uniform(20, 25) for _ in range(50)]
+        self.bind(pos=self.draw_chart, size=self.draw_chart)
+
+    def draw_chart(self, *args):
+        self.canvas.clear()
+        with self.canvas:
+            Color(0.2, 0.2, 0.2, 1)
+            Rectangle(pos=self.pos, size=self.size)
+            Color(*self.line_color)
+            if len(self.data_points) > 1:
+                points = []
+                x_inc = self.width / (len(self.data_points) - 1)
+                for i, val in enumerate(self.data_points):
+                    # Scale 15-35 degrees to widget height
+                    y_scaled = self.y + ((val - 15) / 20) * self.height
+                    points.append(self.x + i * x_inc)
+                    points.append(y_scaled)
+                Line(points=points, width=2)
+            
 class DHTApp(App):
     def build(self):
-        # Glowny uklad poziomy
-        self.main_layout = BoxLayout(orientation="horizontal")
-
-        # --- LEWA STRONA: ZDJECIE (size_hint 0.33 - 1/3 ekranu) ---
-        self.left_side = FloatLayout(size_hint=(0.333, 1))
+        self.root_layout = FloatLayout()
         
-        self.bg_image = Image(
-            source='abc.png', 
-            allow_stretch=True, 
-            keep_ratio=False,
-            size_hint=(1, 1),
-            pos_hint={'x': 0, 'y': 0}
-        )
+        # --- VIEW 1: MAIN DASHBOARD ---
+        self.dashboard = BoxLayout(orientation="vertical")
+        
+        # Top section (Image + Pulse)
+        self.top_section = BoxLayout(orientation="horizontal", size_hint=(1, 0.9))
+        
+        # Left: Image
+        self.left_side = FloatLayout(size_hint=(0.333, 1))
+        self.bg_image = Image(source='abc.png', allow_stretch=True, keep_ratio=False)
         self.left_side.add_widget(self.bg_image)
-
-        # Kolory
+        
         neon_green = (0.2, 1, 0.2, 1)
         blue_color = (0.2, 0.5, 1, 1)
-
-        # Etykiety temperatury na obrazku
+        
         self.temp_blue = Label(text="-- C", font_size='25sp', color=blue_color, pos_hint={'x': -0.35, 'y': 0.4})
         self.temp_lt = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': -0.15, 'y': 0.25})
         self.temp_rt = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': 0.15, 'y': 0.25})
         self.temp_lb = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': -0.15, 'y': -0.2})
         self.temp_rb = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': 0.15, 'y': -0.2})
-
-        self.hum_center = Label(
-            text="-- %", 
-            font_size='50sp', 
-            bold=True,
-            color=neon_green,
-            pos_hint={'center_x': 0.5, 'center_y': 0.55}
-        )
-
-        self.left_side.add_widget(self.temp_blue)
-        self.left_side.add_widget(self.temp_lt)
-        self.left_side.add_widget(self.temp_rt)
-        self.left_side.add_widget(self.temp_lb)
-        self.left_side.add_widget(self.temp_rb)
-        self.left_side.add_widget(self.hum_center)
+        self.hum_center = Label(text="-- %", font_size='50sp', bold=True, color=neon_green, pos_hint={'center_x': 0.5, 'center_y': 0.55})
         
-        # --- PRAWA STRONA: PULS I STATUS (size_hint 0.667 - reszta ekranu) ---
+        for w in [self.temp_blue, self.temp_lt, self.temp_rt, self.temp_lb, self.temp_rb, self.hum_center]:
+            self.left_side.add_widget(w)
+            
+        # Right: Pulse & Status
         self.right_panel = BoxLayout(orientation="vertical", size_hint=(0.667, 1))
-
-        # Gora: Wykres pulsu
         self.pulse_container = FloatLayout(size_hint=(1, 0.5))
         self.pulse_graph = PulseGraph(size_hint=(1, 1))
-        self.pulse_label = Label(
-            text="HEART RATE SIMULATION", 
-            font_size='14sp', 
-            color=neon_green,
-            pos_hint={'center_x': 0.5, 'y': 0.4}
-        )
         self.pulse_container.add_widget(self.pulse_graph)
-        self.pulse_container.add_widget(self.pulse_label)
-
-        # Dol: Panel statusu
-        self.status_panel = BoxLayout(
-            orientation="vertical", 
-            padding=20, 
-            spacing=10,
-            size_hint=(1, 0.5)
-        )
-
-        self.status_label = Label(
-            text="Initializing...", 
-            font_size='18sp',
-            color=(0.7, 0.7, 0.7, 1)
-        )
-
+        self.status_panel = BoxLayout(orientation="vertical", padding=20, size_hint=(1, 0.5))
+        self.status_label = Label(text="Initializing...", font_size='18sp', color=(0.7, 0.7, 0.7, 1))
         self.status_panel.add_widget(Label(text="SYSTEM STATUS", font_size='20sp', bold=True))
         self.status_panel.add_widget(self.status_label)
-
         self.right_panel.add_widget(self.pulse_container)
         self.right_panel.add_widget(self.status_panel)
+        
+        self.top_section.add_widget(self.left_side)
+        self.top_section.add_widget(self.right_panel)
+        
+        # Bottom Navigation
+        self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.1), padding=5, spacing=10)
+        btn_exit = Button(text="EXIT", background_color=(0.8, 0.2, 0.2, 1))
+        btn_exit.bind(on_press=self.stop)
+        btn_charts = Button(text="FULLSCREEN CHARTS", background_color=(0.2, 0.6, 0.2, 1))
+        btn_charts.bind(on_press=self.show_charts)
+        
+        self.nav_bar.add_widget(btn_exit)
+        self.nav_bar.add_widget(btn_charts)
+        
+        self.dashboard.add_widget(self.top_section)
+        self.dashboard.add_widget(self.nav_bar)
+        
+        # --- VIEW 2: FULLSCREEN CHARTS ---
+        self.charts_view = BoxLayout(orientation="vertical", padding=20, spacing=10)
+        self.charts_grid = BoxLayout(orientation="vertical", spacing=5, size_hint=(1, 0.8))
+        
+        self.sensor_charts = []
+        colors = [(1,0,0,1), (0,1,0,1), (0,0,1,1), (1,1,0,1), (1,0,1,1)]
+        for i in range(5):
+            chart = MultiSensorChart(sensor_name=f"Sensor {i+1}", color=colors[i])
+            self.charts_grid.add_widget(chart)
+            self.sensor_charts.append(chart)
+            
+        # Slider section
+        slider_box = BoxLayout(orientation="horizontal", size_hint=(1, 0.1), spacing=20)
+        self.range_slider = Slider(min=1, max=3, value=1, step=1)
+        self.range_label = Label(text="Range: Hour", size_hint_x=0.2)
+        self.range_slider.bind(value=self.on_slider_change)
+        slider_box.add_widget(self.range_label)
+        slider_box.add_widget(self.range_slider)
+        
+        btn_back = Button(text="BACK TO DASHBOARD", size_hint=(1, 0.1))
+        btn_back.bind(on_press=self.show_dashboard)
+        
+        self.charts_view.add_widget(Label(text="MULTI-SENSOR TEMPERATURE HISTORY", size_hint_y=0.05, bold=True))
+        self.charts_view.add_widget(self.charts_grid)
+        self.charts_view.add_widget(slider_box)
+        self.charts_view.add_widget(btn_back)
 
-        self.main_layout.add_widget(self.left_side)
-        self.main_layout.add_widget(self.right_panel)
-
+        self.root_layout.add_widget(self.dashboard)
         Clock.schedule_interval(self.update_data, 2)
+        return self.root_layout
 
-        return self.main_layout
+    def show_charts(self, instance):
+        self.root_layout.clear_widgets()
+        self.root_layout.add_widget(self.charts_view)
+
+    def show_dashboard(self, instance):
+        self.root_layout.clear_widgets()
+        self.root_layout.add_widget(self.dashboard)
+
+    def on_slider_change(self, instance, value):
+        ranges = {1: "Hour", 2: "4 Hours", 3: "Day"}
+        self.range_label.text = f"Range: {ranges[int(value)]}"
+        # Simulate data refresh for new range
+        for chart in self.sensor_charts:
+            chart.data_points = [random.uniform(18, 28) for _ in range(50)]
+            chart.draw_chart()
 
     def update_data(self, dt):
         try:
-            temperature = dht_device.temperature
-            humidity = dht_device.humidity
-
-            if temperature is not None and humidity is not None:
-                val_temp = "{:.1f} C".format(temperature)
-                val_hum = "{:.1f} %".format(humidity)
-                
-                self.temp_blue.text = val_temp
-                self.temp_lt.text = val_temp
-                self.temp_rt.text = val_temp
-                self.temp_lb.text = val_temp
-                self.temp_rb.text = val_temp
-                self.hum_center.text = val_hum
-                
+            temp = dht_device.temperature
+            hum = dht_device.humidity
+            if temp is not None and hum is not None:
+                val_t = "{:.1f} C".format(temp)
+                val_h = "{:.1f} %".format(hum)
+                self.temp_blue.text = val_t
+                self.temp_lt.text = val_t
+                self.temp_rt.text = val_t
+                self.temp_lb.text = val_t
+                self.temp_rb.text = val_t
+                self.hum_center.text = val_h
                 self.status_label.text = "Status: OK"
                 self.status_label.color = (0, 1, 0, 1)
-
-        except RuntimeError:
-            self.status_label.text = "Read error..."
-            self.status_label.color = (1, 0.5, 0, 1)
-            
         except Exception as e:
             self.status_label.text = "Error: " + str(e)
             self.status_label.color = (1, 0, 0, 1)
