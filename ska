@@ -12,13 +12,34 @@ from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.slider import Slider
 from kivy.core.window import Window
-from kivy.graphics import Color, Line, StencilPush, StencilUse, StencilUnUse, StencilPop, Rectangle
+from kivy.graphics import Color, Line, StencilPush, StencilUse, StencilUnUse, StencilPop, Rectangle, Ellipse
 
 # Fullscreen
 Window.fullscreen = 'auto'
 
 # Sensor on GPIO17
 dht_device = adafruit_dht.DHT22(board.D17)
+
+class RoundIconButton(Button):
+    def __init__(self, icon_source, **kwargs):
+        super().__init__(**kwargs)
+        self.background_normal = ''
+        self.background_color = (0, 0, 0, 0)  # Przezroczyste tlo przycisku
+        self.icon_source = icon_source
+        
+        with self.canvas.before:
+            self.bg_color = Color(*kwargs.get('btn_color', (0.2, 0.2, 0.2, 1)))
+            self.bg_shape = Ellipse(pos=self.pos, size=self.size)
+            
+        self.icon = Image(source=self.icon_source, center=self.center, size_hint=(0.6, 0.6))
+        self.add_widget(self.icon)
+        
+        self.bind(pos=self.update_graphics, size=self.update_graphics)
+
+    def update_graphics(self, *args):
+        self.bg_shape.pos = self.pos
+        self.bg_shape.size = self.size
+        self.icon.center = self.center
 
 class PulseGraph(Widget):
     def __init__(self, **kwargs):
@@ -77,7 +98,6 @@ class MultiSensorChart(Widget):
                 points = []
                 x_inc = self.width / (len(self.data_points) - 1)
                 for i, val in enumerate(self.data_points):
-                    # Scale 15-35 degrees to widget height
                     y_scaled = self.y + ((val - 15) / 20) * self.height
                     points.append(self.x + i * x_inc)
                     points.append(y_scaled)
@@ -90,10 +110,8 @@ class DHTApp(App):
         # --- VIEW 1: MAIN DASHBOARD ---
         self.dashboard = BoxLayout(orientation="vertical")
         
-        # Top section (Image + Pulse)
-        self.top_section = BoxLayout(orientation="horizontal", size_hint=(1, 0.9))
+        self.top_section = BoxLayout(orientation="horizontal", size_hint=(1, 0.85))
         
-        # Left: Image
         self.left_side = FloatLayout(size_hint=(0.333, 1))
         self.bg_image = Image(source='abc.png', allow_stretch=True, keep_ratio=False)
         self.left_side.add_widget(self.bg_image)
@@ -111,7 +129,6 @@ class DHTApp(App):
         for w in [self.temp_blue, self.temp_lt, self.temp_rt, self.temp_lb, self.temp_rb, self.hum_center]:
             self.left_side.add_widget(w)
             
-        # Right: Pulse & Status
         self.right_panel = BoxLayout(orientation="vertical", size_hint=(0.667, 1))
         self.pulse_container = FloatLayout(size_hint=(1, 0.5))
         self.pulse_graph = PulseGraph(size_hint=(1, 1))
@@ -126,15 +143,31 @@ class DHTApp(App):
         self.top_section.add_widget(self.left_side)
         self.top_section.add_widget(self.right_panel)
         
-        # Bottom Navigation
-        self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.1), padding=5, spacing=10)
-        btn_exit = Button(text="EXIT", background_color=(0.8, 0.2, 0.2, 1))
+        # Bottom Navigation z okraglymi przyciskami
+        self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.15), padding=10, spacing=30)
+        self.nav_bar.add_widget(Widget()) # Spacer
+        
+        # Przycisk wyjscia (czerwony)
+        btn_exit = RoundIconButton(
+            icon_source='exit_icon.png', 
+            btn_color=(0.8, 0.2, 0.2, 1),
+            size_hint=(None, 1),
+            width=Window.height * 0.12
+        )
         btn_exit.bind(on_press=self.stop)
-        btn_charts = Button(text="FULLSCREEN CHARTS", background_color=(0.2, 0.6, 0.2, 1))
+        
+        # Przycisk wykresow (zielony)
+        btn_charts = RoundIconButton(
+            icon_source='charts_icon.png', 
+            btn_color=(0.2, 0.6, 0.2, 1),
+            size_hint=(None, 1),
+            width=Window.height * 0.12
+        )
         btn_charts.bind(on_press=self.show_charts)
         
         self.nav_bar.add_widget(btn_exit)
         self.nav_bar.add_widget(btn_charts)
+        self.nav_bar.add_widget(Widget()) # Spacer
         
         self.dashboard.add_widget(self.top_section)
         self.dashboard.add_widget(self.nav_bar)
@@ -150,7 +183,6 @@ class DHTApp(App):
             self.charts_grid.add_widget(chart)
             self.sensor_charts.append(chart)
             
-        # Slider section
         slider_box = BoxLayout(orientation="horizontal", size_hint=(1, 0.1), spacing=20)
         self.range_slider = Slider(min=1, max=3, value=1, step=1)
         self.range_label = Label(text="Range: Hour", size_hint_x=0.2)
@@ -181,7 +213,6 @@ class DHTApp(App):
     def on_slider_change(self, instance, value):
         ranges = {1: "Hour", 2: "4 Hours", 3: "Day"}
         self.range_label.text = f"Range: {ranges[int(value)]}"
-        # Simulate data refresh for new range
         for chart in self.sensor_charts:
             chart.data_points = [random.uniform(18, 28) for _ in range(50)]
             chart.draw_chart()
