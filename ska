@@ -22,13 +22,16 @@ dht_device = adafruit_dht.DHT22(board.D17)
 
 class RoundIconButton(Button):
     def __init__(self, icon_source, **kwargs):
+        # Wyciagamy kolor przed przekazaniem kwargs do super()
+        btn_color = kwargs.pop('btn_color', (0.2, 0.2, 0.2, 1))
         super().__init__(**kwargs)
+        
         self.background_normal = ''
-        self.background_color = (0, 0, 0, 0)  # Przezroczyste tlo przycisku
+        self.background_color = (0, 0, 0, 0)  # Przezroczyste tlo bazowe
         self.icon_source = icon_source
         
         with self.canvas.before:
-            self.bg_color = Color(*kwargs.get('btn_color', (0.2, 0.2, 0.2, 1)))
+            self.bg_color_instr = Color(*btn_color)
             self.bg_shape = Ellipse(pos=self.pos, size=self.size)
             
         self.icon = Image(source=self.icon_source, center=self.center, size_hint=(0.6, 0.6))
@@ -113,7 +116,8 @@ class DHTApp(App):
         self.top_section = BoxLayout(orientation="horizontal", size_hint=(1, 0.85))
         
         self.left_side = FloatLayout(size_hint=(0.333, 1))
-        self.bg_image = Image(source='abc.png', allow_stretch=True, keep_ratio=False)
+        # Zaktualizowano fit_mode zamiast allow_stretch/keep_ratio dla nowych wersji Kivy
+        self.bg_image = Image(source='abc.png', fit_mode="fill")
         self.left_side.add_widget(self.bg_image)
         
         neon_green = (0.2, 1, 0.2, 1)
@@ -143,11 +147,11 @@ class DHTApp(App):
         self.top_section.add_widget(self.left_side)
         self.top_section.add_widget(self.right_panel)
         
-        # Bottom Navigation z okraglymi przyciskami
+        # Bottom Navigation
         self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.15), padding=10, spacing=30)
         self.nav_bar.add_widget(Widget()) # Spacer
         
-        # Przycisk wyjscia (czerwony)
+        # Przycisk wyjscia
         btn_exit = RoundIconButton(
             icon_source='exit_icon.png', 
             btn_color=(0.8, 0.2, 0.2, 1),
@@ -156,7 +160,7 @@ class DHTApp(App):
         )
         btn_exit.bind(on_press=self.stop)
         
-        # Przycisk wykresow (zielony)
+        # Przycisk wykresow
         btn_charts = RoundIconButton(
             icon_source='charts_icon.png', 
             btn_color=(0.2, 0.6, 0.2, 1),
@@ -233,11 +237,16 @@ class DHTApp(App):
                 self.status_label.text = "Status: OK"
                 self.status_label.color = (0, 1, 0, 1)
         except Exception as e:
-            self.status_label.text = "Error: " + str(e)
-            self.status_label.color = (1, 0, 0, 1)
+            self.status_label.text = "Reading..."
+            # Nie wypisujemy bledu jako krytyczny, bo DHT22 czesto gubi pakiety
+            pass
 
     def on_stop(self):
-        dht_device.exit()
+        try:
+            dht_device.exit()
+        except:
+            # Ignorujemy bledy zamykania sterownika pulseio na Raspberry Pi
+            pass
 
 if __name__ == "__main__":
     DHTApp().run()
