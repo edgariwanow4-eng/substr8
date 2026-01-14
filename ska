@@ -12,7 +12,7 @@ from kivy.uix.widget import Widget
 from kivy.uix.button import Button
 from kivy.uix.slider import Slider
 from kivy.core.window import Window
-from kivy.graphics import Color, Line, StencilPush, StencilUse, StencilUnUse, StencilPop, Rectangle, Ellipse
+from kivy.graphics import Color, Line, StencilPush, StencilUse, StencilUnUse, StencilPop, Rectangle
 
 # Fullscreen
 Window.fullscreen = 'auto'
@@ -20,29 +20,13 @@ Window.fullscreen = 'auto'
 # Sensor on GPIO17
 dht_device = adafruit_dht.DHT22(board.D17)
 
-class RoundIconButton(Button):
-    def __init__(self, icon_source, **kwargs):
-        # Wyciagamy kolor przed przekazaniem kwargs do super()
-        btn_color = kwargs.pop('btn_color', (0.2, 0.2, 0.2, 1))
+class ImageButton(Button):
+    def __init__(self, img_path, **kwargs):
         super().__init__(**kwargs)
-        
-        self.background_normal = ''
-        self.background_color = (0, 0, 0, 0)  # Przezroczyste tlo bazowe
-        self.icon_source = icon_source
-        
-        with self.canvas.before:
-            self.bg_color_instr = Color(*btn_color)
-            self.bg_shape = Ellipse(pos=self.pos, size=self.size)
-            
-        self.icon = Image(source=self.icon_source, center=self.center, size_hint=(0.6, 0.6))
-        self.add_widget(self.icon)
-        
-        self.bind(pos=self.update_graphics, size=self.update_graphics)
-
-    def update_graphics(self, *args):
-        self.bg_shape.pos = self.pos
-        self.bg_shape.size = self.size
-        self.icon.center = self.center
+        # Ustawiamy obrazek jako tlo przycisku
+        self.background_normal = img_path
+        self.background_down = img_path # Mozesz podac inny plik dla stanu klikniecia
+        self.border = (0, 0, 0, 0) # Usuwa ramki skalowania Kivy
 
 class PulseGraph(Widget):
     def __init__(self, **kwargs):
@@ -116,21 +100,18 @@ class DHTApp(App):
         self.top_section = BoxLayout(orientation="horizontal", size_hint=(1, 0.85))
         
         self.left_side = FloatLayout(size_hint=(0.333, 1))
-        # Zaktualizowano fit_mode zamiast allow_stretch/keep_ratio dla nowych wersji Kivy
         self.bg_image = Image(source='abc.png', fit_mode="fill")
         self.left_side.add_widget(self.bg_image)
         
         neon_green = (0.2, 1, 0.2, 1)
-        blue_color = (0.2, 0.5, 1, 1)
         
-        self.temp_blue = Label(text="-- C", font_size='25sp', color=blue_color, pos_hint={'x': -0.35, 'y': 0.4})
         self.temp_lt = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': -0.15, 'y': 0.25})
         self.temp_rt = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': 0.15, 'y': 0.25})
         self.temp_lb = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': -0.15, 'y': -0.2})
         self.temp_rb = Label(text="-- C", font_size='25sp', color=neon_green, pos_hint={'x': 0.15, 'y': -0.2})
         self.hum_center = Label(text="-- %", font_size='50sp', bold=True, color=neon_green, pos_hint={'center_x': 0.5, 'center_y': 0.55})
         
-        for w in [self.temp_blue, self.temp_lt, self.temp_rt, self.temp_lb, self.temp_rb, self.hum_center]:
+        for w in [self.temp_lt, self.temp_rt, self.temp_lb, self.temp_rb, self.hum_center]:
             self.left_side.add_widget(w)
             
         self.right_panel = BoxLayout(orientation="vertical", size_hint=(0.667, 1))
@@ -151,21 +132,20 @@ class DHTApp(App):
         self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.15), padding=10, spacing=30)
         self.nav_bar.add_widget(Widget()) # Spacer
         
-        # Przycisk wyjscia
-        btn_exit = RoundIconButton(
-            icon_source='exit_icon.png', 
-            btn_color=(0.8, 0.2, 0.2, 1),
-            size_hint=(None, 1),
-            width=Window.height * 0.12
+        # Przycisk wyjscia (PNG)
+        btn_size = Window.height * 0.12 # Rozmiar dopasowany do paska
+        btn_exit = ImageButton(
+            img_path='exit_icon.png',
+            size_hint=(None, None),
+            size=(btn_size, btn_size)
         )
         btn_exit.bind(on_press=self.stop)
         
-        # Przycisk wykresow
-        btn_charts = RoundIconButton(
-            icon_source='charts_icon.png', 
-            btn_color=(0.2, 0.6, 0.2, 1),
-            size_hint=(None, 1),
-            width=Window.height * 0.12
+        # Przycisk wykresow (PNG)
+        btn_charts = ImageButton(
+            img_path='charts_icon.png',
+            size_hint=(None, None),
+            size=(btn_size, btn_size)
         )
         btn_charts.bind(on_press=self.show_charts)
         
@@ -228,7 +208,6 @@ class DHTApp(App):
             if temp is not None and hum is not None:
                 val_t = "{:.1f} C".format(temp)
                 val_h = "{:.1f} %".format(hum)
-                self.temp_blue.text = val_t
                 self.temp_lt.text = val_t
                 self.temp_rt.text = val_t
                 self.temp_lb.text = val_t
@@ -236,16 +215,14 @@ class DHTApp(App):
                 self.hum_center.text = val_h
                 self.status_label.text = "Status: OK"
                 self.status_label.color = (0, 1, 0, 1)
-        except Exception as e:
+        except Exception:
             self.status_label.text = "Reading..."
-            # Nie wypisujemy bledu jako krytyczny, bo DHT22 czesto gubi pakiety
             pass
 
     def on_stop(self):
         try:
             dht_device.exit()
         except:
-            # Ignorujemy bledy zamykania sterownika pulseio na Raspberry Pi
             pass
 
 if __name__ == "__main__":
