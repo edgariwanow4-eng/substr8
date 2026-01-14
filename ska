@@ -118,7 +118,7 @@ class DHTApp(App):
         self.right_container = BoxLayout(orientation="vertical", size_hint=(0.65, 1))
         
         # Panel danych (Góra prawej strony)
-        self.data_panel = BoxLayout(orientation="vertical", size_hint=(1, 0.85))
+        self.data_panel = BoxLayout(orientation="vertical", size_hint=(1, 0.65))
         
         self.pulse_container = FloatLayout(size_hint=(1, 0.6))
         self.pulse_graph = PulseGraph(size_hint=(1, 1))
@@ -132,11 +132,12 @@ class DHTApp(App):
         self.data_panel.add_widget(self.pulse_container)
         self.data_panel.add_widget(self.status_panel)
         
-        # Nawigacja (Dół prawej strony)
-        self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.15), padding=10, spacing=30)
+        # Nawigacja (Dół prawej strony - powiększona wysokość pod większe przyciski)
+        self.nav_bar = BoxLayout(orientation="horizontal", size_hint=(1, 0.35), padding=20, spacing=40)
         self.nav_bar.add_widget(Widget()) # Spacer
         
-        btn_size = Window.height * 0.12
+        # Zwiększono rozmiar bazowy x 2.5 (0.12 * 2.5 = 0.3)
+        btn_size = Window.height * 0.3
         btn_exit = ImageButton(
             img_path='exit_icon.png',
             size_hint=(None, None),
